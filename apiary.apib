@@ -1,0 +1,494 @@
+FORMAT: 1A
+
+# Imagine Learning Cloud API v1 (beta)
+
+# Group Overview
+
+## Requests
+
+### Base URL
+
+All URLs referenced in the API documentation begin with the following base URL:
+
+| SERVER             | URL    
+|:-------------------|:---------------------------------------------------------------------------------|
+|Documentation Mock Server | http://imaginelearningcloudapiv1.apiary-mock.com |
+|Release Server            | https://api.imaginelearning.com                  |
+
+### Allowed HTTPs requests:
+
+* POST   :   To create a resource, or to call specific non-resource actions
+* GET    :   Get a resource or list of resources
+* DELETE :   To delete resource
+* PATCH  :   To update a resource
+    
+######NOTE: For clients that do not support DELETE or PATCH HTTP methods, use POST with additional http header:  
+`X-HTTP-Method-Override: DELETE` or  
+`X-HTTP-Method-Override: PATCH`
+
+
+### Resource Format
+The Imagine Learning REST API currently only supports JSON resource requests and representations.  Please let us know if you need another format.
+
+## Responses
+
+Each response from the Imagine Learning Cloud API contains:
+
+| ITEM               | DESCRIPTION    
+|:-------------------|:---------------------------------------------------------------------------------|
+| HTTP Status Code   | The code indicates general success or failure of the request - see details below
+| HTTP Headers       | Various response headers are set relevant to the particular request.
+| Response Body      | Successful requests contain the an entity resource representation, while failed requests show an error representation.
+
+### HTTP Response Codes used
+
+- 200 `OK` - the request was successful.
+- 201 `Created` - the request was successful and a resource was created.
+- 304 `Not Modified` - the resource has not been modied and therefore not retured (used with request headers If-Modified-Since or If-Match).
+- 400 `Bad Request` - the request could not be understood or was missing required parameters.
+- 401 `Unauthorized` - authentication failed (missing or invalid authentication token).
+- 403 `Forbidden` - authentication failed (account does not access to a resource or operation).
+- 404 `Not Found` - resource was not found.
+- 500 `Internal Server Error` - an unexpected error or condition was encountered.
+- 503 `Service Unavailable` - We are temporarily unable to service the request. Please wait for a bit and try again.
+
+Many errors will include an human readable detailed error message in the metadata section of the result, as follows:
+
+```
+HTTP/1.1 500 Internal Server Error
+Cache-Control: no-cache
+Pragma: no-cache
+Content-Length: 468
+Content-Type: application/json;charset=UTF-8
+Expires: -1
+Server: Microsoft-IIS/8.0
+X-Powered-By: ASP.NET
+Date: Tue, 08 Apr 2014 19:53:41 GMT
+
+{
+  {
+    "metadata":
+    {
+        "errorMsg" : "An unhandled exception occured: <details>"
+    }
+  }
+}
+```
+
+### Response Content
+Responses typically contain up to 3 sections:
+
+* `metadata` - this section contains any metadata about the response or resource being returned
+* `<resource name>` - this section is the resource that was requested
+* `notifications` - this section contains notifications of changes that the client may want to reflect in the UI
+
+######TODO: Add full example with metadata, resource and notifications
+
+# Group Authentication
+
+This is an authenticated API which uses [Client Credentials Grant](http://tools.ietf.org/html/rfc6749#section-4.4) flow of the [OAuth2](http://tools.ietf.org/html/rfc6749) specification as the authentication mechanism.
+
+To use this API:
+
+- An application makes a request to the POST /api/token endpoint to exchange credentials for a bearer token.
+- When accessing the REST API, the application uses the bearer token to authenticate.
+
+
+#Client Credentials Grant authorization
+##Tokens are passwords
+Keep in mind that the bearer token itself grants access to make requests on behalf of an application. These values should be considered as sensitive as passwords and must not be shared or distributed to untrusted parties.
+
+##SSL absolutely required
+To ensure student privacy and to fulfill legal obligations under [FERPA](http://www.wrightslaw.com/info/ferpa.index.htm), all requests (both to obtain and use tokens) must use HTTPS endpoints
+
+
+
+
+##Step 1: Obtain a bearer token
+
+Credentials must be exchanged for a bearer token by issuing a request to POST api/token:
+
+- The request must be a `HTTP POST` request.
+- The body of the request must be `grant_type=password&username=XXX&password=YYY`.
+
+######Example request (Authorization header has been wrapped):
+
+```
+POST /token HTTP/1.1
+Host: api.imaginelearning.com
+User-Agent: Imagine Learning Unity Player
+Content-Type: application/x-www-form-urlencoded;charset=UTF-8
+Content-Length: 67
+
+grant_type=password&username=demo@imaginelearning.com&password=demo
+```
+
+If the request was formatted correctly, the server will respond with a JSON-encoded payload:
+
+######Example response (access_token has been wrapped):
+
+```
+HTTP/1.1 200 OK
+Cache-Control: no-cache
+Pragma: no-cache
+Content-Length: 468
+Content-Type: application/json;charset=UTF-8
+Expires: -1
+Server: Microsoft-IIS/8.0
+X-Powered-By: ASP.NET
+Date: Tue, 08 Apr 2014 19:53:41 GMT
+
+{
+"access_token":"rDdBkKmtpFiYUoKlZF-LqH4qkyQM_ZywDHqF1IcViinRZg795x9aROHEwM2qlvqXPurtqRcb8GQXtx3npLUXg0ZNuBEf24HgMwNw2h6jqzbVAYc-BqukZvQ78_NaMkOzowAAzJxc9UhZ0BVWlYgNKzrMtpI_NVihRDdlygCV8GxSYL-NnVpjEOc8FxtN2m23JgOCcJIUSyUPs6WvP-buDdPO-oy9iFIMI4wk4eMdNqgRFoFLg-XFhB-S_dAqLi1Cr2_4PDgbkuHrOgUHdwXHsvolzTMC7NGTRQp0LYFLt3CZMxjBVOKEj8AxyVKR_4zO4oc4ta9dO0SKdEh4i-vEMw",
+"token_type":"bearer",
+"expires_in":1209599,
+"username":"demo@imaginelearning.com",
+"displayname":"Demo User"
+}
+```
+
+Applications should verify that the value associated with the `token_type` key of the returned object is `bearer`. The value associated with the access_token key is the bearer token.
+
+Note that one bearer token is valid for an application at a time. Issuing another request with the same credentials to /token will return the same token until it is invalidated.
+
+##Step 2: Authenticate API requests with the bearer token
+
+The bearer token may be used to issue requests to the REST API endpoints. To use the bearer token, construct a normal HTTPS request and include an `Authorization` header with the value of 
+`Bearer <base64 access_token value from step 1 response>` . Signing is not required.
+
+######Example request:
+```
+GET <some api> HTTP/1.1
+Host: api.imaginelearning.com
+User-Agent: Imagine Learning Unity Player
+Content-Type: application/x-www-form-urlencoded;charset=UTF-8
+Authorization: bearer rDdBkKmtpFiYUoKlZF-LqH4qkyQM_ZywDHqF1IcViinRZg795x9aROHEwM2qlvqXPurtqRcb8GQXtx3npLUXg0ZNuBEf24HgMwNw2h6jqzbVAYc-BqukZvQ78_NaMkOzowAAzJxc9UhZ0BVWlYgNKzrMtpI_NVihRDdlygCV8GxSYL-NnVpjEOc8FxtN2m23JgOCcJIUSyUPs6WvP-buDdPO-oy9iFIMI4wk4eMdNqgRFoFLg-XFhB-S_dAqLi1Cr2_4PDgbkuHrOgUHdwXHsvolzTMC7NGTRQp0LYFLt3CZMxjBVOKEj8AxyVKR_4zO4oc4ta9dO0SKdEh4i-vEMw
+```
+  
+  
+## Token [/token]
+
+### Get Authentication Token [POST]
+
+This resource has the following attributes
+
+- `username` The name of the user or student (in email format) 
+- `password` The password of the user or student 
+
++ Request (application/json)
+
+        { "username": "useremail@example.com", "password": "userspassword" }
+
++ Response 200 (application/json)
+    
+        {
+            "access_token":"Base64EncodedToken",
+            "token_type":"bearer",
+            "expires_in":1209599,
+            "username": "useremail@example.com",
+            "password": "userspassword"
+        }
+
++ Response 403 (application/json)
+
+        {
+            "message" : "The credentials entered are not valid"
+        }  
+  
+
+
+# Group Provisioning
+
+## Student [/students/{id}]
+
+A Student resource has the following attributes: 
+
+- `id` (string): Enter description here [Assigned by API when Student is created]
+- `username` (string): Unique name used to login (email address)
+- `firstName` (string): First Name
+- `nickName` (string): Alternative to First Name
+- `lastName` (string): Last Name
+- `gradeLevel` (number: Grade Level, Kinderton=0, First Grade = 1, etc.
+- `firstLanguage`(number): Oral first language
+- `writtenLanguage` (number): Written language used at home
+- `studentNumber` (string): Id assigned by school or district
+- `withDisabilities` (boolean): Classified as having disabilities
+- `strugglingReader` (boolean): Classified as a Struggling Reader
+- `englishlanguagelearner` (boolean): Classified as an ELL
+
+
+
++ Parameters
+    + id (string) ... Student Id.
+
++ Model (application/hal+json)
+
+            {
+              "metadata": {},
+              "student":
+              {
+                "id": "4176a86d-5ef3-4898-a350-8b80ddc09a49",
+                "username": "demostudent@imaginelearning.com",
+                "firstName": "Madyson",
+                "nickName": "Mady",
+                "lastName": "Cram",
+                "gradeLevel": 1,
+                "firstLanguage": 1,
+                "writtenLanguage": 1,
+                "studentNumber": "",
+                "withDisabilities": false,
+                "strugglingReader": false,
+                "englishLanguageLearner": true
+              }
+              "notifications": {}
+            }
+
+### Retrieve a Single Student [GET]
++ Response 200
+    
+    [Student][]
+
+### Edit a Student [PATCH]
+To update a Student send a Patch Request with updated value(s) for one or more of the Student resource attributes. All attributes values (properties) from the previous version are carried over by default if not specified.
+
++ Request (application/json)
+
+        {
+            "attribute_name": "Updated attribute contents"
+        }
+
++ Response 200
+    
+    [Student][]
+
+### Delete a Student [DELETE]
++ Response 200 (application/json)
+
+            {
+              "notifications": {}
+            }
+
+## Students Collection [/students{?limit,offset,fields}]
+
+This resource is the collection of all students that the authenticated user has rights to.
+
+### List all Students [GET]
++ Parameters
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
+    + offset = `0` (optional, number, `10`)...The number of results to skip
+    + fields (optional, list, `username,studentNumber`)...List of fields to include in result of partial selection
+
++ Response 200 (application/json)
+
+            {
+              "metadata": {},
+              "students":
+              {
+                [{
+                  "id": "4176a86d-5ef3-4898-a350-8b80ddc09a49",
+                  "username": "demostudent@imaginelearning.com",
+                  "firstName": "Madyson",
+                  "nickName": "Mady",
+                  "lastName": "Cram",
+                  "gradeLevel": 1,
+                  "firstLanguage": 1,
+                  "writtenLanguage": 1,
+                  "studentNumber": "",
+                  "withDisabilities": false,
+                  "strugglingReader": false,
+                  "englishLanguageLearner": true
+                }, {
+                  "id": "3a617f40-4748-4c32-a8c3-5d6282c6842c",
+                  "username": "demostudent2@imaginelearning.com",
+                  "firstName": "Matt",
+                  "nickName": "Nancy-boy",
+                  "lastName": "Isgay",
+                  "gradeLevel": 2,
+                  "firstLanguage": 2,
+                  "writtenLanguage": 2,                
+                  "studentNumber": "",
+                  "withDisabilities": true,
+                  "strugglingReader": true,
+                  "englishLanguageLearner": true                
+                }
+              }
+              "notifications": {}
+            }
+
+
+### Create student [POST]
+
+| property               | type    | required | default | notes
+|:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
+| username               | string  | Yes |       |
+| firstName              | string  | Yes |       |
+| nickName               | string  | Yes |       |
+| lastName               | string  | Yes |       |
+| gradeLevel             | number  | Yes |       |
+| firstLanguage          | number  | Yes |       |
+| writtenLanguage        | number  | Yes |       |
+| studentNumber          | number  | No  | null  |
+| withDisabilities       | boolean | No  | false |
+| strugglingReader       | boolean | No  | false |
+| englishLanguageLearner | boolean | No  | false |
+| password               | string  | Yes |       |
+
++ Request (application/json)
+
+        {
+            "username" : "demostudent@imaginelearning.com",
+            "firstName": "Madyson",
+            "nickName": "Mady",
+            "lastName" : "Cram",
+            "gradeLevel": 1,
+            "firstLanguage" : 1,
+            "writtenLanguage": 1,
+            "studentNumber": "",
+            "withDisabilities": false,
+            "strugglingReader": false,
+            "englishLanguageLearner": true,
+            "password": "demo"
+        }
+        
++ Response 201
+
+    [Student][]
+
++ Response 409
+        
+        {
+            "message" : "The Student username already exists"
+        }
+
+
+## User [/users/{id}]
+
+A User resource has the following attributes: 
+
+- `id` (string) Enter description here [Assigned by API when User is created]
+- `username` (string) Unique name used to login (email address)
+- `firstName` (string) First Name
+- `lastName` (string) Last Name
+- `phoneNumber` (string) Phone Number
+- `title` (string) User title ie. Teacher, ELL Administrator, etc.
+
+
++ Parameters
+    + id (string) ... User Id.
+
++ Model (application/hal+json)
+
+            {
+              "metadata": {},
+              "user":
+              {
+                "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+                "username": "demouser@imaginelearning.com",
+                "firstName": "Susan",
+                "lastName": "Preator",
+                "phoneNumber": 555-555-5555,
+                "title": "Teacher"
+              }
+              "notifications": {}
+            }
+
+### Retrieve a Single User [GET]
++ Response 200
+    
+    [User][]
+
+### Edit a User [PATCH]
+To update a User send a Patch Request with updated value(s) for one or more of the Student resource attributes. All attributes values (properties) from the previous version are carried over by default if not specified.
+
++ Request (application/json)
+
+        {
+            "attribute_name": "Updated attribute contents"
+        }
+
++ Response 200
+    
+    [User][]
+
+### Delete a User [DELETE]
++ Response 200 (application/json)
+
+            {
+              "notifications": {}
+            }
+
+
+## Users Collection [/users{?limit,offset}]
+
+This resource is the collection of all users
+
+### List all Users [GET]
+
++ Parameters
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
+    + offset = `0` (optional, number, `10`)...The number of results to skip
+
++ Response 200 (application/json)
+
+            {
+              "metadata": {},
+              "users":
+              {
+                [{
+                  "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+                  "username": "demouser@imaginelearning.com",
+                  "firstName": "Susan",
+                  "lastName": "Preator",
+                  "phoneNumber": 555-555-5555,
+                  "title": "Teacher"
+                }, {
+                  "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+                  "username": "demouser@imaginelearning.com",
+                  "firstName": "Clydie",
+                  "lastName": "Wakefield",
+                  "phoneNumber": 555-555-5555,
+                  "title": "ELL Administrator"
+                }
+              }
+              "notifications": {}
+            }
+
+
+### Create user [POST]
+
+| property               | type    | required | default | notes
+|:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
+| username               | string  | Yes |       |
+| firstName              | string  | Yes |       |
+| lastName               | string  | Yes |       |
+| phoneNumber            | string  | No  | null  |
+| title                  | string  | No  | null  |
+| password               | string  | Yes |       |
+
++ Request (application/json)
+
+        {
+            "username" : "demouser@imaginelearning.com",
+            "firstName": "Susan",
+            "lastName" : "Preator",
+            "phoneNumber": "555-555-5555",
+            "title" : "Teacher",
+            "password": "demo"
+        }
+        
++ Response 201
+
+    [User][]
+
++ Response 409
+        
+        {
+            "message" : "The User username already exists"
+        }
+
+
+# Group Runtime
+
+
+
+
