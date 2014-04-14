@@ -69,7 +69,7 @@ Date: Tue, 08 Apr 2014 19:53:41 GMT
   {
     "metadata":
     {
-        "errorMsg" : "An unhandled exception occured: <details>"
+      "errorMsg" : "An unhandled exception occured: <details>"
     }
   }
 }
@@ -139,11 +139,11 @@ X-Powered-By: ASP.NET
 Date: Tue, 08 Apr 2014 19:53:41 GMT
 
 {
-"access_token":"rDdBkKmtpFiYUoKlZF-LqH4qkyQM_ZywDHqF1IcViinRZg795x9aROHEwM2qlvqXPurtqRcb8GQXtx3npLUXg0ZNuBEf24HgMwNw2h6jqzbVAYc-BqukZvQ78_NaMkOzowAAzJxc9UhZ0BVWlYgNKzrMtpI_NVihRDdlygCV8GxSYL-NnVpjEOc8FxtN2m23JgOCcJIUSyUPs6WvP-buDdPO-oy9iFIMI4wk4eMdNqgRFoFLg-XFhB-S_dAqLi1Cr2_4PDgbkuHrOgUHdwXHsvolzTMC7NGTRQp0LYFLt3CZMxjBVOKEj8AxyVKR_4zO4oc4ta9dO0SKdEh4i-vEMw",
-"token_type":"bearer",
-"expires_in":1209599,
-"username":"demo@imaginelearning.com",
-"displayname":"Demo User"
+  "access_token":"rDdBkKmtpFiYUoKlZF-LqH4qkyQM_ZywDHqF1IcViinRZg795x9aROHEwM2qlvqXPurtqRcb8GQXtx3npLUXg0ZNuBEf24HgMwNw2h6jqzbVAYc-BqukZvQ78_NaMkOzowAAzJxc9UhZ0BVWlYgNKzrMtpI_NVihRDdlygCV8GxSYL-NnVpjEOc8FxtN2m23JgOCcJIUSyUPs6WvP-buDdPO-oy9iFIMI4wk4eMdNqgRFoFLg-XFhB-S_dAqLi1Cr2_4PDgbkuHrOgUHdwXHsvolzTMC7NGTRQp0LYFLt3CZMxjBVOKEj8AxyVKR_4zO4oc4ta9dO0SKdEh4i-vEMw",
+  "token_type":"bearer",
+  "expires_in":1209599,
+  "username":"demo@imaginelearning.com",
+  "displayname":"Demo User"
 }
 ```
 
@@ -177,22 +177,25 @@ This resource has the following attributes
 
 + Request (application/json)
 
-        { "username": "useremail@example.com", "password": "userspassword" }
+        { 
+          "username": "useremail@example.com", 
+          "password": "userspassword" 
+        }
 
 + Response 200 (application/json)
     
         {
-            "access_token":"Base64EncodedToken",
-            "token_type":"bearer",
-            "expires_in":1209599,
-            "username": "useremail@example.com",
-            "password": "userspassword"
+          "access_token":"Base64EncodedToken",
+          "token_type":"bearer",
+          "expires_in":1209599,
+          "username": "useremail@example.com",
+          "password": "userspassword"
         }
 
 + Response 403 (application/json)
 
         {
-            "message" : "The credentials entered are not valid"
+          "message" : "The credentials entered are not valid"
         }  
   
 
@@ -223,25 +226,25 @@ A Student resource has the following attributes:
 
 + Model (application/hal+json)
 
-            {
-              "metadata": {},
-              "student":
-              {
-                "id": "4176a86d-5ef3-4898-a350-8b80ddc09a49",
-                "username": "demostudent@imaginelearning.com",
-                "firstName": "Madyson",
-                "nickName": "Mady",
-                "lastName": "Cram",
-                "gradeLevel": 1,
-                "firstLanguage": 1,
-                "writtenLanguage": 1,
-                "studentNumber": "",
-                "withDisabilities": false,
-                "strugglingReader": false,
-                "englishLanguageLearner": true
-              }
-              "notifications": {}
-            }
+        {
+          "metadata": {},
+          "student":
+          {
+            "id": "4176a86d-5ef3-4898-a350-8b80ddc09a49",
+            "username": "demostudent@imaginelearning.com",
+            "firstName": "Madyson",
+            "nickName": "Mady",
+            "lastName": "Cram",
+            "gradeLevel": 1,
+            "firstLanguage": 1,
+            "writtenLanguage": 1,
+            "studentNumber": "",
+            "withDisabilities": false,
+            "strugglingReader": false,
+            "englishLanguageLearner": true
+          }
+          "notifications": {}
+        }
 
 ### Retrieve a Single Student [GET]
 + Response 200
@@ -254,7 +257,7 @@ To update a Student send a Patch Request with updated value(s) for one or more o
 + Request (application/json)
 
         {
-            "attribute_name": "Updated attribute contents"
+          "attribute_name": "Updated attribute contents"
         }
 
 + Response 200
@@ -264,11 +267,11 @@ To update a Student send a Patch Request with updated value(s) for one or more o
 ### Delete a Student [DELETE]
 + Response 200 (application/json)
 
-            {
-              "notifications": {}
-            }
+        {
+          "notifications": {}
+        }
             
-## Student Assignments Collection [/students/{id}/assignments]
+## Student's Assignments Collection [/students/{id}/assignments]
 
 This resource represents the list of upcoming assingments for the specified student that have either been manually assigned by a teacher or automatically chosen by the Sequencer
 
@@ -279,22 +282,22 @@ This resource represents the list of upcoming assingments for the specified stud
 
 + Response 200 (application/json)
 
-            {
-              "metadata": {},
-              "assignments":
-              {
-                [{
-                  "id": "6df94a9a-9283-4982-97c5-0e1336aa9417",
-                  "activityId": "",
-                  "datasetId": ""
-                }, {
-                  "id": "a610a987-8c8b-49bf-902c-ce859b9b4087",
-                  "activityId": "",
-                  "datasetId": ""
-                }
-              }
-              "notifications": {}
+        {
+          "metadata": {},
+          "assignments":
+          {
+            [{
+              "id": "6df94a9a-9283-4982-97c5-0e1336aa9417",
+              "activityId": "",
+              "datasetId": ""
+            }, {
+              "id": "a610a987-8c8b-49bf-902c-ce859b9b4087",
+              "activityId": "",
+              "datasetId": ""
             }
+          }
+          "notifications": {}
+        }
 
 
 ## Students Collection [/students{?limit,offset,fields}]
@@ -309,40 +312,40 @@ This resource is the collection of all students that the authenticated user has 
 
 + Response 200 (application/json)
 
-            {
-              "metadata": {},
-              "students":
-              {
-                [{
-                  "id": "4176a86d-5ef3-4898-a350-8b80ddc09a49",
-                  "username": "demostudent@imaginelearning.com",
-                  "firstName": "Madyson",
-                  "nickName": "Mady",
-                  "lastName": "Cram",
-                  "gradeLevel": 1,
-                  "firstLanguage": 1,
-                  "writtenLanguage": 1,
-                  "studentNumber": "",
-                  "withDisabilities": false,
-                  "strugglingReader": false,
-                  "englishLanguageLearner": true
-                }, {
-                  "id": "3a617f40-4748-4c32-a8c3-5d6282c6842c",
-                  "username": "demostudent2@imaginelearning.com",
-                  "firstName": "Matt",
-                  "nickName": "Nancy-boy",
-                  "lastName": "Isgay",
-                  "gradeLevel": 2,
-                  "firstLanguage": 2,
-                  "writtenLanguage": 2,                
-                  "studentNumber": "",
-                  "withDisabilities": true,
-                  "strugglingReader": true,
-                  "englishLanguageLearner": true                
-                }
-              }
-              "notifications": {}
+        {
+          "metadata": {},
+          "students":
+          {
+            [{
+              "id": "4176a86d-5ef3-4898-a350-8b80ddc09a49",
+              "username": "demostudent@imaginelearning.com",
+              "firstName": "Madyson",
+              "nickName": "Mady",
+              "lastName": "Cram",
+              "gradeLevel": 1,
+              "firstLanguage": 1,
+              "writtenLanguage": 1,
+              "studentNumber": "",
+              "withDisabilities": false,
+              "strugglingReader": false,
+              "englishLanguageLearner": true
+            }, {
+              "id": "3a617f40-4748-4c32-a8c3-5d6282c6842c",
+              "username": "demostudent2@imaginelearning.com",
+              "firstName": "Matt",
+              "nickName": "Nancy-boy",
+              "lastName": "Isgay",
+              "gradeLevel": 2,
+              "firstLanguage": 2,
+              "writtenLanguage": 2,                
+              "studentNumber": "",
+              "withDisabilities": true,
+              "strugglingReader": true,
+              "englishLanguageLearner": true                
             }
+          }
+          "notifications": {}
+        }
 
 
 ### Create student [POST]
@@ -365,18 +368,18 @@ This resource is the collection of all students that the authenticated user has 
 + Request (application/json)
 
         {
-            "username" : "demostudent@imaginelearning.com",
-            "firstName": "Madyson",
-            "nickName": "Mady",
-            "lastName" : "Cram",
-            "gradeLevel": 1,
-            "firstLanguage" : 1,
-            "writtenLanguage": 1,
-            "studentNumber": "",
-            "withDisabilities": false,
-            "strugglingReader": false,
-            "englishLanguageLearner": true,
-            "password": "demo"
+          "username" : "demostudent@imaginelearning.com",
+          "firstName": "Madyson",
+          "nickName": "Mady",
+          "lastName" : "Cram",
+          "gradeLevel": 1,
+          "firstLanguage" : 1,
+          "writtenLanguage": 1,
+          "studentNumber": "",
+          "withDisabilities": false,
+          "strugglingReader": false,
+          "englishLanguageLearner": true,
+          "password": "demo"
         }
         
 + Response 201
@@ -386,7 +389,7 @@ This resource is the collection of all students that the authenticated user has 
 + Response 409
         
         {
-            "message" : "The Student username already exists"
+          "message" : "The Student username already exists"
         }
 
 
@@ -407,19 +410,19 @@ A User resource has the following attributes:
 
 + Model (application/hal+json)
 
-            {
-              "metadata": {},
-              "user":
-              {
-                "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
-                "username": "demouser@imaginelearning.com",
-                "firstName": "Susan",
-                "lastName": "Preator",
-                "phoneNumber": 555-555-5555,
-                "title": "Teacher"
-              }
-              "notifications": {}
-            }
+        {
+          "metadata": {},
+          "user":
+          {
+            "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+            "username": "demouser@imaginelearning.com",
+            "firstName": "Susan",
+            "lastName": "Preator",
+            "phoneNumber": 555-555-5555,
+            "title": "Teacher"
+          }
+          "notifications": {}
+        }
 
 ### Retrieve a Single User [GET]
 + Response 200
@@ -432,7 +435,7 @@ To update a User send a Patch Request with updated value(s) for one or more of t
 + Request (application/json)
 
         {
-            "attribute_name": "Updated attribute contents"
+          "attribute_name": "Updated attribute contents"
         }
 
 + Response 200
@@ -442,9 +445,9 @@ To update a User send a Patch Request with updated value(s) for one or more of t
 ### Delete a User [DELETE]
 + Response 200 (application/json)
 
-            {
-              "notifications": {}
-            }
+        {
+          "notifications": {}
+        }
 
 
 ## Users Collection [/users{?limit,offset}]
@@ -459,28 +462,28 @@ This resource is the collection of all users
 
 + Response 200 (application/json)
 
-            {
-              "metadata": {},
-              "users":
-              {
-                [{
-                  "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
-                  "username": "demouser@imaginelearning.com",
-                  "firstName": "Susan",
-                  "lastName": "Preator",
-                  "phoneNumber": 555-555-5555,
-                  "title": "Teacher"
-                }, {
-                  "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
-                  "username": "demouser@imaginelearning.com",
-                  "firstName": "Clydie",
-                  "lastName": "Wakefield",
-                  "phoneNumber": 555-555-5555,
-                  "title": "ELL Administrator"
-                }
-              }
-              "notifications": {}
+        {
+          "metadata": {},
+          "users":
+          {
+            [{
+              "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+              "username": "demouser@imaginelearning.com",
+              "firstName": "Susan",
+              "lastName": "Preator",
+              "phoneNumber": 555-555-5555,
+              "title": "Teacher"
+            }, {
+              "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+              "username": "demouser@imaginelearning.com",
+              "firstName": "Clydie",
+              "lastName": "Wakefield",
+              "phoneNumber": 555-555-5555,
+              "title": "ELL Administrator"
             }
+          }
+          "notifications": {}
+        }
 
 
 ### Create user [POST]
@@ -497,12 +500,12 @@ This resource is the collection of all users
 + Request (application/json)
 
         {
-            "username" : "demouser@imaginelearning.com",
-            "firstName": "Susan",
-            "lastName" : "Preator",
-            "phoneNumber": "555-555-5555",
-            "title" : "Teacher",
-            "password": "demo"
+          "username" : "demouser@imaginelearning.com",
+          "firstName": "Susan",
+          "lastName" : "Preator",
+          "phoneNumber": "555-555-5555",
+          "title" : "Teacher",
+          "password": "demo"
         }
         
 + Response 201
@@ -512,67 +515,102 @@ This resource is the collection of all users
 + Response 409
         
         {
-            "message" : "The User username already exists"
+          "message" : "The User username already exists"
         }
 
 
 ## Institution [/institutions/{id}]
 
-An Institution resource has the following attributes: 
+An Institution reprents a school, district, sub-district, or similar grouping.   The resource has the following attributes: 
 
 - `id` (string) Unique Institution identifier [Assigned by API when User is created]
+- `name` (string) Name of the Institution
 - `address` (string) Street address
 - `city` (string) City
 - `state` (string) State or Province, fully spelled out
 - `zip` (string) Zip Code 
 - `country` (string) [ISO 3166-1 alpha-3 Country Code](https://en.wikipedia.org/wiki/ISO_3166-1)
-
-
+- `parentId` (string) Id of the parent institution of this instution (empty if there is no parent institution)
 
 + Parameters
     + id (string) ... Institution Id.
 
 + Model (application/hal+json)
 
-            {
-              "metadata": {},
-              "institution":
-              {
-                "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
-                "address": "",
-               }
-              "notifications": {}
-            }
+        {
+          "metadata": {},
+          "institution":
+          {
+            "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+            "name": "Imagine Learning Academy",
+            "address": "191 River Park Dr.",
+            "city": "Provo",
+            "state": "Utah",
+            "zip": "84604",
+            "country": "USA",
+            "parentId": ""
+          }
+          "notifications": {}
+        }
 
 ### Retrieve a Single Institution [GET]
 + Response 200
     
     [Institution][]
 
-### Edit a Institution [PATCH]
-To update a Institution send a Patch Request with updated value(s) for one or more of the Student resource attributes. All attributes values (properties) from the previous version are carried over by default if not specified.
+### Edit an Institution [PATCH]
+To update an Institution send a Patch Request with updated value(s) for one or more of the Student resource attributes. All attributes values (properties) from the previous version are carried over by default if not specified.
 
 + Request (application/json)
 
         {
-            "attribute_name": "Updated attribute contents"
+          "attribute_name": "Updated attribute contents"
         }
 
 + Response 200
     
     [Institution][]
 
-### Delete a Institution [DELETE]
+### Delete an Institution [DELETE]
 + Response 200 (application/json)
 
-            {
-              "notifications": {}
-            }
+        {
+          "notifications": {}
+        }
 
+## Insitution's Child-Institution Collection [/instutions/{id}/institutions]
+
+This resource represents the list of child institutions for the specified institution
+
+### Retrieve child Institutions [GET]
+
++ Parameters
+    + id (string) ... Id of the parent Institution
+
++ Response 200 (application/json)
+
+        {
+          "metadata": {},
+          "institutions":
+          {
+            [{
+              "id": "6f587521-1dd4-431d-ad91-4c27c5f32776",
+              "name": "Anderton Academy",
+              "address": "1100 Samson Trl",
+              "city": "McCall",
+              "state": "Idaho",
+              "zip": "83638",
+              "country": "USA",
+              "parentId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc"
+            }]
+          }
+          "notifications": {}
+        }
+        
 
 ## Institutions Collection [/institutions{?limit,offset}]
 
-This resource is the collection of all users
+This resource is the collection of all Institutions
 
 ### List all Institutions [GET]
 
@@ -582,50 +620,67 @@ This resource is the collection of all users
 
 + Response 200 (application/json)
 
-            {
-              "metadata": {},
-              "institutions":
-              {
-                [{
-                  "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
-                }, {
-                  "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
-                }
-              }
-              "notifications": {}
+        {
+          "metadata": {},
+          "institutions":
+          {
+            [{
+              "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+              "name": "Imagine Learning School District",
+              "address": "191 River Park Dr.",
+              "city": "Provo",
+              "state": "Utah",
+              "zip": "84604",
+              "country": "USA",
+              "parentId": ""
+            }, {
+              "id": "6f587521-1dd4-431d-ad91-4c27c5f32776",
+              "name": "Anderton Academy",
+              "address": "1100 Samson Trl",
+              "city": "McCall",
+              "state": "Idaho",
+              "zip": "83638",
+              "country": "USA",
+              "parentId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc"
             }
+          }
+          "notifications": {}
+        }
 
 
-### Create institution [POST]
+### Create Institution [POST]
 
 | property               | type    | required | default | notes
 |:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
-| username               | string  | Yes |       |
-| firstName              | string  | Yes |       |
-| lastName               | string  | Yes |       |
-| phoneNumber            | string  | No  | null  |
-| title                  | string  | No  | null  |
-| password               | string  | Yes |       |
+| name                   | string  | Yes |       |
+| address                | string  | Yes |       |
+| city                   | string  | Yes |       |
+| state                  | string  | Yes |       |
+| zip                    | string  | Yes |       |
+| country                | string  | Yes |       |
+| parentId               | string  | No  | null  | If not specified, will be a root institution
+
 
 + Request (application/json)
 
         {
-            "username" : "demouser@imaginelearning.com",
-            "firstName": "Susan",
-            "lastName" : "Preator",
-            "phoneNumber": "555-555-5555",
-            "title" : "Teacher",
-            "password": "demo"
+          "name" : "Imagine Learning School District",
+          "address": "191 River Park Dr.",
+          "city" : "Provo",
+          "state": "Utah",
+          "zip" : "84604",
+          "country": "USA"
         }
         
 + Response 201
 
-    [User][]
+    [Institution][]
+         
 
 + Response 409
         
         {
-            "message" : "The User username already exists"
+          "message" : "The User username already exists"
         }
 
 
@@ -649,7 +704,7 @@ An Assignment resource represents an activity that was either manually assigned 
 + Request (application/json)
 
         {
-            "id" : "demouser@imaginelearning.com"
+          "id" : "demouser@imaginelearning.com"
         }
         
 + Response 200
@@ -666,21 +721,21 @@ This resource represents the list of upcoming assingments for the logged-in stud
 
 + Response 200 (application/json)
 
-            {
-              "metadata": {},
-              "assignments":
-              {
-                [{
-                  "id": "6df94a9a-9283-4982-97c5-0e1336aa9417",
-                  "activityId": "",
-                  "datasetId": ""
-                }, {
-                  "id": "a610a987-8c8b-49bf-902c-ce859b9b4087",
-                  "activityId": "",
-                  "datasetId": ""
-                }
-              }
-              "notifications": {}
+        {
+          "metadata": {},
+          "assignments":
+          {
+            [{
+              "id": "6df94a9a-9283-4982-97c5-0e1336aa9417",
+              "activityId": "",
+              "datasetId": ""
+            }, {
+              "id": "a610a987-8c8b-49bf-902c-ce859b9b4087",
+              "activityId": "",
+              "datasetId": ""
             }
+          }
+          "notifications": {}
+        }
             
 
