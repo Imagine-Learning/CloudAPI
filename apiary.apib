@@ -449,6 +449,32 @@ To update a User send a Patch Request with updated value(s) for one or more of t
           "notifications": {}
         }
 
+## Users's Groups Collection [/users/{id}/groups]
+
+This resource represents the list of groups for the specified user
+
+### Retrieve Groups specified User [GET]
+
++ Parameters
+    + id (string) ... Id of the User
+
++ Response 200 (application/json)
+
+        {
+          "metadata": {},
+          "groups":
+          {
+            [{
+              "id": "5687fc7a-dccc-45b7-8be5-bf9533e37af3",
+              "name": "First Grade"
+            }, {
+              "id": "0a0b13c0-8315-43f3-bc5a-033d0dd340ac",
+              "name": "After School"
+            }
+          }
+          "notifications": {}
+        }
+
 
 ## Users Collection [/users{?limit,offset}]
 
@@ -681,6 +707,154 @@ This resource is the collection of all Institutions
         
         {
           "message" : "The User username already exists"
+        }
+
+
+## Group [/groups/{id}]
+
+A Group reprents any type of class or other grouping of students.   The resource has the following attributes: 
+
+- `id` (string) Unique Group identifier [Assigned by API when User is created]
+- `name` (string) Name of the Group
+
+
++ Parameters
+    + id (string) ... Group Id.
+
++ Model (application/hal+json)
+
+        {
+          "metadata": {},
+          "group":
+          {
+            "id": "5687fc7a-dccc-45b7-8be5-bf9533e37af3",
+            "name": "First Grade"
+          }
+          "notifications": {}
+        }
+
+### Retrieve a Single Group [GET]
++ Response 200
+    
+    [Group][]
+
+### Edit an Group [PATCH]
+To update an Group send a Patch Request with updated value(s) for one or more of the Student resource attributes. All attributes values (properties) from the previous version are carried over by default if not specified.
+
++ Request (application/json)
+
+        {
+          "attribute_name": "Updated attribute contents"
+        }
+
++ Response 200
+    
+    [Group][]
+
+### Delete an Group [DELETE]
++ Response 200 (application/json)
+
+        {
+          "notifications": {}
+        }
+
+## Groups's Student Collection [/groups/{id}/students]
+
+This resource represents the list of child institutions for the specified institution
+
+### Retrieve child Institutions [GET]
+
++ Parameters
+    + id (string) ... Group Id for which to retrieve students
+
++ Response 200 (application/json)
+
+        {
+          "metadata": {},
+          "students":
+          {
+            [{
+              "id": "4176a86d-5ef3-4898-a350-8b80ddc09a49",
+              "username": "demostudent@imaginelearning.com",
+              "firstName": "Madyson",
+              "nickName": "Mady",
+              "lastName": "Cram",
+              "gradeLevel": 1,
+              "firstLanguage": 1,
+              "writtenLanguage": 1,
+              "studentNumber": "",
+              "withDisabilities": false,
+              "strugglingReader": false,
+              "englishLanguageLearner": true
+            }, {
+              "id": "3a617f40-4748-4c32-a8c3-5d6282c6842c",
+              "username": "demostudent2@imaginelearning.com",
+              "firstName": "Matt",
+              "nickName": "Nancy-boy",
+              "lastName": "Isgay",
+              "gradeLevel": 2,
+              "firstLanguage": 2,
+              "writtenLanguage": 2,                
+              "studentNumber": "",
+              "withDisabilities": true,
+              "strugglingReader": true,
+              "englishLanguageLearner": true                
+            }
+          }
+          "notifications": {}
+        }
+        
+
+## Groups Collection [/groups{?limit,offset}]
+
+This resource is the collection of groups owned by the current user.
+
+### List all Groups for current User [GET]
+
++ Parameters
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
+    + offset = `0` (optional, number, `10`)...The number of results to skip
+
++ Response 200 (application/json)
+
+        {
+          "metadata": {},
+          "groups":
+          {
+            [{
+              "id": "5687fc7a-dccc-45b7-8be5-bf9533e37af3",
+              "name": "First Grade"
+            }, {
+              "id": "0a0b13c0-8315-43f3-bc5a-033d0dd340ac",
+              "name": "After School"
+            }
+          }
+          "notifications": {}
+        }
+
+
+### Create Group [POST]
+
+| property               | type    | required | default | notes
+|:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
+| name                   | string  | Yes |       |
+
+
++ Request (application/json)
+
+        {
+          "name" : "After School"
+        }
+        
++ Response 201
+
+    [Group][]
+         
+
++ Response 409
+        
+        {
+          "message" : "The Group name already exists"
         }
 
 
