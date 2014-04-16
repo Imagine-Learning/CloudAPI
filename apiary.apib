@@ -299,6 +299,35 @@ This resource represents the list of upcoming assingments for the specified stud
           "notifications": {}
         }
 
+## Student's Artifacts Collection [/students/{id}/artifacts]
+
+This resource represents the list artifacts for the specified student r
+
+### Retrieve Artifacts for specified Student [GET]
+
++ Parameters
+    + id (string) ... Id of the Student
+
++ Response 200 (application/json)
+
+        {
+          "metadata": {},
+          "artifacts":
+          {
+            [{
+              "id" : "52acbb43-5ec0-4f89-9f9a-8dd67ec70e75",
+              "title" : "Book XXX Recording",
+              "type" : "recording",
+              "assignmentId" : "6df94a9a-9283-4982-97c5-0e1336aa9417"
+            }, {
+              "id" : "da936c09-9d09-44d0-8aff-d6df46076985",
+              "title" : "Book YYY Recording",
+              "type" : "recording",
+              "assignmentId" : "a610a987-8c8b-49bf-902c-ce859b9b4087"
+            }
+          }
+          "notifications": {}
+        }
 
 ## Students Collection [/students{?limit,offset,fields}]
 
@@ -907,15 +936,71 @@ This resource represents the list of upcoming assingments for the logged-in stud
           {
             [{
               "id": "6df94a9a-9283-4982-97c5-0e1336aa9417",
-              "activityId": "",
-              "datasetId": ""
+              "activityId": "a1fd94e6-5439-404e-913f-8d6fe31252e2",
+              "datasetId": "407614e9-899c-4009-909b-438f9ad045e8"
             }, {
               "id": "a610a987-8c8b-49bf-902c-ce859b9b4087",
-              "activityId": "",
-              "datasetId": ""
+              "activityId": "fb0861bb-67e1-43b5-9eb1-acf2d4f5fc39",
+              "datasetId": "40153d0c-8f4f-4273-8466-3b3c6c27fcca"
             }
           }
           "notifications": {}
         }
             
+## Artifact [/artifacts/{id}]
+
+An Artifact resource represents a digital document or media produced by a student while playing activities
+
+- `id` (string) Unique Artifact identfier [Assigned by API when Artifact is created]
+- `title` (string) Named title
+- `type` (string) Supported types - "recording", "document"
+- `assignmentId` (string) Identifier of the Assignment where the Artifact was created
+
+
+### Save new Artifact [POST]
+
+| property               | type    | required | default | notes
+|:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
+| title                  | string  | Yes |       |
+| assignmentId           | string  | Yes |       |
+
+
++ Request (application/json)
+
+        {
+          "title" : "Book XXX Recording",
+          "type" : "recording",
+          "assignmentId" : "6df94a9a-9283-4982-97c5-0e1336aa9417"
+        }
+        
++ Response 200
+
+        {
+          "notifications": {}
+        }
+            
+## Artifacts Collection [/artifacts]
+
+### Retrieve upcoming assignments [GET]
+
++ Response 200 (application/json)
+
+        {
+          "metadata": {},
+          "artifacts":
+          {
+            [{
+              "id" : "52acbb43-5ec0-4f89-9f9a-8dd67ec70e75",
+              "title" : "Book XXX Recording",
+              "type" : "recording",
+              "assignmentId" : "6df94a9a-9283-4982-97c5-0e1336aa9417"
+            }, {
+              "id" : "da936c09-9d09-44d0-8aff-d6df46076985",
+              "title" : "Book YYY Recording",
+              "type" : "recording",
+              "assignmentId" : "a610a987-8c8b-49bf-902c-ce859b9b4087"
+            }
+          }
+          "notifications": {}
+        }
 
