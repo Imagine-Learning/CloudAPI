@@ -466,10 +466,12 @@ This resource represents the list of groups for the specified user
           {
             [{
               "id": "5687fc7a-dccc-45b7-8be5-bf9533e37af3",
-              "name": "First Grade"
+              "name": "First Grade",
+              "defaultSessionTime": 20
             }, {
               "id": "0a0b13c0-8315-43f3-bc5a-033d0dd340ac",
-              "name": "After School"
+              "name": "After School",
+              "defaultSessionTime": 30
             }
           }
           "notifications": {}
@@ -716,6 +718,7 @@ A Group reprents any type of class or other grouping of students.   The resource
 
 - `id` (string) Unique Group identifier [Assigned by API when User is created]
 - `name` (string) Name of the Group
+- `defaultSessionTime` (number) Number of minutes as default session time for students in this group
 
 
 + Parameters
@@ -728,7 +731,8 @@ A Group reprents any type of class or other grouping of students.   The resource
           "group":
           {
             "id": "5687fc7a-dccc-45b7-8be5-bf9533e37af3",
-            "name": "First Grade"
+            "name": "First Grade",
+            "defaultSessionTime": 20
           }
           "notifications": {}
         }
@@ -823,10 +827,12 @@ This resource is the collection of groups owned by the current user.
           {
             [{
               "id": "5687fc7a-dccc-45b7-8be5-bf9533e37af3",
-              "name": "First Grade"
+              "name": "First Grade",
+              "defaultSessionTime": 20
             }, {
               "id": "0a0b13c0-8315-43f3-bc5a-033d0dd340ac",
-              "name": "After School"
+              "name": "After School",
+              "defaultSessionTime": 30
             }
           }
           "notifications": {}
