@@ -1070,3 +1070,31 @@ An Artifact resource represents a digital document or media produced by a studen
           "notifications": {}
         }
 
+## Logs Collection [/logs]
+
+This resource is the collection of all diagnostic logs that the authenticated user has rights to.
+
+### Create diagnostic log entry [POST]
+
+| property | type | required | default | notes
+|:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
+| reporterApplication | string | Yes | |
+| reporterComponent | string | Yes | |
+| message | string | Yes | |
+| details | string | No | |
+| logCreationTimestamp | date | Yes | | UTC date-time, not local
+| context | string | No | | TODO - I want this to be an array of string-string
+
++ Request (application/json)
+
+        {
+          "reporterApplication" : "ILE Unity",
+          "reporterComponent": "Imagine.ILE.Activities.RecognizeLetters",
+          "message": "System.ApplicationException: Error in the application.",
+          "details" : "at ConsoleApplication13.Program.Main(String[] args) in c:\Users\Matthew\Documents\Visual Studio 2013\Projects\Consolelication13\ConsoleApplication13\Program.cs:line 13",
+          "logCreationTimestamp": "2014-05-06T15:05:03.0238299Z"
+        }
+        
++ Response 202
+
+
