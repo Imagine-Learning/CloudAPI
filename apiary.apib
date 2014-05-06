@@ -212,8 +212,7 @@ A Student resource has the following attributes:
 - `firstName` (string): First Name
 - `nickName` (string): Alternative to First Name
 - `lastName` (string): Last Name
-- `gradeLevel` (number: Grade Level, Kinderton=0, First Grade = 1, etc.
-- `firstLanguage`(number): Oral first language
+- `gradeLevel` (number: Grade Level, Kinderton=0, First Grade = 1, etc.- `firstLanguage`(number): Oral first language
 - `writtenLanguage` (number): Written language used at home
 - `studentNumber` (string): Id assigned by school or district
 - `withDisabilities` (boolean): Classified as having disabilities
@@ -431,7 +430,6 @@ A User resource has the following attributes:
 - `username` (string) Unique name used to login (email address)
 - `firstName` (string) First Name
 - `lastName` (string) Last Name
-- `phoneNumber` (string) Phone Number
 - `title` (string) User title ie. Teacher, ELL Administrator, etc.
 
 
@@ -448,7 +446,6 @@ A User resource has the following attributes:
             "username": "demouser@imaginelearning.com",
             "firstName": "Susan",
             "lastName": "Preator",
-            "phoneNumber": 555-555-5555,
             "title": "Teacher"
           }
           "notifications": {}
@@ -529,14 +526,12 @@ This resource is the collection of all users
               "username": "demouser@imaginelearning.com",
               "firstName": "Susan",
               "lastName": "Preator",
-              "phoneNumber": 555-555-5555,
               "title": "Teacher"
             }, {
               "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
               "username": "demouser@imaginelearning.com",
               "firstName": "Clydie",
               "lastName": "Wakefield",
-              "phoneNumber": 555-555-5555,
               "title": "ELL Administrator"
             }
           }
@@ -551,7 +546,6 @@ This resource is the collection of all users
 | username               | string  | Yes |       |
 | firstName              | string  | Yes |       |
 | lastName               | string  | Yes |       |
-| phoneNumber            | string  | No  | null  |
 | title                  | string  | No  | null  |
 | password               | string  | Yes |       |
 
@@ -561,7 +555,6 @@ This resource is the collection of all users
           "username" : "demouser@imaginelearning.com",
           "firstName": "Susan",
           "lastName" : "Preator",
-          "phoneNumber": "555-555-5555",
           "title" : "Teacher",
           "password": "demo"
         }
@@ -1004,4 +997,32 @@ An Artifact resource represents a digital document or media produced by a studen
           }
           "notifications": {}
         }
+
+## Logs Collection [/logs]
+
+This resource is the collection of all diagnostic logs that the authenticated user has rights to.
+
+### Create diagnostic log entry [POST]
+
+| property               | type    | required | default | notes
+|:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
+| reporterApplication    | string  | Yes |       |
+| reporterComponent      | string  | Yes |       |
+| message                | string  | Yes |       |
+| details                | string  | No  |       |
+| logCreationTimestamp   | date    | Yes |       | UTC date-time, not local
+| context                | string  | No  |       | TODO - I want this to be an array of string-string
+
++ Request (application/json)
+
+        {
+          "reporterApplication" : "ILE Unity",
+          "reporterComponent": "Imagine.ILE.Activities.RecognizeLetters",
+          "message": "System.ApplicationException: Error in the application.",
+          "details" : "at ConsoleApplication13.Program.Main(String[] args) in c:\Users\Matthew\Documents\Visual Studio 2013\Projects\Console
+lication13\ConsoleApplication13\Program.cs:line 13",
+          "logCreationTimestamp": "2014-05-06T15:05:03.0238299Z"
+        }
+        
++ Response 202
 
