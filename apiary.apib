@@ -210,15 +210,13 @@ A Student resource has the following attributes:
 - `id` (string): Unique Student identifier [Assigned by API when Student is created]
 - `username` (string): Unique name used to login (email address)
 - `firstName` (string): First Name
-- `nickName` (string): Alternative to First Name
 - `lastName` (string): Last Name
-- `gradeLevel` (number: Grade Level, Kinderton=0, First Grade = 1, etc.
-- `firstLanguage`(number): Oral first language
-- `writtenLanguage` (number): Written language used at home
-- `studentNumber` (string): Id assigned by school or district
-- `withDisabilities` (boolean): Classified as having disabilities
-- `strugglingReader` (boolean): Classified as a Struggling Reader
-- `englishlanguagelearner` (boolean): Classified as an ELL
+- `gender` (string): Male or Female
+- `gradeLevel` (string): Grade Level: PreK, Kinderton, First-Twelfth, Other
+- `firstLanguage`(string): Oral first language
+- `writtenLanguage` (string): Written language used at home
+- `studentNumber` (string): Unique district or school id for Student.  [OPTIONAL]
+- `syncId` (string): Id used in syncing with SIS [OPTIONAL]
 
 
 
@@ -234,15 +232,13 @@ A Student resource has the following attributes:
             "id": "4176a86d-5ef3-4898-a350-8b80ddc09a49",
             "username": "demostudent@imaginelearning.com",
             "firstName": "Madyson",
-            "nickName": "Mady",
             "lastName": "Cram",
-            "gradeLevel": 1,
-            "firstLanguage": 1,
-            "writtenLanguage": 1,
+            "gender" : "Male",
+            "gradeLevel": "Second",
+            "firstLanguage": "English",
+            "writtenLanguage": "English",
             "studentNumber": "",
-            "withDisabilities": false,
-            "strugglingReader": false,
-            "englishLanguageLearner": true
+            "syncId": ""
           }
           "notifications": {}
         }
@@ -350,28 +346,24 @@ This resource is the collection of all students that the authenticated user has 
               "id": "4176a86d-5ef3-4898-a350-8b80ddc09a49",
               "username": "demostudent@imaginelearning.com",
               "firstName": "Madyson",
-              "nickName": "Mady",
               "lastName": "Cram",
-              "gradeLevel": 1,
-              "firstLanguage": 1,
-              "writtenLanguage": 1,
+              "gender": "Male",
+              "gradeLevel": "Second",
+              "firstLanguage": "English",
+              "writtenLanguage": "English",
               "studentNumber": "",
-              "withDisabilities": false,
-              "strugglingReader": false,
-              "englishLanguageLearner": true
+              "syncId": ""
             }, {
               "id": "3a617f40-4748-4c32-a8c3-5d6282c6842c",
               "username": "demostudent2@imaginelearning.com",
               "firstName": "Matt",
-              "nickName": "Nancy-boy",
-              "lastName": "Isgay",
-              "gradeLevel": 2,
-              "firstLanguage": 2,
-              "writtenLanguage": 2,                
+              "lastName": "Lund",
+              "gender": "Male",
+              "gradeLevel": "PreK",
+              "firstLanguage": "Mandarin",
+              "writtenLanguage": "Chinese Simplified",                
               "studentNumber": "",
-              "withDisabilities": true,
-              "strugglingReader": true,
-              "englishLanguageLearner": true                
+              "syncId": ""
             }
           }
           "notifications": {}
@@ -382,34 +374,31 @@ This resource is the collection of all students that the authenticated user has 
 
 | property               | type    | required | default | notes
 |:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
-| username               | string  | Yes |       |
-| firstName              | string  | Yes |       |
-| nickName               | string  | Yes |       |
-| lastName               | string  | Yes |       |
-| gradeLevel             | number  | Yes |       |
-| firstLanguage          | number  | Yes |       |
-| writtenLanguage        | number  | Yes |       |
-| studentNumber          | number  | No  | null  |
-| withDisabilities       | boolean | No  | false |
-| strugglingReader       | boolean | No  | false |
-| englishLanguageLearner | boolean | No  | false |
-| password               | string  | Yes |       |
+| username               | string  | Yes |       | Must be unique and in email format
+| password               | string  | Yes |       | Length 8-256 characters
+| firstName              | string  | Yes |       | Length 1-32 characters
+| lastName               | string  | Yes |       | Length 1-32 characters
+| gender                 | string  | Yes |       | Valid values: "Male", "Female"
+| gradeLevel             | string  | Yes |       | Valid values: "PreK", "Kindergarten", "First"-"Twelfth", "Other"
+| firstLanguage          | number  | Yes |       | Call GET /OralLanguages for valid values
+| writtenLanguage        | number  | Yes |       | Call GET /WrittenLanguages for valid values
+| studentNumber          | string  | No  | null  | Length 1-64 characters
+| syncId                 | string  | No  | null  | Length 1-64 characters
+
 
 + Request (application/json)
 
         {
           "username" : "demostudent@imaginelearning.com",
+          "password" : "demopassword",
           "firstName": "Madyson",
-          "nickName": "Mady",
           "lastName" : "Cram",
-          "gradeLevel": 1,
-          "firstLanguage" : 1,
-          "writtenLanguage": 1,
+          "gender": "Female",
+          "gradeLevel": "Second",
+          "firstLanguage" : "English",
+          "writtenLanguage": "English",
           "studentNumber": "",
-          "withDisabilities": false,
-          "strugglingReader": false,
-          "englishLanguageLearner": true,
-          "password": "demo"
+          "syncId": ""
         }
         
 + Response 201
@@ -431,7 +420,10 @@ A User resource has the following attributes:
 - `username` (string) Unique name used to login (email address)
 - `firstName` (string) First Name
 - `lastName` (string) Last Name
-- `title` (string) User title ie. Teacher, ELL Administrator, etc.
+- `userType` (string) Type of user. Valid values: "Administrator", "Teacher"
+- `language` (string) Language.  
+- `userNumber` (string) Unique district or school id for User.  [OPTIONAL]
+- `syncId` (string) Id used in syncing with SIS [OPTIONAL]
 
 
 + Parameters
@@ -447,7 +439,10 @@ A User resource has the following attributes:
             "username": "demouser@imaginelearning.com",
             "firstName": "Susan",
             "lastName": "Preator",
-            "title": "Teacher"
+            "userType": "Teacher",
+            "language": "English",
+            "userNumber": "",
+            "syncId": ""
           }
           "notifications": {}
         }
@@ -495,11 +490,23 @@ This resource represents the list of groups for the specified user
             [{
               "id": "5687fc7a-dccc-45b7-8be5-bf9533e37af3",
               "name": "First Grade",
-              "defaultSessionTime": 20
+              "groupType": "ILE",
+              "sessionTime": 30,
+              "printOption": "All",
+              "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+              "sectionName": "",
+              "groupNumber": "",
+              "syncId": ""
             }, {
               "id": "0a0b13c0-8315-43f3-bc5a-033d0dd340ac",
               "name": "After School",
-              "defaultSessionTime": 30
+              "groupType": "ILS",
+              "sessionTime": 60,
+              "printOption": "Partial",
+              "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+              "sectionName": "",
+              "groupNumber": "",
+              "syncId": ""
             }
           }
           "notifications": {}
@@ -527,13 +534,19 @@ This resource is the collection of all users
               "username": "demouser@imaginelearning.com",
               "firstName": "Susan",
               "lastName": "Preator",
-              "title": "Teacher"
+              "userType": "Administrator",
+              "language": "English",
+              "userNumber": "",
+              "syncId": ""
             }, {
-              "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+              "id": "fe33418b-099f-49bf-97c0-85468a791084",
               "username": "demouser@imaginelearning.com",
               "firstName": "Clydie",
               "lastName": "Wakefield",
-              "title": "ELL Administrator"
+              "userType": "Teacher"
+              "language": "Chinese Traditional",
+              "userNumber": "",
+              "syncId": ""            
             }
           }
           "notifications": {}
@@ -544,20 +557,27 @@ This resource is the collection of all users
 
 | property               | type    | required | default | notes
 |:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
-| username               | string  | Yes |       |
-| firstName              | string  | Yes |       |
-| lastName               | string  | Yes |       |
-| title                  | string  | No  | null  |
-| password               | string  | Yes |       |
+| username               | string  | Yes |       | Must be unique and in email format
+| password               | string  | Yes |       | Length 8-256 characters
+| firstName              | string  | Yes |       | Length 1-32 characters
+| lastName               | string  | Yes |       | Length 1-32 characters
+| userType               | string  | Yes |       | Valid values: "Administrator", "Teacher"
+| language               | string  | Yes |       | Call GET /WrittenLanguages for valid values
+| userNumber             | string  | No  |       | Length 1-64 characters
+| syncId                 | string  | No  |       | Length 1-64 characters
+| organizationId         | string  | No  |       | Valid organizationId for initial membership
+
 
 + Request (application/json)
 
         {
           "username" : "demouser@imaginelearning.com",
+          "password": "demopassword"
           "firstName": "Susan",
           "lastName" : "Preator",
-          "title" : "Teacher",
-          "password": "demo"
+          "userType" : "Teacher",
+          "language" : "English",
+          "userNumber" : "12345"
         }
         
 + Response 201
@@ -577,12 +597,17 @@ An Institution reprents a school, district, sub-district, or similar grouping.  
 
 - `id` (string) Unique Institution identifier [Assigned by API when User is created]
 - `name` (string) Name of the Institution
+- `organizationType` (string) Type of Organization
 - `address` (string) Street address
+- `address2` (string) Street address 2 [OPTIONAL]
 - `city` (string) City
 - `state` (string) State or Province, fully spelled out
 - `zip` (string) Zip Code 
 - `country` (string) [ISO 3166-1 alpha-3 Country Code](https://en.wikipedia.org/wiki/ISO_3166-1)
-- `parentId` (string) Id of the parent institution of this instution (empty if there is no parent institution)
+- `parentId` (string) Id of the parent institution of this instution
+- `licenseCap` (number) Number of licenses organization is limited to [OPTIONAL - ommission indicates no cap on licenses]
+- `organizationNumber` (string) Unique state/district id for Organization.  [OPTIONAL]
+- `syncId` (string) Id used in syncing with SIS [OPTIONAL]
 
 + Parameters
     + id (string) ... Institution Id.
@@ -595,12 +620,16 @@ An Institution reprents a school, district, sub-district, or similar grouping.  
           {
             "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
             "name": "Imagine Learning Academy",
+            "organizationType" : "School",
             "address": "191 River Park Dr.",
             "city": "Provo",
             "state": "Utah",
             "zip": "84604",
             "country": "USA",
-            "parentId": ""
+            "parentId": "00000000-0000-0000-0000-000000000000",
+            "licenseCap": 50,
+            "organizationNumber": "",
+            "syncId", ""
           }
           "notifications": {}
         }
@@ -653,7 +682,10 @@ This resource represents the list of child institutions for the specified instit
               "state": "Idaho",
               "zip": "83638",
               "country": "USA",
-              "parentId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc"
+              "parentId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+              "licenseCap": 50,
+              "organizationNumber": "",
+              "syncId", ""
             }]
           }
           "notifications": {}
@@ -684,7 +716,10 @@ This resource is the collection of all Institutions
               "state": "Utah",
               "zip": "84604",
               "country": "USA",
-              "parentId": ""
+              "parentId": "00000000-0000-0000-0000-000000000000",
+              "licenseCap": 100,
+              "organizationNumber": "",
+              "syncId", ""
             }, {
               "id": "6f587521-1dd4-431d-ad91-4c27c5f32776",
               "name": "Anderton Academy",
@@ -693,7 +728,10 @@ This resource is the collection of all Institutions
               "state": "Idaho",
               "zip": "83638",
               "country": "USA",
-              "parentId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc"
+              "parentId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+              "licenseCap": 50,
+              "organizationNumber": "",
+              "syncId", ""
             }
           }
           "notifications": {}
@@ -704,24 +742,30 @@ This resource is the collection of all Institutions
 
 | property               | type    | required | default | notes
 |:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
-| name                   | string  | Yes |       |
-| address                | string  | Yes |       |
-| city                   | string  | Yes |       |
-| state                  | string  | Yes |       |
-| zip                    | string  | Yes |       |
-| country                | string  | Yes |       |
-| parentId               | string  | No  | null  | If not specified, will be a root institution
+| name                   | string  | Yes |       | Length 1-128 characters
+| organizationType       | string  | Yes |       | Valid values: "District", "School", "Other"
+| address                | string  | Yes |       | Length 1-128 characters
+| address2               | string  | No  | null  | Length 1-128 characters
+| city                   | string  | Yes |       | Length 1-128 characters
+| state                  | string  | Yes |       | Length 1-64 characters
+| zip                    | string  | Yes |       | Length 5 numbers
+| country                | string  | Yes |       | Length 3 characters ([ISO 3166-1 alpha-3 Country Code](https://en.wikipedia.org/wiki/ISO_3166-1))
+| parentId               | string  | Yes |       | Valid Organization Id of parent ("00000000-0000-0000-0000-000000000000" for Imagine Learning)
+| licenseCap             | number  | No  | null  | 
+| organizationNumber     | string  | No  | null  | Length 1-64 characters
+| syncId                 | string  | No  | null  | Length 1-64 characters
 
 
 + Request (application/json)
 
         {
-          "name" : "Imagine Learning School District",
+          "name" : "Test School District",
           "address": "191 River Park Dr.",
           "city" : "Provo",
           "state": "Utah",
           "zip" : "84604",
-          "country": "USA"
+          "country": "USA",
+          "parentId": "00000000-0000-0000-0000-000000000000"
         }
         
 + Response 201
@@ -742,7 +786,13 @@ A Group reprents any type of class or other grouping of students.   The resource
 
 - `id` (string) Unique Group identifier [Assigned by API when User is created]
 - `name` (string) Name of the Group
-- `defaultSessionTime` (number) Number of minutes as default session time for students in this group
+- `groupType` (string) Type of group: "ILE", "ILS"
+- `sessionTime` (number) Number of minutes students run each session
+- `printOption` (string) "All" printouts, "Partial" printouts, or "None"
+- `organizationId` (string) Id of the Organization the group belongs to
+- `sectionName` (string) Name of Section [OPTIONAL]
+- `groupNumber` (string) Unique district/school id for the group.  [OPTIONAL]
+- `syncId` (string) Id used in syncing with SIS [OPTIONAL]
 
 
 + Parameters
@@ -756,7 +806,13 @@ A Group reprents any type of class or other grouping of students.   The resource
           {
             "id": "5687fc7a-dccc-45b7-8be5-bf9533e37af3",
             "name": "First Grade",
-            "defaultSessionTime": 20
+            "groupType": "ILE",
+            "sessionTime": 30,
+            "printOption": "All",
+            "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+            "sectionName": "",
+            "groupNumber": "",
+            "syncId": ""
           }
           "notifications": {}
         }
@@ -790,7 +846,7 @@ To update an Group send a Patch Request with updated value(s) for one or more of
 
 This resource represents the list of child institutions for the specified institution
 
-### Retrieve child Institutions [GET]
+### Retrieve student in a group [GET]
 
 + Parameters
     + id (string) ... Group Id for which to retrieve students
@@ -805,28 +861,24 @@ This resource represents the list of child institutions for the specified instit
               "id": "4176a86d-5ef3-4898-a350-8b80ddc09a49",
               "username": "demostudent@imaginelearning.com",
               "firstName": "Madyson",
-              "nickName": "Mady",
               "lastName": "Cram",
-              "gradeLevel": 1,
-              "firstLanguage": 1,
-              "writtenLanguage": 1,
+              "gender": "Male",
+              "gradeLevel": "Second",
+              "firstLanguage": "English",
+              "writtenLanguage": "English",
               "studentNumber": "",
-              "withDisabilities": false,
-              "strugglingReader": false,
-              "englishLanguageLearner": true
+              "syncId": ""
             }, {
               "id": "3a617f40-4748-4c32-a8c3-5d6282c6842c",
               "username": "demostudent2@imaginelearning.com",
               "firstName": "Matt",
-              "nickName": "Nancy-boy",
-              "lastName": "Isgay",
-              "gradeLevel": 2,
-              "firstLanguage": 2,
-              "writtenLanguage": 2,                
+              "lastName": "Lund",
+              "gender": "Male",
+              "gradeLevel": "PreK",
+              "firstLanguage": "Mandarin",
+              "writtenLanguage": "Chinese Simplified",                
               "studentNumber": "",
-              "withDisabilities": true,
-              "strugglingReader": true,
-              "englishLanguageLearner": true                
+              "syncId": ""
             }
           }
           "notifications": {}
@@ -852,11 +904,23 @@ This resource is the collection of groups owned by the current user.
             [{
               "id": "5687fc7a-dccc-45b7-8be5-bf9533e37af3",
               "name": "First Grade",
-              "defaultSessionTime": 20
+              "groupType": "ILE",
+              "sessionTime": 30,
+              "printOption": "All",
+              "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+              "sectionName": "",
+              "groupNumber": "",
+              "syncId": ""
             }, {
               "id": "0a0b13c0-8315-43f3-bc5a-033d0dd340ac",
               "name": "After School",
-              "defaultSessionTime": 30
+              "groupType": "ILS",
+              "sessionTime": 60,
+              "printOption": "Partial",
+              "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+              "sectionName": "",
+              "groupNumber": "",
+              "syncId": ""
             }
           }
           "notifications": {}
@@ -867,7 +931,14 @@ This resource is the collection of groups owned by the current user.
 
 | property               | type    | required | default | notes
 |:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
-| name                   | string  | Yes |       |
+| name                   | string  | Yes |       | Length 1-64 characters
+| groupType              | string  | Yes |       | Valid values: "ILE", "ILS"
+| sessionTime            | number  | Yes |       | 
+| printOption            | string  | Yes |       | Valid values: "Full", "Partial", "None"
+| organizationId         | string  | Yes |       | Valid Organization Id the group belongs to
+| sectionName            | string  | No  | null  | Length 1-64 characters
+| groupNumber            | string  | No  | null  | Length 1-64 characters
+| syncId                 | string  | No  | null  | Length 1-64 characters
 
 
 + Request (application/json)
@@ -999,29 +1070,3 @@ An Artifact resource represents a digital document or media produced by a studen
           "notifications": {}
         }
 
-## Logs Collection [/logs]
-
-This resource is the collection of all diagnostic logs that the authenticated user has rights to.
-
-### Create diagnostic log entry [POST]
-
-| property               | type    | required | default | notes
-|:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
-| reporterApplication    | string  | Yes |       |
-| reporterComponent      | string  | Yes |       |
-| message                | string  | Yes |       |
-| details                | string  | No  |       |
-| logCreationTimestamp   | date    | Yes |       | UTC date-time, not local
-| context                | string  | No  |       | TODO - I want this to be an array of string-string
-
-+ Request (application/json)
-
-        {
-          "reporterApplication" : "ILE Unity",
-          "reporterComponent": "Imagine.ILE.Activities.RecognizeLetters",
-          "message": "System.ApplicationException: Error in the application.",
-          "details" : "at ConsoleApplication13.Program.Main(String[] args) in c:\Users\Matthew\Documents\Visual Studio 2013\Projects\Consolelication13\ConsoleApplication13\Program.cs:line 13",
-          "logCreationTimestamp": "2014-05-06T15:05:03.0238299Z"
-        }
-        
-+ Response 202
