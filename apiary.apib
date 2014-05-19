@@ -585,12 +585,12 @@ This resource is the collection of all users
         }
 
 
-## Institution [/institutions/{id}]
+## Organization [/organizations/{id}]
 
-An Institution reprents a school, district, sub-district, or similar grouping.   The resource has the following attributes: 
+An Organization reprents a school, district, sub-district, or similar grouping.   The resource has the following attributes: 
 
-- `id` (string) Unique Institution identifier [Assigned by API when User is created]
-- `name` (string) Name of the Institution
+- `id` (string) Unique Organization identifier [Assigned by API when User is created]
+- `name` (string) Name of the Organization
 - `organizationType` (string) Type of Organization
 - `address` (string) Street address
 - `address2` (string) Street address 2 [OPTIONAL]
@@ -598,19 +598,19 @@ An Institution reprents a school, district, sub-district, or similar grouping.  
 - `state` (string) State or Province, fully spelled out
 - `zip` (string) Zip Code 
 - `country` (string) [ISO 3166-1 alpha-3 Country Code](https://en.wikipedia.org/wiki/ISO_3166-1)
-- `parentId` (string) Id of the parent institution of this instution
+- `parentId` (string) Id of the parent organization of this organization
 - `licenseCap` (number) Number of licenses organization is limited to [OPTIONAL - ommission indicates no cap on licenses]
 - `organizationNumber` (string) Unique state/district id for Organization.  [OPTIONAL]
 - `syncId` (string) Id used in syncing with SIS [OPTIONAL]
 
 + Parameters
-    + id (string) ... Institution Id.
+    + id (string) ... Organization Id.
 
 + Model (application/hal+json)
 
         {
           "metadata": {},
-          "institution":
+          "organization":
           {
             "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
             "name": "Imagine Learning Academy",
@@ -628,13 +628,13 @@ An Institution reprents a school, district, sub-district, or similar grouping.  
           "notifications": {}
         }
 
-### Retrieve a Single Institution [GET]
+### Retrieve a Single Organization [GET]
 + Response 200
     
-    [Institution][]
+    [Organization][]
 
-### Edit an Institution [PATCH]
-To update an Institution send a Patch Request with updated value(s) for one or more of the Student resource attributes. All attributes values (properties) from the previous version are carried over by default if not specified.
+### Edit an Organization [PATCH]
+To update an Organization send a Patch Request with updated value(s) for one or more of the Student resource attributes. All attributes values (properties) from the previous version are carried over by default if not specified.
 
 + Request (application/json)
 
@@ -644,29 +644,29 @@ To update an Institution send a Patch Request with updated value(s) for one or m
 
 + Response 200
     
-    [Institution][]
+    [Organization][]
 
-### Delete an Institution [DELETE]
+### Delete an Organization [DELETE]
 + Response 200 (application/json)
 
         {
           "notifications": {}
         }
 
-## Insitution's Child-Institution Collection [/instutions/{id}/institutions]
+## Organizations's Child-Organization Collection [/organizations/{id}/organizations]
 
-This resource represents the list of child institutions for the specified institution
+This resource represents the list of child organizations for the specified organization
 
-### Retrieve child Institutions [GET]
+### Retrieve child Organizations [GET]
 
 + Parameters
-    + id (string) ... Id of the parent Institution
+    + id (string) ... Id of the parent Organization
 
 + Response 200 (application/json)
 
         {
           "metadata": {},
-          "institutions":
+          "organizations":
           {
             [{
               "id": "6f587521-1dd4-431d-ad91-4c27c5f32776",
@@ -686,11 +686,11 @@ This resource represents the list of child institutions for the specified instit
         }
         
 
-## Institutions Collection [/institutions{?limit,offset}]
+## Organizations Collection [/organizations{?limit,offset}]
 
-This resource is the collection of all Institutions
+This resource is the collection of all Organizations
 
-### List all Institutions [GET]
+### List all Organizations [GET]
 
 + Parameters
     + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
@@ -700,7 +700,7 @@ This resource is the collection of all Institutions
 
         {
           "metadata": {},
-          "institutions":
+          "organizations":
           {
             [{
               "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
@@ -732,7 +732,7 @@ This resource is the collection of all Institutions
         }
 
 
-### Create Institution [POST]
+### Create Organization [POST]
 
 | property               | type    | required | default | notes
 |:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
@@ -764,7 +764,7 @@ This resource is the collection of all Institutions
         
 + Response 201
 
-    [Institution][]
+    [Organization][]
          
 
 + Response 409
@@ -838,7 +838,7 @@ To update an Group send a Patch Request with updated value(s) for one or more of
 
 ## Groups's Student Collection [/groups/{id}/students]
 
-This resource represents the list of child institutions for the specified institution
+This resource represents the list of child organizations for the specified organization
 
 ### Retrieve student in a group [GET]
 
