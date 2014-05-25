@@ -42,8 +42,9 @@ Each response from the Imagine Learning Cloud API contains:
 
 ### HTTP Response Codes used
 
-- 200 `OK` - the request was successful.
+- 200 `OK` - the request was successful.  The Response body contains entity resource data.
 - 201 `Created` - the request was successful and a resource was created.
+- 204 `No Content` - the request was successful, but there is no content to return
 - 304 `Not Modified` - the resource has not been modied and therefore not retured (used with request headers If-Modified-Since or If-Match).
 - 400 `Bad Request` - the request could not be understood or was missing required parameters.
 - 401 `Unauthorized` - authentication failed (missing or invalid authentication token).
@@ -51,8 +52,6 @@ Each response from the Imagine Learning Cloud API contains:
 - 404 `Not Found` - resource was not found.
 - 500 `Internal Server Error` - an unexpected error or condition was encountered.
 - 503 `Service Unavailable` - We are temporarily unable to service the request. Please wait for a bit and try again.
-
-Many errors will include an human readable detailed error message in the metadata section of the result, as follows:
 
 ```
 HTTP/1.1 500 Internal Server Error
@@ -66,11 +65,9 @@ X-Powered-By: ASP.NET
 Date: Tue, 08 Apr 2014 19:53:41 GMT
 
 {
+  "metadata":
   {
-    "metadata":
-    {
-      "errorMsg" : "An unhandled exception occured: <details>"
-    }
+    "errorMsg" : "An unhandled exception occured: <details>"
   }
 }
 ```
