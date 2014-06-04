@@ -922,12 +922,12 @@ This resource is the collection of groups owned by the current user.
 
 | property               | type    | required | default | notes
 |:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
-| name                   | string  | Yes |       | Length 1-64 characters
+| name                   | string  | Yes |       | Length 1-256 characters
 | groupType              | string  | Yes |       | Valid values: "ILE", "ILS"
 | sessionTime            | number  | Yes |       | 
 | printOption            | string  | Yes |       | Valid values: "Full", "Partial", "None"
 | organizationId         | string  | Yes |       | Valid Organization Id the group belongs to
-| sectionName            | string  | No  | null  | Length 1-64 characters
+| sectionName            | string  | No  | null  | Length 1-256 characters
 | groupNumber            | string  | No  | null  | Length 1-64 characters
 | syncId                 | string  | No  | null  | Length 1-64 characters
 
