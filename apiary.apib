@@ -949,7 +949,126 @@ This resource is the collection of groups owned by the current user.
           "message" : "The Group name already exists"
         }
 
+# Group Sequencing
 
+## Activity [/activities{?product,clientActivitySupport}]
+
+An Activity resource represents the next activity selected for the Student to play
+
+### Get next Activity [GET]
+
++ Parameters
+    + product = `` (required, number, `1`)...The Id of the Product to run.
+    + clientActivitySupport = `` (optional, number, `123456789`)...The hash/Id of the set of supported Activities and DataSet
+
++ Response 200 (application/json)
+
+        {
+            "selectedContent": {
+                "activity": 49,
+                "activityDescription": "RecognizeLetters",
+                "dataSetNum": 1,
+                "activitySpecificDatas": null
+            },
+            "diagnosticData": {
+            "expectedSkillsToBeScored": [
+                {
+                    "skillId": 3,
+                    "skillDescription": "Summary_RecognizeLetters",
+                    "skillType": "Percentage"
+                },
+                {
+                    "skillId": 1958,
+                    "skillDescription": "A",
+                    "skillType": "Mastery"
+                },
+                {
+                    "skillId": 1970,
+                    "skillDescription": "M",
+                    "skillType": "Mastery"
+                }
+                ]
+            },
+            "testSection": null,
+            "reviewMenuEnabledActivitySection": null,
+            "recordingDatas": null
+        }
+
++ Response 404 (application/json)
+
+        {
+            "message": "No clientActivitySupport with ID = 123456789. Use POST /activities/support"
+        }
+
+## Activity [/activities]
+
+### Process completed Activity [PUT]
+
++ Request (application/json)
+
+        {
+            "product": 1,
+            "completedActivityData": {
+                "activity": 49,
+                "dataSetNum": 1,
+                "elapsedTime": "00:00:00",
+                "scores": [
+                {
+                    "skill": 3,
+                    "numPossible": 10,
+                    "numCorrect": 0
+                },
+                {
+                    "skill": 1958,
+                    "mastered": false
+                },
+                {
+                    "skill": 1970,
+                    "mastered": false
+                }
+                ]
+            }
+        }
+
++ Response 204
+
+### Save Activity progress [POST]
+
++ Request (application/json)
+
+        {
+            "Activity": 96,
+            "ActivitySavedDataCollection": [
+            {
+                "Key": "TestData",
+                "Value": "TestData"
+            }
+            ]
+        }
+
++ Response 204
+
+## Activity [/activities/support]
+
+# Create client supported Activities [POST]
+
++ Request (application/json)
+
+        {
+            "ClientActivitySupport": 123456789,
+            "SupportedActivities": [
+            {
+                "Activity": "AffixAction",
+                "SupportedDataSets": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
+            },
+            {
+                "Activity": "AlphabetQuiz",
+                "SupportedDataSets": [1,2,3,4,5]
+            }
+            ]
+        }
+
++ Response 201
 
 # Group Runtime
 
