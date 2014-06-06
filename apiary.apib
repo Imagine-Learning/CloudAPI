@@ -1048,9 +1048,11 @@ An Activity resource represents the next activity selected for the Student to pl
 
 + Response 204
 
-## Activity [/activities/support]
+## Client Activity support [/activities/support]
 
-# Create client supported Activities [POST]
+A client may send its set of supported content (Activities and DataSets) such that server-side sequencing logic may determine to not send any activity to the client which it doesn't have the capability to play
+
+# Create client Activity support  [POST]
 
 + Request (application/json)
 
@@ -1069,6 +1071,28 @@ An Activity resource represents the next activity selected for the Student to pl
         }
 
 + Response 201
+
+## Recordings [/recordings]
+
+Student recordings made in some activities
+
+# Store Recordings [PUT]
+
++ Request (application/json)
+
+        {
+            "Product": 1,
+            "Activity": 14,
+            "DataSetNum": 1,
+            "RecordingDatas": [
+            {
+                "RecordingName": "TestRecording",
+                "RawAudioData": "AQ=="
+            }
+            ]
+        }
+
++ Response 204
 
 # Group Runtime
 
