@@ -317,6 +317,46 @@ This resource represents the list artifacts for the specified student r
           "notifications": {}
         }
 
+## Student's Groups Collection [/students/{id}/groups]
+
+This resource represents the list of groups for the specified student
+
+### Retrieve Groups for specified Student [GET]
+
++ Parameters
+    + id (string) ... Id of the Student
+
++ Response 200 (application/json)
+
+        {
+          "metadata": {},
+          "groups":
+          {
+            [{
+              "id": "5687fc7a-dccc-45b7-8be5-bf9533e37af3",
+              "name": "First Grade",
+              "groupType": "ILE",
+              "sessionTime": 30,
+              "printOption": "All",
+              "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+              "sectionName": "",
+              "groupNumber": "",
+              "syncId": ""
+            }, {
+              "id": "0a0b13c0-8315-43f3-bc5a-033d0dd340ac",
+              "name": "After School",
+              "groupType": "ILS",
+              "sessionTime": 60,
+              "printOption": "Partial",
+              "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+              "sectionName": "",
+              "groupNumber": "",
+              "syncId": ""
+            }
+          }
+          "notifications": {}
+        }
+
 ## Students Collection [/students{?limit,offset,fields}]
 
 This resource is the collection of all students that the authenticated user has rights to.
@@ -833,14 +873,14 @@ To update an Group send a Patch Request with updated value(s) for one or more of
           "notifications": {}
         }
 
-## Groups's Student Collection [/groups/{id}/students]
+## Groups's Student Collection [/groups/{groupId}/students/{studentId}]
 
-This resource represents the list of child organizations for the specified organization
+This resource represents the list of students in the specified group
 
-### Retrieve student in a group [GET]
+### Retrieve students in a group [GET]
 
 + Parameters
-    + id (string) ... Group Id for which to retrieve students
+    + groupId (string) ... Group Id for which to retrieve students
 
 + Response 200 (application/json)
 
@@ -874,6 +914,77 @@ This resource represents the list of child organizations for the specified organ
           }
           "notifications": {}
         }
+
+### Add student to a group [PUT]
+
++ Parameters
+    + groupId (string) ... Group Id to add User to
+    + studentId (string) ... Student Id being added to Group
+
++ Response 202 (application/json)
+
+### Remove student from group [DELETE]
+
++ Parameters
+    + groupId (string) ... Group Id to remove User from
+    + studentId (string) ... Student Id being removed from Group
+
++ Response 202 (application/json)
+
+
+## Groups's Users Collection [/groups/{groupId}/users/{userId}]
+
+This resource represents the list of users in the specified group
+
+### Retrieve users in a group [GET]
+
++ Parameters
+    + groupId (string) ... Group Id for which to retrieve users
+
++ Response 200 (application/json)
+
+        {
+          "metadata": {},
+          "users":
+          {
+            [{
+              "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+              "username": "demouser@imaginelearning.com",
+              "firstName": "Susan",
+              "lastName": "Preator",
+              "userType": "Administrator",
+              "language": "English",
+              "userNumber": "",
+              "syncId": ""
+            }, {
+              "id": "fe33418b-099f-49bf-97c0-85468a791084",
+              "username": "demouser@imaginelearning.com",
+              "firstName": "Clydie",
+              "lastName": "Wakefield",
+              "userType": "Teacher"
+              "language": "Chinese Traditional",
+              "userNumber": "",
+              "syncId": ""            
+            }
+          }
+          "notifications": {}
+        }
+
+### Add user to a group [PUT]
+
++ Parameters
+    + groupId (string) ... Group Id to add User to
+    + userId (string) ... User Id being added to Group
+
++ Response 202 (application/json)
+
+### Remove user from group [DELETE]
+
++ Parameters
+    + groupId (string) ... Group Id to remove User from
+    + userId (string) ... User Id being removed from Group
+
++ Response 202 (application/json)
         
 
 ## Groups Collection [/groups{?limit,offset}]
