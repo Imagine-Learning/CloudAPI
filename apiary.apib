@@ -1185,11 +1185,11 @@ A client may send its set of supported content (Activities and DataSets) such th
 
 + Response 201
 
-## Recordings [/activities/recordings]
+## Recordings Metadata [/activities/recordings]
 
 Student recordings made in some activities
 
-# Store Recordings [POST]
+# Store Recordings Metadata [POST]
 
 + Request (application/json)
 
@@ -1199,13 +1199,32 @@ Student recordings made in some activities
             "DataSetNum": 1,
             "RecordingDatas": [
             {
-                "RecordingName": "TestRecording",
-                "RawAudioData": "AQ=="
+                "RecordingName": "TestRecording"
             }
             ]
         }
 
-+ Response 204
++ Response 201 (application/json)
+
+        {
+            "recordingIds": [
+                "8ef75a2f-92c8-4996-98d2-2d6122f137c3"
+            ]
+        }
+
+## Recordings Bytes [/activities/recordings/{id}]
+
+# Store Recording Bytes [PUT]
+
++ Request (application/octect-stream)
+
++ Response 201
+
+# Get Recording Bytes [GET]
+
++ Request 
+
++ Response 200 (application/octect-stream)
 
 # Group Runtime
 
