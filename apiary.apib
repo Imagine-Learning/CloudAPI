@@ -398,6 +398,7 @@ This resource is the collection of all students that the authenticated user has 
 | gradeLevel             | string  | Yes |       | Valid values: "PreK", "Kindergarten", "First"-"Twelfth", "Other"
 | firstLanguage          | number  | Yes |       | Call GET /OralLanguages for valid values
 | writtenLanguage        | number  | Yes |       | Call GET /WrittenLanguages for valid values
+| organizationId         | string  | Yes |       | Valid organizationId
 | studentNumber          | string  | No  | null  | Length 1-64 characters
 | syncId                 | string  | No  | null  | Length 1-64 characters
 
@@ -413,8 +414,7 @@ This resource is the collection of all students that the authenticated user has 
           "gradeLevel": "Second",
           "firstLanguage" : "English",
           "writtenLanguage": "English",
-          "studentNumber": "",
-          "syncId": ""
+          "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc"
         }
         
 + Response 201
@@ -622,10 +622,9 @@ This resource is the collection of all users
 | lastName               | string  | Yes |       | Length 1-32 characters
 | userType               | string  | Yes |       | Valid values: "Administrator", "Teacher"
 | language               | string  | Yes |       | Call GET /WrittenLanguages for valid values
+| organizationId         | string  | Yes |       | Valid organizationId for initial membership
 | userNumber             | string  | No  |       | Length 1-64 characters
 | syncId                 | string  | No  |       | Length 1-64 characters
-| organizationId         | string  | No  |       | Valid organizationId for initial membership
-
 
 + Request (application/json)
 
