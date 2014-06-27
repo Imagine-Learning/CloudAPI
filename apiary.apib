@@ -1215,6 +1215,8 @@ The selectedContent construct in the response instructs the client what should b
 - `dataSetNum` (number): Dataset to be played.  Corresponds to DataSet.DataSetNum in the Imagine database.  This is frequently confused with artificial dataset keys.  So to be clear, this is the very same number that the designer would refer to as "dataset 1000", etc.
 - `activitySpecificDatas:` (see below): Returns any activity saved data that's previously been stored for this student / product.
 
+diagnosticData: Anything contained here is meant to be used to facilitate dev and qa but should not be consumed by the client for other purposes, without further discussion.
+
 + Parameters
     + product = `` (required, number, `1`)...The Id of the Product to run.
     + clientActivitySupport = `` (optional, number, `123456789`)...The hash/Id of the set of supported Activities and DataSet
