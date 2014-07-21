@@ -275,6 +275,7 @@ This resource represents the list of organizations for the specified student
           {
             [{
               "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+              "organizationType" : "District",
               "name": "Imagine Learning School District",
               "address": "191 River Park Dr.",
               "city": "Provo",
@@ -287,6 +288,7 @@ This resource represents the list of organizations for the specified student
               "syncId", ""
             }, {
               "id": "6f587521-1dd4-431d-ad91-4c27c5f32776",
+              "organizationType" : "School",
               "name": "Anderton Academy",
               "address": "1100 Samson Trl",
               "city": "McCall",
@@ -505,6 +507,7 @@ This resource represents the list of organizations for the specified user
           {
             [{
               "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+              "organizationType" : "District",
               "name": "Imagine Learning School District",
               "address": "191 River Park Dr.",
               "city": "Provo",
@@ -517,6 +520,7 @@ This resource represents the list of organizations for the specified user
               "syncId", ""
             }, {
               "id": "6f587521-1dd4-431d-ad91-4c27c5f32776",
+              "organizationType" : "School",
               "name": "Anderton Academy",
               "address": "1100 Samson Trl",
               "city": "McCall",
@@ -630,11 +634,12 @@ This resource is the collection of all users
 
         {
           "username" : "demouser@imaginelearning.com",
-          "password": "demopassword"
+          "password": "demopassword",
           "firstName": "Susan",
           "lastName" : "Preator",
           "userType" : "Teacher",
           "language" : "English",
+          "organizationId" : "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
           "userNumber" : "12345"
         }
         
@@ -677,8 +682,8 @@ An Organization reprents a school, district, sub-district, or similar grouping. 
           "organization":
           {
             "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
-            "name": "Imagine Learning Academy",
             "organizationType" : "School",
+            "name": "Imagine Learning Academy",
             "address": "191 River Park Dr.",
             "city": "Provo",
             "state": "Utah",
@@ -734,6 +739,7 @@ This resource represents the list of child organizations for the specified organ
           {
             [{
               "id": "6f587521-1dd4-431d-ad91-4c27c5f32776",
+              "organizationType" : "School",
               "name": "Anderton Academy",
               "address": "1100 Samson Trl",
               "city": "McCall",
@@ -881,6 +887,7 @@ This resource is the collection of all Organizations
           {
             [{
               "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+              "organizationType" : "District",
               "name": "Imagine Learning School District",
               "address": "191 River Park Dr.",
               "city": "Provo",
@@ -893,6 +900,7 @@ This resource is the collection of all Organizations
               "syncId", ""
             }, {
               "id": "6f587521-1dd4-431d-ad91-4c27c5f32776",
+              "organizationType" : "School",
               "name": "Anderton Academy",
               "address": "1100 Samson Trl",
               "city": "McCall",
@@ -931,6 +939,7 @@ This resource is the collection of all Organizations
 
         {
           "name" : "Test School District",
+          "organizationType" : "School",
           "address": "191 River Park Dr.",
           "city" : "Provo",
           "state": "Utah",
@@ -1186,7 +1195,11 @@ This resource is the collection of groups owned by the current user.
 + Request (application/json)
 
         {
-          "name" : "After School"
+          "name" : "After School",
+          "groupType" : "ILE",
+          "sessionTime" : 30,
+          "printOption" : "All",
+          "organizationId" : "9fad4cfd-f669-4cc7-a38d-275d033eb7bc"
         }
         
 + Response 201
