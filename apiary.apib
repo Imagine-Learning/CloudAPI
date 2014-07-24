@@ -1347,6 +1347,12 @@ A client may send its set of supported content (Activities and DataSets) such th
 
 + Response 201
 
++ Response 409 (application/json)
+
+        {
+            "message": "Supported activities/datasets doesn't match previously POSTed ClientActivtySupport sent with the same hash/ID value: 123456789"
+        }
+
 ## Recordings Metadata [/activities/recordings]
 
 Student recordings made in some activities
