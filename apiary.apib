@@ -205,7 +205,8 @@ This resource has the following attributes
 A Student resource has the following attributes: 
 
 - `id` (string): Unique Student identifier [Assigned by API when Student is created]
-- `username` (string): Unique name used to login (email address)
+- `username` (string): Unique name used to login (must be unique within an authentication domain)
+- `password` (string): Password
 - `firstName` (string): First Name
 - `lastName` (string): Last Name
 - `gender` (string): Male or Female
@@ -228,6 +229,7 @@ A Student resource has the following attributes:
           {
             "id": "4176a86d-5ef3-4898-a350-8b80ddc09a49",
             "username": "demostudent@imaginelearning.com",
+            "password": "123",
             "firstName": "Madyson",
             "lastName": "Cram",
             "gender" : "Male",
@@ -363,6 +365,7 @@ This resource is the collection of all students that the authenticated user has 
             [{
               "id": "4176a86d-5ef3-4898-a350-8b80ddc09a49",
               "username": "demostudent@imaginelearning.com",
+              "password": "123",
               "firstName": "Madyson",
               "lastName": "Cram",
               "gender": "Male",
@@ -374,6 +377,7 @@ This resource is the collection of all students that the authenticated user has 
             }, {
               "id": "3a617f40-4748-4c32-a8c3-5d6282c6842c",
               "username": "demostudent2@imaginelearning.com",
+              "password": "456",
               "firstName": "Matt",
               "lastName": "Lund",
               "gender": "Male",
@@ -774,6 +778,7 @@ This resource represents the list of students in the specified organization
             [{
               "id": "4176a86d-5ef3-4898-a350-8b80ddc09a49",
               "username": "demostudent@imaginelearning.com",
+              "password": "123",
               "firstName": "Madyson",
               "lastName": "Cram",
               "gender": "Male",
@@ -785,6 +790,7 @@ This resource represents the list of students in the specified organization
             }, {
               "id": "3a617f40-4748-4c32-a8c3-5d6282c6842c",
               "username": "demostudent2@imaginelearning.com",
+              "password": "456",
               "firstName": "Matt",
               "lastName": "Lund",
               "gender": "Male",
@@ -1042,6 +1048,7 @@ This resource represents the list of students in the specified group
             [{
               "id": "4176a86d-5ef3-4898-a350-8b80ddc09a49",
               "username": "demostudent@imaginelearning.com",
+              "password": "123",
               "firstName": "Madyson",
               "lastName": "Cram",
               "gender": "Male",
@@ -1053,6 +1060,7 @@ This resource represents the list of students in the specified group
             }, {
               "id": "3a617f40-4748-4c32-a8c3-5d6282c6842c",
               "username": "demostudent2@imaginelearning.com",
+              "password": "456",
               "firstName": "Matt",
               "lastName": "Lund",
               "gender": "Male",
