@@ -170,7 +170,7 @@ Authorization: bearer rDdBkKmtpFiYUoKlZF-LqH4qkyQM_ZywDHqF1IcViinRZg795x9aROHEwM
 
 This resource has the following attributes
 
-- `username` The name of the user or student (in email format) 
+- `username` The name of the user or student (in email format) [Note: student usernames are specified as 'AuthenticationDomain!Username']
 - `password` The password of the user or student 
 
 + Request (application/json)
@@ -669,8 +669,9 @@ An Organization reprents a school, district, sub-district, or similar grouping. 
 - `country` (string) [ISO 3166-1 alpha-3 Country Code](https://en.wikipedia.org/wiki/ISO_3166-1)
 - `parentId` (string) Id of the parent organization of this organization
 - `licenseCap` (number) Number of licenses organization is limited to [OPTIONAL - ommission indicates no cap on licenses]
-- `organizationNumber` (string) Unique state/district id for Organization.  [OPTIONAL]
-- `syncId` (string) Id used in syncing with SIS [OPTIONAL]
+- `organizationNumber` (string) Unique state/district id for Organization.
+- `syncId` (string) Id used in syncing with SIS
+- `authenticationDomainBoundary` (boolean) Indicates whether students authentication and searching stops at this organization or flows up to parent organization(s)
 
 + Parameters
     + id (string) ... Organization Id.
@@ -919,20 +920,21 @@ This resource is the collection of all Organizations
 
 ### Create Organization [POST]
 
-| property               | type    | required | default | notes
-|:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
-| name                   | string  | Yes |       | Length 1-128 characters
-| organizationType       | string  | Yes |       | Valid values: "District", "School", "Other"
-| address                | string  | Yes |       | Length 1-128 characters
-| address2               | string  | No  | null  | Length 1-128 characters
-| city                   | string  | Yes |       | Length 1-128 characters
-| state                  | string  | Yes |       | Length 1-64 characters
-| zip                    | string  | No  | null  | Length 5-10 characters
-| country                | string  | Yes |       | Length 3 characters ([ISO 3166-1 alpha-3 Country Code](https://en.wikipedia.org/wiki/ISO_3166-1))
-| parentId               | string  | Yes |       | Valid Organization Id of parent ("00000000-0000-0000-0000-000000000000" for Imagine Learning)
-| licenseCap             | number  | No  | null  | Empty=No Cap, otherwise Range (0-MAXINT)
-| organizationNumber     | string  | No  | null  | Length 1-64 characters
-| syncId                 | string  | No  | null  | Length 1-64 characters
+| property                    | type    | required | default | notes
+|:----------------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
+| name                        | string  | Yes |       | Length 1-128 characters
+| organizationType            | string  | Yes |       | Valid values: "District", "School", "Other"
+| address                     | string  | Yes |       | Length 1-128 characters
+| address2                    | string  | No  | null  | Length 1-128 characters
+| city                        | string  | Yes |       | Length 1-128 characters
+| state                       | string  | Yes |       | Length 1-64 characters
+| zip                         | string  | No  | null  | Length 5-10 characters
+| country                     | string  | Yes |       | Length 3 characters ([ISO 3166-1 alpha-3 Country Code](https://en.wikipedia.org/wiki/ISO_3166-1))
+| parentId                    | string  | Yes |       | Valid Organization Id of parent ("00000000-0000-0000-0000-000000000000" for Imagine Learning)
+| licenseCap                  | number  | No  | null  | Empty=No Cap, otherwise Range (0-MAXINT)
+| organizationNumber          | string  | No  | null  | Length 1-64 characters
+| syncId                      | string  | No  | null  | Length 1-64 characters
+| authentiationDomainBoundary | boolean | No  | true  | 
 
 
 + Request (application/json)
