@@ -170,7 +170,7 @@ Authorization: bearer rDdBkKmtpFiYUoKlZF-LqH4qkyQM_ZywDHqF1IcViinRZg795x9aROHEwM
 
 This resource has the following attributes
 
-- `username` The name of the user or student (in email format) [Note: student usernames are specified as 'AuthenticationDomain!Username']
+- `username` The name of the user (in email format) or student [Note: student usernames are specified as 'AuthenticationDomain!Username']
 - `password` The password of the user or student 
 
 + Request (application/json)
@@ -396,7 +396,7 @@ This resource is the collection of all students that the authenticated user has 
 
 | property               | type    | required | default | notes
 |:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
-| username               | string  | Yes |       | Must be unique and in email format
+| username               | string  | Yes |       | Must be unique within the authentication domain of the organization
 | password               | string  | Yes |       | Length 8-256 characters
 | firstName              | string  | Yes |       | Length 1-32 characters
 | lastName               | string  | Yes |       | Length 1-32 characters
