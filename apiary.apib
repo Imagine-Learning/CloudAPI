@@ -1320,11 +1320,11 @@ diagnosticData: Anything contained here is meant to be used to facilitate dev an
 + Request (application/json)
 
         {
-            "Activity": 96,
-            "ActivitySavedDataCollection": [
+            "activity": 96,
+            "activitySavedDataCollection": [
             {
-                "Key": "TestData",
-                "Value": "TestData"
+                "key": "TestData",
+                "value": "TestData"
             }
             ]
         }
@@ -1340,17 +1340,17 @@ A client may send its set of supported content (Activities and DataSets) such th
 + Request (application/json)
 
         {
-            "ClientActivitySupport": 123456789,
-            "SupportedActivities": [
+            "clientActivitySupport": 123456789,
+            "supportedActivities": [
             {
-                "Activity": 2,
-                "ActivityDescription" : "AffixAction",
-                "SupportedDataSetNums": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
+                "activity": 2,
+                "activityDescription" : "AffixAction",
+                "supportedDataSetNums": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
             },
             {
-                "Activity": 154,
-                "ActivityDescription" : "AlphabetQuiz",
-                "SupportedDataSetNums": [1,2,3,4,5]
+                "activity": 154,
+                "activityDescription" : "AlphabetQuiz",
+                "supportedDataSetNums": [1,2,3,4,5]
             }
             ]
         }
@@ -1372,12 +1372,12 @@ Student recordings made in some activities
 + Request (application/json)
 
         {
-            "Product": 1,
-            "Activity": 14,
-            "DataSetNum": 1,
-            "RecordingDatas": [
+            "product": 1,
+            "activity": 14,
+            "dataSetNum": 1,
+            "recordingDatas": [
             {
-                "Name": "TestRecording"
+                "name": "TestRecording"
             }
             ]
         }
