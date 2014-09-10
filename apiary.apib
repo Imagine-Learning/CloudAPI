@@ -260,6 +260,11 @@ To update a Student send a Patch Request with updated value(s) for one or more o
     
     [Student][]
 
+### Delete a Student [DELETE]
+NOTE: Only the root user is authorized to delete a Student. We normally want to keep student data around forever. Typically, only a use case for cleaning up test data would call for deleting a Student.
+
++ Response 204
+
 ## Student's Organizations Collection [/students/{id}/organizations]
 
 This resource represents the list of organizations for the specified student
@@ -1233,41 +1238,35 @@ An Activity resource represents the next activity selected for the Student to pl
 
 The selectedContent construct in the response instructs the client what should be played:
 
-- `activity` (number): This is the identifier of the activity to be played
-- `activityDescription` (string): *May be removed but this pending further discussion* This is the name of the activity.  It originates from the Activity.Name in the Imagine database.  This field was added for ease of debugging - it helps developers to see at a glance which activity is playing (versus activity 93) but Matt (and perhaps others) are nervous that if this is programatically used by clients, activity renames will bite us.
+- `activity` (string): This is the identifier of the activity to be played
 - `dataSetNum` (number): Dataset to be played.  Corresponds to DataSet.DataSetNum in the Imagine database.  This is frequently confused with artificial dataset keys.  So to be clear, this is the very same number that the designer would refer to as "dataset 1000", etc.
-- `activitySpecificDatas:` (see below): Returns any activity saved data that's previously been stored for this student / product.
-
-diagnosticData: Anything contained here is meant to be used to facilitate dev and qa but should not be consumed by the client for other purposes, without further discussion.
+- `activitySpecificDatas`: (see below): Returns any activity saved data that's previously been stored for this student / product.
+- `diagnosticData`: Anything contained here is meant to be used to facilitate dev and qa but should not be consumed by the client for other purposes, without further discussion.
 
 + Parameters
-    + product = `` (required, number, `1`)...The Id of the Product to run.
+    + product = `` (required, string, `ILE`)...The unique identifer (or Name) of the Product to run.
     + clientActivitySupport = `` (optional, number, `123456789`)...The hash/Id of the set of supported Activities and DataSets. Omit the value (or use the value 0) to imply client support of all Activities and DataSets known to the server.
 
 + Response 200 (application/json)
 
         {
             "selectedContent": {
-                "activity": 49,
-                "activityDescription": "RecognizeLetters",
+                "activity": "RecognizeLetters",
                 "dataSetNum": 1,
                 "activitySpecificDatas": null
             },
             "diagnosticData": {
             "expectedSkillsToBeScored": [
                 {
-                    "skillId": 3,
-                    "skillDescription": "Summary_RecognizeLetters",
+                    "skillId": "Summary_RecognizeLetters",
                     "skillType": "Percentage"
                 },
                 {
-                    "skillId": 1958,
-                    "skillDescription": "A",
+                    "skillId": "A",
                     "skillType": "Mastery"
                 },
                 {
-                    "skillId": 1970,
-                    "skillDescription": "M",
+                    "skillId": "M",
                     "skillType": "Mastery"
                 }
                 ]
@@ -1290,23 +1289,23 @@ diagnosticData: Anything contained here is meant to be used to facilitate dev an
 + Request (application/json)
 
         {
-            "product": 1,
+            "product": "ILE",
             "completedActivityData": {
-                "activity": 49,
+                "activity": "RecognizeLetters",
                 "dataSetNum": 1,
                 "elapsedTime": "00:00:00",
                 "scores": [
                 {
-                    "skill": 3,
+                    "skill": "Summary_RecognizeLetters",
                     "numPossible": 10,
                     "numCorrect": 0
                 },
                 {
-                    "skill": 1958,
+                    "skill": "A",
                     "mastered": false
                 },
                 {
-                    "skill": 1970,
+                    "skill": "M",
                     "mastered": false
                 }
                 ]
@@ -1320,7 +1319,7 @@ diagnosticData: Anything contained here is meant to be used to facilitate dev an
 + Request (application/json)
 
         {
-            "activity": 96,
+            "activity": "PreAndPlacementTest",
             "activitySavedDataCollection": [
             {
                 "key": "TestData",
@@ -1331,11 +1330,11 @@ diagnosticData: Anything contained here is meant to be used to facilitate dev an
 
 + Response 204
 
-## Client Activity support [/activities/support]
+## Client Activity Support [/activities/support]
 
 A client may send its set of supported content (Activities and DataSets) such that server-side sequencing logic may determine to not send any activity to the client which it doesn't have the capability to play
 
-# Create client Activity support  [POST]
+# Create Client Activity Support  [POST]
 
 + Request (application/json)
 
@@ -1343,13 +1342,11 @@ A client may send its set of supported content (Activities and DataSets) such th
             "clientActivitySupport": 123456789,
             "supportedActivities": [
             {
-                "activity": 2,
-                "activityDescription" : "AffixAction",
+                "activity": "AffixAction",
                 "supportedDataSetNums": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
             },
             {
-                "activity": 154,
-                "activityDescription" : "AlphabetQuiz",
+                "activity": "AlphabetQuiz",
                 "supportedDataSetNums": [1,2,3,4,5]
             }
             ]
@@ -1363,6 +1360,235 @@ A client may send its set of supported content (Activities and DataSets) such th
             "message": "Supported activities/datasets doesn't match previously POSTed ClientActivtySupport sent with the same hash/ID value: 123456789"
         }
 
+## Client Activity Support data [/activities/support/{clientActivitySupport}]
+
++ Parameters
+    + clientActivitySupport (integer hash) ... value used to create client activity support (POST /activities/support)
+
+# Delete Client Activity Suport data [DELETE]
+
+NOTE: Only the root user is authorized to delete client activity support data from server storage. Normally, we would not ever want to delete client activity support data once created. Typically, only a use case for cleaning up test data would call for deleting client activity support data.
+
++ Response 204
+
+## Student Sequencing Data [/activities/{id}]
+
+Operations on underlying student data store
+
++ Parameters
+    + id (string) ... Student Id.
+
+# Seed the Student with sample Data [POST]
+
+NOTE: Only the root user is authorized to seed a student with sample data. Normally student data would be built over the course of natural use of the product. Typically, only tests would call for seeding a student with data.
+
+The POST content is optional. Either supply valid student data (json document) or omit the content to use a server-side pre-built sample. Student data may only be seeded for a new student, i.e. one that does not yet have sequencing data.
+
++ Request (application/json)
+
+        {
+            "_id": "f566a01b-c3dd-47e1-a549-a3a0011b9fc3",
+            "Revision": 4,
+            "StudentProductStateCollection": [
+                {
+                    "Product": "ILE",
+                    "LastStrandChoiceAlgorithmUsed": "LongestSincePlayed",
+                    "NumReviewMenuChoicesMade": 0,
+                    "IsOnDemandTestAssigned": false
+                }
+            ],
+            "StudentLessonStateCollection": [
+                {
+                    "Lesson": "01d6691f-911f-45b5-b861-778c725b4d98",
+                    "LessonState": "Satisfied",
+                    "SatisfiedReason": "SkippedByGradeLevel",
+                    "RowVersion": 0,
+                    "AnyBranchEverFailed": false
+                },
+                {
+                    "Lesson": "d17e51fd-a445-47a1-8145-47d35f45af75",
+                    "LessonState": "Satisfied",
+                    "SatisfiedReason": "SkippedByGradeLevel",
+                    "RowVersion": 0,
+                    "AnyBranchEverFailed": false
+                }
+            ],
+            "ActivityCountedCollection": [
+                {
+                    "LessonBranch": "Main",
+                    "Activity": "EverydayWordsInScenes",
+                    "Lesson": "c3fe8440-1676-4147-8888-83ed059d9771",
+                    "SequenceNode": "b7974386-2593-44ed-80ae-938b46233ff7",
+                    "DataSet": 1,
+                    "DateTime": "2014-09-08T17:12:44.6435162-06:00",
+                    "ElapsedSeconds": 150.0
+                },
+                {
+                    "LessonBranch": "Main",
+                    "Activity": "RecognizeEverydayWords",
+                    "Lesson": "c3fe8440-1676-4147-8888-83ed059d9771",
+                    "SequenceNode": "f6ac8dd4-8ca5-4663-bcd4-f7eeade29b29",
+                    "DataSet": 1,
+                    "DateTime": "2014-09-08T17:12:46.442246-06:00",
+                    "ElapsedSeconds": 150.0,
+                    "Scores": [
+                        {
+                            "Activity": "RecognizeEverydayWords",
+                            "DataSet": 1,
+                            "Skill": "Summary_RecognizeEverydayWords",
+                            "Lesson": "c3fe8440-1676-4147-8888-83ed059d9771",
+                            "LessonBranch": "Main",
+                            "ActivityNode": "f6ac8dd4-8ca5-4663-bcd4-f7eeade29b29",
+                            "DateTime": "2014-09-08T17:12:46.442246-06:00",
+                            "NumPossible": 3,
+                            "NumCorrect": 1,
+                            "Mastered": false,
+                            "QuestionResponses": [
+                                {
+                                    "QuestionNumber": 1,
+                                    "ResponseNumber": 1,
+                                    "AttemptNumber": 1,
+                                    "ProductVersion": "1.0.0.0"
+                                },
+                                {
+                                    "QuestionNumber": 2,
+                                    "ResponseNumber": 2,
+                                    "AttemptNumber": 2,
+                                    "ProductVersion": "1.0.0.0"
+                                },
+                                {
+                                    "QuestionNumber": 3,
+                                    "ResponseNumber": 3,
+                                    "AttemptNumber": 3,
+                                    "ProductVersion": "1.0.0.0"
+                                }
+                            ]
+                        },
+                        {
+                            "Activity": "RecognizeEverydayWords",
+                            "DataSet": 1,
+                            "Skill": "bird",
+                            "Lesson": "c3fe8440-1676-4147-8888-83ed059d9771",
+                            "LessonBranch": "Main",
+                            "ActivityNode": "f6ac8dd4-8ca5-4663-bcd4-f7eeade29b29",
+                            "DateTime": "2014-09-08T17:12:46.442246-06:00",
+                            "NumPossible": 0,
+                            "NumCorrect": 0,
+                            "Mastered": false
+                        }
+                    ]
+                }
+            ],
+            "ActivitySavedDataCollection": [
+                {
+                    "Activity": "ThemeSong",
+                    "VariableName": "TestData",
+                    "Value": "TestData"
+                },
+                {
+                    "Activity": "TimeToRead",
+                    "VariableName": "InfoText_ScaffoldingLevel",
+                    "Value": "NOT_SET"
+                }
+            ],
+            "StudentLessonStateHistoryV2Collection": [
+                {
+                    "ActivatedRevision": 0,
+                    "AnyBranchEverFailed": false,
+                    "CurrentBranch": "",
+                    "LastBranch": "",
+                    "Lesson": "01d6691f-911f-45b5-b861-778c725b4d98",
+                    "LessonState": "Satisfied",
+                    "PendingBranchOutcome": "",
+                    "SatisfiedReason": "SkippedByGradeLevel",
+                    "LessonStateTransitionReason": "SkippingBasedOnGrade",
+                    "DateTime": "2014-09-08T17:12:39.7157042-06:00"
+                },
+                {
+                    "ActivatedRevision": 0,
+                    "AnyBranchEverFailed": false,
+                    "CurrentBranch": "",
+                    "LastBranch": "",
+                    "Lesson": "d17e51fd-a445-47a1-8145-47d35f45af75",
+                    "LessonState": "Satisfied",
+                    "PendingBranchOutcome": "",
+                    "SatisfiedReason": "SkippedByGradeLevel",
+                    "LessonStateTransitionReason": "SkippingBasedOnGrade",
+                    "DateTime": "2014-09-08T17:12:39.7157042-06:00"
+                }
+            ],
+            "TestInstances": [
+                {
+                    "Lesson": "c3fe8440-1676-4147-8888-83ed059d9771",
+                    "LessonBranch": "Main",
+                    "TestType": "Pretest",
+                    "TimeStarted": "2014-09-08T17:12:44.0948972-06:00",
+                    "TimeCompleted": "2014-09-08T17:12:44.3662592-06:00",
+                    "TestInstanceId": "1",
+                    "TestSectionInstances": [
+                        {
+                            "TestSection": "Basic Vocab 1-5",
+                            "TestQuestionInstances": [
+                                {
+                                    "TestQuestion": "q157",
+                                    "TimeStarted": "2014-09-08T17:12:44.2952474-06:00",
+                                    "TimeCompleted": "2014-09-08T17:12:44.2952474-06:00",
+                                    "TestOptionInstances": [
+                                        {
+                                            "ClickCount": 1,
+                                            "IsSelected": false,
+                                            "ResponseLatency": 5,
+                                            "TestOption": "opt729"
+                                        },
+                                        {
+                                            "ClickCount": 1,
+                                            "IsSelected": true,
+                                            "ResponseLatency": 5,
+                                            "TestOption": "opt730"
+                                        },
+                                        {
+                                            "ClickCount": 1,
+                                            "IsSelected": false,
+                                            "ResponseLatency": 5,
+                                            "TestOption": "opt731"
+                                        },
+                                        {
+                                            "ClickCount": 1,
+                                            "IsSelected": false,
+                                            "ResponseLatency": 5,
+                                            "TestOption": "opt732"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "MdtPredictionValidationCollection": [
+                {
+                    "PredictionValidationFrequency": 20.0,
+                    "MdtPredictionParameters": "GradeID Second, SectionID 39: QID51(0.689895470383,0.310104529617,0.6,0.4);QID52(0.852233676975,0.147766323025,0.6,0.4);QID53(0.90243902439,0.09756097561,0.444444444444,0.555555555556);QID54(0.923875432525,0.076124567475,0.65,0.35);QID58(0.973118279569,0.026881720431,0.153846153846,0.846153846154);QID61(0.844290657439,0.155709342561,0.6,0.4);QID62(0.585365853658,0.414634146342,0.5,0.5);",
+                    "DateTime": "2014-09-08T17:12:44.0908968-06:00",
+                    "Lesson": "c3fe8440-1676-4147-8888-83ed059d9771",
+                    "SequenceNode": "3a6b0d0e-9ab3-484b-b768-92e0a51d2f53",
+                    "TestSection": "Basic Vocab 1-5",
+                    "MdtPredictionResultType": "UncertainForcedValidation",
+                    "GradeLevel": "Second"
+                }
+            ]
+        }
+        
++ Response 201
+
+# Delete Student Data [DELETE]
+
+NOTE: Only the root user is authorized to delete student data. We normally want to keep student data around forever. Typically, only a use case for cleaning up test data would call for deleting student data.
+
+Should be performed BEFORE deleting the Student itself via management/provisioning API's (DELETE /students/{id})
+
++ Response 204
+
 ## Recordings Metadata [/activities/recordings]
 
 Student recordings made in some activities
@@ -1372,8 +1598,8 @@ Student recordings made in some activities
 + Request (application/json)
 
         {
-            "product": 1,
-            "activity": 14,
+            "product": "ILE",
+            "activity": "DecodableBooks",
             "dataSetNum": 1,
             "recordingDatas": [
             {
@@ -1392,6 +1618,9 @@ Student recordings made in some activities
 
 ## Recordings Bytes [/activities/recordings/{id}]
 
++ Parameters
+    + id (string) ... Server-assigned recording id, returned in response to store recordings metadata (POST /activities/recordings).
+
 # Store Recording Bytes [PUT]
 
 + Request (application/octect-stream)
@@ -1403,6 +1632,12 @@ Student recordings made in some activities
 + Request (application/octect-stream)
 
 + Response 200 (application/octect-stream)
+
+# Delete Recording Bytes [DELETE]
+
+NOTE: Only the root user is authorized to delete student recordings. We normally want to keep student recordings around forever. Typically, only a use case for cleaning up test data would call for deleting student recordings.
+
++ Response 204
 
 # Group Runtime
 
