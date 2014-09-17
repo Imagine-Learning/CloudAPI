@@ -1230,6 +1230,23 @@ This resource is the collection of groups owned by the current user.
 
 # Group Sequencing
 
+## Activity [/products]
+
+A product resource represents a sequenced product that can be played.
+
+### Get products [GET]
+
++ Response 200 (application/json)
+
+        {
+            [
+                { "identifier": "ILE" },
+                { "identifier": "Spanish" },
+                { "identifier": "Test" },
+                { "identifier": "CommunicationTest" }
+            ]
+        }
+
 ## Activity [/activities{?product,clientActivitySupport}]
 
 An Activity resource represents the next activity selected for the Student to play
