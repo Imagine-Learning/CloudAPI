@@ -1687,11 +1687,26 @@ This resource is the collection of all diagnostic logs that the authenticated us
 
 # Group Reports
 
-## Growth Reports Generation [/growth?student=listofStudentTokens%5B&gradelevel=listofgradelevels&group=listofGroupTokens&graphtype=GraphType&schoolyearstartmmdd=BeginningMonthandDate%5D]
+## Activity [/growth{?student,gradelevel,group,graphtype,schoolyearstartmmdd}]
 
-To generate growth reports for students, group(s), organization(s).
+Generate growth reports by student(s), gradelevel(s),group(s), organization(s).
 
-### Get Growth Reports for Students/groups/organization [GET]
+### Get Growth Reports for Students/gradelevels/groups/organization [GET]
+
+The selectedContent construct in the response instructs the client what is returned back:
+
+- `student` (list of strings): This is the list of student tokens identifying which students if any the report needs to be generated
+- `gradelevel` (number): Dataset to be played.  Corresponds to DataSet.DataSetNum in the Imagine database.  This is frequently confused with artificial dataset keys.  So to be clear, this is the very same number that the designer would refer to as "dataset 1000", etc.
+- `activitySpecificDatas`: (see below): Returns any activity saved data that's previously been stored for this student / product.
+- `diagnosticData`: Anything contained here is meant to be used to facilitate dev and qa but should not be consumed by the client for other purposes, without further discussion.
+
++ Parameters
+    + student = `` (optional, list of strings, `DZOtOM8mCMOjDJ0sOoqqD68rBJWvCM4jOJCvOp0mPZTcDcHY0`)...The list of student tokens identifying which students if any the report needs to be generated. It is important that atleast one of the student, gradelevel, group has to be sent in to get successful results.
+    + gradelevel = `` (optional, list of strings, `C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0`)...The list of grade level tokens identifying for which grades if any, the report needs to be generated.
+    + group = `` (optional, list of strings, `C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0`)...The list of group tokens identifying for which student groups if any, the report needs to be generated.
+    + graphtype = `` (optional, enum GraphType, `GraphType.AllPoints`)...The Graph Type for the reports, RollingAverage(default), WeeklyAverage and AllPoints.
+    + schoolyearstartmmdd = `` (optional, string, `10/14`)...The beginning Day and Month from which the report needs to be generated.
+
 
 | property | type | required | default | notes
 |:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
