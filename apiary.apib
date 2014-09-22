@@ -1711,4 +1711,39 @@ To generate growth reports for students, group(s), organization(s).
           "schoolyearstartmmdd": "05/06"
         }
         
-+ Response 202
++ Response 201 (application/json)
+
+        {
+            "BeginDate": [
+                "8ef75a2f-92c8-4996-98d2-2d6122f137c3"
+            ]
+        }
+        {
+            "BeginDate" : "2014-05-06T15:05:03.0238299Z"
+            "EndDate" : "2014-09-06T15:05:03.0238299Z"
+            "selectedContent": {
+                "activity": "RecognizeLetters",
+                "dataSetNum": 1,
+                "activitySpecificDatas": null
+            },
+            "diagnosticData": {
+            "expectedSkillsToBeScored": [
+                {
+                    "skillId": "Summary_RecognizeLetters",
+                    "skillType": "Percentage"
+                },
+                {
+                    "skillId": "A",
+                    "skillType": "Mastery"
+                },
+                {
+                    "skillId": "M",
+                    "skillType": "Mastery"
+                }
+                ]
+            },
+            "testSection": null,
+            "reviewMenuEnabledActivitySection": null,
+            "recordingDatas": null
+        }
+        
