@@ -1685,4 +1685,30 @@ This resource is the collection of all diagnostic logs that the authenticated us
         
 + Response 202
 
+# Group Reports
 
+## Growth Reports Generation [/growth]
+
+To generate growth reports for students, group(s), organization(s).
+
+### Get Growth Reports for Students/groups/organization [POST]
+
+| property | type | required | default | notes
+|:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
+| student | string[] | Yes | | list of student tokens
+| gradelevel | string[] | No | |list of grade level tokens
+| group | string[] | No | | list of group tokens
+| graphtype | GraphType | No | | type of graph
+| schoolyearstartmmdd | string | Yes | | for testing only, normally should be retrieved from organization
+
++ Request (application/json)
+
+        {
+          "student" : "DZOtOM8mCMOjDJ0sOoqqD68rBJWvCM4jOJCvOp0mPZTcDcHY0",
+          "gradelevel": "C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0",
+          "group": "C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0",
+          "graphtype" : GraphType.AllPoints ,
+          "schoolyearstartmmdd": "05/06"
+        }
+        
++ Response 202
