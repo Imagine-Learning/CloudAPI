@@ -1695,12 +1695,12 @@ Generate growth reports by student(s), gradelevel(s),group(s), organization(s).
 
 The selectedContent construct in the response instructs the client what is returned back:
 
-- `BeginningDate` (list of strings): This is the list of student tokens identifying which students if any the report needs to be generated
-- `EndDate` (number): Dataset to be played.  Corresponds to DataSet.DataSetNum in the Imagine database.  This is frequently confused with artificial dataset keys.  So to be clear, this is the very same number that the designer would refer to as "dataset 1000", etc.
-- `SimilarTrends`: (see below): Returns any activity saved data that's previously been stored for this student / product.
-- `StudentTrends`: Anything contained here is meant to be used to facilitate dev and qa but should not be consumed by the client for other purposes, without further discussion.
-- `GroupsTrends`: Anything contained here is meant to be used to facilitate dev and qa but should not be consumed by the client for other purposes, without further discussion.
-- `GradesTrends`: Anything contained here is meant to be used to facilitate dev and qa but should not be consumed by the client for other purposes, without further discussion.
+- `BeginningDate` (string): Beginning date from which the scores are counted for the report.
+- `EndDate` (string): End date of the results.
+- `SimilarTrends`: (List of IrtPoints): IrtPoints for similar trends.
+- `StudentTrends`: (List of IrtPoints): Trends for student(s).
+- `GroupsTrends`: (List of IrtPoints)Trends for groups(s).
+- `GradesTrends`: (List of IrtPoints)Trends for grades(s).
 - `GradeRanges`: Anything contained here is meant to be used to facilitate dev and qa but should not be consumed by the client for other purposes, without further discussion.
 
 + Parameters
