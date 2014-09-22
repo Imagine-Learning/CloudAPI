@@ -1704,7 +1704,7 @@ The selectedContent construct in the response instructs the client what is retur
 - `GradeRanges`: (List of grade ranges) Each containing Grade, LowPoint(float) and and HighPoint(float).
 
 + Parameters
-    + student = `` (optional, list of strings, ``)...The list of student tokens identifying which students if any the report needs to be generated. It is important that atleast one of the student, gradelevel, group has to be sent in to get successful results.
+    + student = `` (optional, list of strings, ``)...The list of student tokens identifying which students if any the report needs to be generated for. It is important that atleast one of the student, gradelevel, group has to be sent in to get successful results.
     + gradelevel = `` (optional, list of strings, ``)...The list of grade level tokens identifying for which grades if any, the report needs to be generated.
     + group = `` (optional, list of strings, ``)...The list of group tokens identifying for which student groups if any, the report needs to be generated.
     + graphtype = `` (optional, enum GraphType, `GraphType.AllPoints`)...The Graph Type for the reports, RollingAverage(default), WeeklyAverage and AllPoints.
