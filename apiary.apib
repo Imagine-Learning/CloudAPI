@@ -1921,56 +1921,26 @@ The selectedContent construct in the response instructs the client what is retur
 + Response 302 (application/json)
 
         {
-                "Organizations": [
-                    {
-                        "Token": "DZOtOM8mCMOjDJ0sOoqqD68rBJWvCM4jOJCvOp0mPZTcDcHY0",
-                        "Name": "Organization1"
-                    }
-                    {
-                        "Token": "A50mC30mA50jA50mC2qmA50mBJ0mA50jA50mA50mA50mA50m0",
-                        "Name": "Organization2"
-                    }
+                "TotalResults" : 3245,
+                "BatchIndex" : 0,
+                "BatchCount" : 50,
+                "OrganizationsByGrade": [
+                {
+                    
+                    "Grade" : GradeLevel
                 
-                ],
-                "Groups": [
-                    {
-                        "Token": "C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0",
-                        "UserName": "Teacher1"
-                    }
-                    {
-                        "Token": "A50mC30mA50jA50mC2qmA50mBJ0mA50jA50mA50mA50mA50m0",
-                        "UserName": "Teacher2"
-                    }
-                
-                ],
-                "Students": [
-                    {
-                        "Token": "D40mD40mD40jD40mC2qmD40mBJ0mD40jD40mD40mD40mD40m0",
-                        "Name": "Student1"
-                        "Grade" : "First"
-                        "StudentNumber" : "Student1234"
-                    }
-                    {
-                        "Token": "A50mC30mA50jA50mC2qmA50mBJ0mA50jA50mA50mA50mA50m0",
-                        "Name": "Student2"
-                        "Grade" : "Third"
-                        "StudentNumber" : "Student4567"
-                    }
-                
-                ],
-                "GradeLevels": [
-                    "Grade": "C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0",
                     "Organizations": [
                         {
-                            "Token": "B70mB70mB70jB70mC2qmB70mBJ0mB70jB70mB70mB70mB70m0",
+                            "Token": "DZOtOM8mCMOjDJ0sOoqqD68rBJWvCM4jOJCvOp0mPZTcDcHY0",
                             "Name": "Organization1"
-                        },
+                        }
                         {
                             "Token": "A50mC30mA50jA50mC2qmA50mBJ0mA50jA50mA50mA50mA50m0",
                             "Name": "Organization2"
                         }
+                    
                     ]
-                
+                }
                 ]
-
+               
         }
