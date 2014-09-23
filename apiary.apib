@@ -1895,8 +1895,12 @@ Filter by gradelevels.
 The selectedContent construct in the response instructs the client what is returned back:
 
 - `OrganizationsbyGradeResult`: List of Organizations by Grade Levels containing
-    - `Grade` (GradeLevel): List of Organizations each containing a Token(string) and Name(string).
-    - `Organizations` (list of strings): List of Organizations each containing a Token(string) and UserName(string).
+    - `TotalResults` (int): Total number of results.
+    - `BatchIndex` (int): Total number of results.
+    - `BatchCount` (int): Total number of results.
+    - `OrganizationsByGrade` (int): List of Organizations by Grade containing,
+        - `Grade` (GradeLevel): List of Organizations each containing a Token(string) and Name(string).
+        - `Organizations` (list of strings): List of Organizations each containing a Token(string) and UserName(string).
 
 + Parameters
     + organizationIds = `` (optional, list of strings, ``)...List of organization Ids. One of either organizationIds, groupsIds,studentIds or gradelevelIds should be provided as input to the call to get proper results back.
