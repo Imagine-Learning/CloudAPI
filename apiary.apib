@@ -1918,8 +1918,8 @@ The selectedContent construct in the response instructs the client what is retur
 
 - `OrganizationsbyGradeResult`: List of Organizations by Grade Levels containing
     - `TotalResults` (int): Total number of results.
-    - `BatchIndex` (int): Total number of results.
-    - `BatchCount` (int): Total number of results.
+    - `BatchIndex` (int): Index number for the batch.
+    - `BatchCount` (int): Total entries in the batch.
     - `OrganizationsByGrade` (OrganizationsByGrade): List of Organizations by Grade containing,
         - `Grade` (GradeLevel): Grade.
         - `Organizations` (list of strings): List of Organizations each containing a Token(string) and UserName(string).
@@ -2013,8 +2013,8 @@ The selectedContent construct in the response instructs the client what is retur
 
 - `OrganizationsbyGradeResult`: List of Organizations by Grade Levels containing
     - `TotalResults` (int): Total number of results.
-    - `BatchIndex` (int): Total number of results.
-    - `BatchCount` (int): Total number of results.
+    - `BatchIndex` (int): Index number for the batch.
+    - `BatchCount` (int): Total entries in the batch.
     - `GroupsByUser` (GroupsByUser): List of Groups by User containing,
         - `User` (string): User.
         - `Groups` (list of strings): List of Groups each containing a Name(string) Id(string) and Grade(GradeLevel).
