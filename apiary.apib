@@ -1806,13 +1806,11 @@ Generate growth reports by student(s), gradelevel(s),group(s), organization(s).
 
 The selectedContent construct in the response instructs the client what is returned back:
 
-- `BeginningDate` (string): Beginning date from which the scores are counted for the report.
-- `EndDate` (string): End date of the results.
-- `SimilarTrends`: (List of IrtPoints): Each containing a date and a floting point number.
-- `StudentTrends`: (List of IrtPoints): Each containing a date and a floting point number.
-- `GroupsTrends`: (List of IrtPoints): Each containing a date and a floting point number.
-- `GradesTrends`: (List of IrtPoints): Each containing a date and a floting point number.
-- `GradeRanges`: (List of grade ranges) Each containing Grade, LowPoint(float) and and HighPoint(float).
+- `Organizations` (list of strings): List of Organizations each containing a Token(string) and Name(string).
+- `Groups` (list of strings): List of Groups each containing a Token(string) and UserName(string).
+- `Students`: (list of strings): List of Students each containing a Token(string),Name(string), Grade (string) and StudentNumber(string).
+- `GradeLevels`: (List of strings): GradeLevel and a list of  Organizations each containing a Token(string) and Name(string).
+
 
 + Parameters
     + student = `` (optional, list of strings, ``)...The list of student tokens identifying which students if any the report needs to be generated for. It is important that atleast one of the student, gradelevel, group has to be sent in to get successful results.
