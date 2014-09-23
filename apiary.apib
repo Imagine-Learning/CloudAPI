@@ -1687,7 +1687,7 @@ This resource is the collection of all diagnostic logs that the authenticated us
 
 # Group Reports
 
-## Activity [/growth{?student,gradelevel,group,graphtype,schoolyearstartmmdd}]
+## Growth Reports [/growth{?student,gradelevel,group,graphtype,schoolyearstartmmdd}]
 
 Generate growth reports by student(s), gradelevel(s),group(s), organization(s).
 
@@ -1723,81 +1723,81 @@ The selectedContent construct in the response instructs the client what is retur
         
 + Response 302 (application/json)
 
-        {
-            "BeginDate" : "2014-05-06T15:05:03.0238299Z"
-            "EndDate" : "2014-09-06T15:05:03.0238299Z"
-            "SimilarTrends": [
-                    "Token": "C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0",
-                    "IrtPoints": [
-                        {
-                            "Date" :"2014-07-18T15:05:03.0238299Z"
-                            "Score" :  45
-                        },
-                        {
-                            "Date" :"2014-08-24T15:05:03.0238299Z"
-                            "Score" :  80
-                        }
-                    ]
-                
-                ],
-            "StudentTrends": [
-                    "Token": "C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0",
-                    "IrtPoints": [
-                        {
-                            "Date" :"2014-07-18T15:05:03.0238299Z"
-                            "Score" :  45
-                        },
-                        {
-                            "Date" :"2014-08-24T15:05:03.0238299Z"
-                            "Score" :  80
-                        }
-                    ]
-                
-                ],
-                "GroupsTrends": [
-                    "Token": "C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0",
-                    "IrtPoints": [
-                        {
-                            "Date" :"2014-07-18T15:05:03.0238299Z"
-                            "Score" :  45
-                        },
-                        {
-                            "Date" :"2014-08-24T15:05:03.0238299Z"
-                            "Score" :  80
-                        }
-                    ]
-                
-                ],
-                "GradesTrends": [
-                    "Token": "C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0",
-                    "IrtPoints": [
-                        {
-                            "Date" :"2014-07-18T15:05:03.0238299Z"
-                            "Score" :  45
-                        },
-                        {
-                            "Date" :"2014-08-24T15:05:03.0238299Z"
-                            "Score" :  80
-                        }
-                    ]
-                
-                ]
-                "GradeRanges": [
+    {
+        "BeginDate" : "2014-05-06T15:05:03.0238299Z"
+        "EndDate" : "2014-09-06T15:05:03.0238299Z"
+        "SimilarTrends": [
+                "Token": "C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0",
+                "IrtPoints": [
                     {
-                        "Grade": "First",
-                        "LowPoint" : 25
-                        "HighPoint" : 87
+                        "Date" :"2014-07-18T15:05:03.0238299Z"
+                        "Score" :  45
                     },
                     {
-                        "Grade": "Second",
-                        "LowPoint" : 45
-                        "HighPoint" : 92
+                        "Date" :"2014-08-24T15:05:03.0238299Z"
+                        "Score" :  80
                     }
-                
                 ]
-                
-        }
-## Activity [/filter/details{?organizationIds,groupIds,studentIds,gradelevelIds}]
+            
+            ],
+        "StudentTrends": [
+                "Token": "C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0",
+                "IrtPoints": [
+                    {
+                        "Date" :"2014-07-18T15:05:03.0238299Z"
+                        "Score" :  45
+                    },
+                    {
+                        "Date" :"2014-08-24T15:05:03.0238299Z"
+                        "Score" :  80
+                    }
+                ]
+            
+            ],
+            "GroupsTrends": [
+                "Token": "C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0",
+                "IrtPoints": [
+                    {
+                        "Date" :"2014-07-18T15:05:03.0238299Z"
+                        "Score" :  45
+                    },
+                    {
+                        "Date" :"2014-08-24T15:05:03.0238299Z"
+                        "Score" :  80
+                    }
+                ]
+            
+            ],
+            "GradesTrends": [
+                "Token": "C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0",
+                "IrtPoints": [
+                    {
+                        "Date" :"2014-07-18T15:05:03.0238299Z"
+                        "Score" :  45
+                    },
+                    {
+                        "Date" :"2014-08-24T15:05:03.0238299Z"
+                        "Score" :  80
+                    }
+                ]
+            
+            ]
+            "GradeRanges": [
+                {
+                    "Grade": "First",
+                    "LowPoint" : 25
+                    "HighPoint" : 87
+                },
+                {
+                    "Grade": "Second",
+                    "LowPoint" : 45
+                    "HighPoint" : 92
+                }
+            
+            ]
+            
+    }
+## Filter Reports [/filter/details{?organizationIds,groupIds,studentIds,gradelevelIds}]
 
 Generate growth reports by student(s), gradelevel(s),group(s), organization(s).
 
