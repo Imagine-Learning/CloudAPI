@@ -1885,3 +1885,90 @@ The selectedContent construct in the response instructs the client what is retur
                 ]
 
         }
+        
+## Filter GradeLevel Reports [/filter/gradeLevels{?organizationIds,groupIds,studentIds,gradelevelIds}]
+
+Filter by gradelevels.
+
+###  Returns array of organizations grouped by grade level. [GET]
+
+The selectedContent construct in the response instructs the client what is returned back:
+
+- `OrganizationsbyGradeResult`: List of Organizations by Grade Levels.
+contianing
+    - `Grade` (GradeLevel): List of Organizations each containing a Token(string) and Name(string).
+    - `Organizations` (list of strings): List of Organizations each containing a Token(string) and UserName(string).
+
++ Parameters
+    + organizationIds = `` (optional, list of strings, ``)...List of organization Ids. One of either organizationIds, groupsIds,studentIds or gradelevelIds should be provided as input to the call to get proper results back.
+    + groupIds = `` (optional, list of strings, ``)...List of group Ids.
+    + studentIds = `` (optional, list of strings, ``)...List of student Ids.
+    + gradelevelIds = `` (optional, list of strings, ``)...List of grade level Ids.
+    
+
+
++ Request (application/json)
+
+        {
+          "organizationIds" : "DZOtOM8mCMOjDJ0sOoqqD68rBJWvCM4jOJCvOp0mPZTcDcHY0",
+          "groupsIds": "C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0",
+          "studentIds": "D40mD40mD40jD40mC2qmD40mBJ0mD40jD40mD40mD40mD40m0",
+          "gradelevelIds" : "B70mB70mB70jB70mC2qmB70mBJ0mB70jB70mB70mB70mB70m0"
+        }
+        
++ Response 302 (application/json)
+
+        {
+                "Organizations": [
+                    {
+                        "Token": "DZOtOM8mCMOjDJ0sOoqqD68rBJWvCM4jOJCvOp0mPZTcDcHY0",
+                        "Name": "Organization1"
+                    }
+                    {
+                        "Token": "A50mC30mA50jA50mC2qmA50mBJ0mA50jA50mA50mA50mA50m0",
+                        "Name": "Organization2"
+                    }
+                
+                ],
+                "Groups": [
+                    {
+                        "Token": "C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0",
+                        "UserName": "Teacher1"
+                    }
+                    {
+                        "Token": "A50mC30mA50jA50mC2qmA50mBJ0mA50jA50mA50mA50mA50m0",
+                        "UserName": "Teacher2"
+                    }
+                
+                ],
+                "Students": [
+                    {
+                        "Token": "D40mD40mD40jD40mC2qmD40mBJ0mD40jD40mD40mD40mD40m0",
+                        "Name": "Student1"
+                        "Grade" : "First"
+                        "StudentNumber" : "Student1234"
+                    }
+                    {
+                        "Token": "A50mC30mA50jA50mC2qmA50mBJ0mA50jA50mA50mA50mA50m0",
+                        "Name": "Student2"
+                        "Grade" : "Third"
+                        "StudentNumber" : "Student4567"
+                    }
+                
+                ],
+                "GradeLevels": [
+                    "Grade": "C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0",
+                    "Organizations": [
+                        {
+                            "Token": "B70mB70mB70jB70mC2qmB70mBJ0mB70jB70mB70mB70mB70m0",
+                            "Name": "Organization1"
+                        },
+                        {
+                            "Token": "A50mC30mA50jA50mC2qmA50mBJ0mA50jA50mA50mA50mA50m0",
+                            "Name": "Organization2"
+                        }
+                    ]
+                
+                ]
+
+        }
