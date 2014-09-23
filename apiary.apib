@@ -1973,9 +1973,29 @@ The selectedContent construct in the response instructs the client what is retur
     - `TotalResults` (int): Total number of results.
     - `BatchIndex` (int): Total number of results.
     - `BatchCount` (int): Total number of results.
-    - `OrganizationsByGrade` (OrganizationsByGrade): List of Organizations by Grade containing,
-        - `Grade` (GradeLevel): List of Organizations each containing a Token(string) and Name(string).
-        - `Organizations` (list of strings): List of Organizations each containing a Token(string) and UserName(string).
+    - `GroupsByUser` (GroupsByUser): List of Groups by User containing,
+        - `User` (string): User.
+        - `Groups` (list of strings): List of Groups each containing a Name(string) Id(string) and Grade(GradeLevel).
+    
+GradeLevel is an Enum
+public enum GradeLevel
+  {
+    PreK,
+    Kindergarten,
+    First,
+    Second,
+    Third,
+    Fourth,
+    Fifth,
+    Sixth,
+    Seventh,
+    Eighth,
+    Ninth,
+    Tenth,
+    Eleventh,
+    Twelfth,
+    Other,
+  }
 
 + Parameters
     + searchTerms = `` (optional,string, ``)...Search string to search groups by username.
