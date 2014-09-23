@@ -2095,3 +2095,96 @@ GradeLevel
                 ]
                
         }
+        
+## Filter and send students under the teacher [/filter/directStudents{?searchTerms,offset,limit}]
+
+Filter students by User.
+
+###  Returns flat array of all students directly under the teacher/user. [GET]
+
+The selectedContent construct in the response instructs the client what is returned back:
+
+- `OrganizationsbyGradeResult`: List of Organizations by Grade Levels containing
+    - `TotalResults` (int): Total number of results.
+    - `BatchIndex` (int): Index number for the batch.
+    - `BatchCount` (int): Total entries in the batch.
+    - `GroupsByUser` (GroupsByUser): List of Groups by User containing,
+        - `User` (string): User.
+        - `Groups` (list of strings): List of Groups each containing a Name(string) Id(string) and Grade(GradeLevel).
+    
+GradeLevel is an Enum
+GradeLevel
+  {
+    PreK,
+    Kindergarten,
+    First,
+    Second,
+    Third,
+    Fourth,
+    Fifth,
+    Sixth,
+    Seventh,
+    Eighth,
+    Ninth,
+    Tenth,
+    Eleventh,
+    Twelfth,
+    Other,
+  }
+
++ Parameters
+    + searchTerms = `` (optional,string, ``)...Search string to search groups by username.
+    + offset = `` (optional,int, ``)...The position of the entry to be listed.
+    + limit = `` (optional,int, ``)...Number of entries per page.
+    
+    
+
+
++ Request (application/json)
+
+        {
+          "searchTerm" : "User1",
+          "offset": 0,
+          "limit": 10,
+        }
+        
++ Response 302 (application/json)
+
+        {
+                "TotalResults" : 3245,
+                "BatchIndex" : 0,
+                "BatchCount" : 50,
+                "GroupsByUser": [
+                    {
+                        
+                        "User" : "User1"
+                    
+                        "Groups": [
+                            {
+                                "Name": "Group1",
+                                "Id": "37803E93-F0CB-48A2-92B7-51F55999CA0F"
+                                "Grade": First
+                            }
+                            {
+                                "Name": "Group2",
+                                "Id": "9BC6CCFC-4E2B-4358-BADB-6F9178F3434E"
+                                "Grade": Second
+                            }
+                        
+                        ]
+                    }
+                    {
+                        
+                        "User" : "User2"
+                    
+                        "Groups": [
+                            {
+                               "Name": "Group3",
+                                "Id": "37803E93-F0CB-48A2-92B7-51F55999CA0F"
+                                "Grade": Fourth
+                            }
+                        ]
+                    }
+                ]
+               
+        }
