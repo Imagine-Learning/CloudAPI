@@ -2132,7 +2132,7 @@ GradeLevel
     Other,
   }
 
-The authenticated Users token is used to filter students directly under him or her.
+The authenticated Users token is used to filter students directly under him or her and an array of Students is returned to the user.
 
 + Request (application/json)
 
@@ -2142,13 +2142,13 @@ The authenticated Users token is used to filter students directly under him or h
         
 + Response 302 (application/json)
 
-        {
+        {   [
                 {
-                    "Token" :     
-                    "Name"
-                    Grade
-                    StudentNumber
-                    "TeacherNames" 
+                    "Token" : "DZOtOM8mCMOjDJ0sOoqqD68rBJWvCM4jOJCvOp0mPZTcDcHY0"    
+                    "Name" : "Student 1"
+                    "Grade" : "First"
+                    "StudentNumber" : "Student12345"
+                    "TeacherNames" :
                     {
                         {
                             Teacher1
@@ -2160,21 +2160,28 @@ The authenticated Users token is used to filter students directly under him or h
                             Teacher3
                         }
                     }
-                    
                 
                 }
+                
+                {
+                    "Token" :  "A50mC30mA50jA50mC2qmA50mBJ0mA50jA50mA50mA50mA50m0"   
+                    "Name" : "Student2"
+                    "Grade" : "First"
+                    "StudentNumber" : "Student6789"
+                    "TeacherNames" :
                     {
-                        
-                        "User" : "User2"
-                    
-                        "Groups": [
+                        {
+                            Teacher1
+                        }
+                        {
+                            Teacher2
+                        }
                             {
-                               "Name": "Group3",
-                                "Id": "37803E93-F0CB-48A2-92B7-51F55999CA0F"
-                                "Grade": Fourth
-                            }
-                        ]
+                            Teacher3
+                        }
                     }
-                ]
-               
+                
+                }
+             
+            ]  
         }
