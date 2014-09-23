@@ -1886,7 +1886,7 @@ The selectedContent construct in the response instructs the client what is retur
 
         }
         
-## Filter GradeLevel Reports [/filter/gradeLevels{?organizationIds,groupIds,studentIds,gradelevelIds}]
+## Filter GradeLevel Reports [/filter/gradeLevels{?searchTerms,offset,limit}]
 
 Filter by gradelevels.
 
@@ -1898,25 +1898,24 @@ The selectedContent construct in the response instructs the client what is retur
     - `TotalResults` (int): Total number of results.
     - `BatchIndex` (int): Total number of results.
     - `BatchCount` (int): Total number of results.
-    - `OrganizationsByGrade` (int): List of Organizations by Grade containing,
+    - `OrganizationsByGrade` (OrganizationsByGrade): List of Organizations by Grade containing,
         - `Grade` (GradeLevel): List of Organizations each containing a Token(string) and Name(string).
         - `Organizations` (list of strings): List of Organizations each containing a Token(string) and UserName(string).
 
 + Parameters
-    + organizationIds = `` (optional, list of strings, ``)...List of organization Ids. One of either organizationIds, groupsIds,studentIds or gradelevelIds should be provided as input to the call to get proper results back.
-    + groupIds = `` (optional, list of strings, ``)...List of group Ids.
-    + studentIds = `` (optional, list of strings, ``)...List of student Ids.
-    + gradelevelIds = `` (optional, list of strings, ``)...List of grade level Ids.
+    + searchTerms = `` (optional,string, ``)...Search string with Organization name in it. It can have partial name or actual full name of the organization.
+    + offset = `` (optional,int, ``)...The position of the entry to be listed.
+    + limit = `` (optional,int, ``)...Number of entries per page.
+    
     
 
 
 + Request (application/json)
 
         {
-          "organizationIds" : "DZOtOM8mCMOjDJ0sOoqqD68rBJWvCM4jOJCvOp0mPZTcDcHY0",
-          "groupsIds": "C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0",
-          "studentIds": "D40mD40mD40jD40mC2qmD40mBJ0mD40jD40mD40mD40mD40m0",
-          "gradelevelIds" : "B70mB70mB70jB70mC2qmB70mBJ0mB70jB70mB70mB70mB70m0"
+          "search" : "DZOtOM8mCMOjDJ0sOoqqD68rBJWvCM4jOJCvOp0mPZTcDcHY0",
+          "offset": "C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0",
+          "limit": "D40mD40mD40jD40mC2qmD40mBJ0mD40jD40mD40mD40mD40m0",
         }
         
 + Response 302 (application/json)
