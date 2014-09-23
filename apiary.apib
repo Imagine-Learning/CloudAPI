@@ -1913,7 +1913,7 @@ The selectedContent construct in the response instructs the client what is retur
 + Request (application/json)
 
         {
-          "search" : "Organization1",
+          "searchTerm" : "Organization1",
           "offset": 0,
           "limit": 10,
         }
@@ -1937,6 +1937,83 @@ The selectedContent construct in the response instructs the client what is retur
                             {
                                 "Token": "A50mC30mA50jA50mC2qmA50mBJ0mA50jA50mA50mA50mA50m0",
                                 "Name": "Organization2"
+                            }
+                        
+                        ]
+                    }
+                    {
+                        
+                        "Grade" : First
+                    
+                        "Organizations": [
+                            {
+                                "Token": "DZOtOM8mCMOjDJ0sOoqqD68rBJWvCM4jOJCvOp0mPZTcDcHY0",
+                                "Name": "Organization1"
+                            }
+                            {
+                                "Token": "A50mC30mA50jA50mC2qmA50mBJ0mA50jA50mA50mA50mA50m0",
+                                "Name": "Organization2"
+                            }
+                        
+                        ]
+                    }
+                ]
+               
+        }
+        
+## Filter Groups by User [/filter/groups{?searchTerms,offset,limit}]
+
+Filter Groups by User.
+
+###  Returns array of groups grouped by user. [GET]
+
+The selectedContent construct in the response instructs the client what is returned back:
+
+- `OrganizationsbyGradeResult`: List of Organizations by Grade Levels containing
+    - `TotalResults` (int): Total number of results.
+    - `BatchIndex` (int): Total number of results.
+    - `BatchCount` (int): Total number of results.
+    - `OrganizationsByGrade` (OrganizationsByGrade): List of Organizations by Grade containing,
+        - `Grade` (GradeLevel): List of Organizations each containing a Token(string) and Name(string).
+        - `Organizations` (list of strings): List of Organizations each containing a Token(string) and UserName(string).
+
++ Parameters
+    + searchTerms = `` (optional,string, ``)...Search string to search groups by username.
+    + offset = `` (optional,int, ``)...The position of the entry to be listed.
+    + limit = `` (optional,int, ``)...Number of entries per page.
+    
+    
+
+
++ Request (application/json)
+
+        {
+          "searchTerm" : "User1",
+          "offset": 0,
+          "limit": 10,
+        }
+        
++ Response 302 (application/json)
+
+        {
+                "TotalResults" : 3245,
+                "BatchIndex" : 0,
+                "BatchCount" : 50,
+                "GroupsByUser": [
+                    {
+                        
+                        "User" : "User1"
+                    
+                        "Groups": [
+                            {
+                                "Name": "User1",
+                                "Id": "37803E93-F0CB-48A2-92B7-51F55999CA0F"
+                                "Grade": First
+                            }
+                            {
+                                "Name": "User2",
+                                "Id": "9BC6CCFC-4E2B-4358-BADB-6F9178F3434E"
+                                "Grade": First
                             }
                         
                         ]
