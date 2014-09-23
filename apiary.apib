@@ -2096,22 +2096,22 @@ GradeLevel
                
         }
         
-## Filter and send students under the teacher [/filter/directStudents]
+## Filter and send students under the teacher/user [/filter/directStudents]
 
-Filter students by User.
+Filter students by Teacher/User.
 
 ###  Returns flat array of all students directly under the teacher/user. [GET]
 
 The selectedContent construct in the response instructs the client what is returned back:
 
-- `OrganizationsbyGradeResult`: List of Organizations by Grade Levels containing
-    - `TotalResults` (int): Total number of results.
-    - `BatchIndex` (int): Index number for the batch.
-    - `BatchCount` (int): Total entries in the batch.
-    - `GroupsByUser` (GroupsByUser): List of Groups by User containing,
-        - `User` (string): User.
-        - `Groups` (list of strings): List of Groups each containing a Name(string) Id(string) and Grade(GradeLevel).
-    
+- `List<Students>`: Array of Students. The student record contains,
+        - `Token` (string): Student Token.
+        - `Name` (string): Name of the student.
+        - `Grade` (GradeLevel): The Grade level the student is in.
+        - `StudentNumber` (string): Student Number.
+        - `AatUrl` (string): The Action area tools URL.
+        - `TeacherNames` (list of strings): List of Teachers the student has.
+        
 GradeLevel is an Enum
 GradeLevel
   {
@@ -2132,7 +2132,7 @@ GradeLevel
     Other,
   }
 
-The authenticated Users token is used to filter students directly under him or her and an array of Students is returned to the user.
+The authenticated Teacher/User token is used to filter students directly under him or her and an array of Students is returned to the user.
 
 + Request (application/json)
 
@@ -2148,6 +2148,7 @@ The authenticated Users token is used to filter students directly under him or h
                     "Name" : "Student 1"
                     "Grade" : "First"
                     "StudentNumber" : "Student12345"
+                    "AatUrl" "http://someurl.com"
                     "TeacherNames" :
                     {
                         {
@@ -2168,6 +2169,7 @@ The authenticated Users token is used to filter students directly under him or h
                     "Name" : "Student2"
                     "Grade" : "First"
                     "StudentNumber" : "Student6789"
+                    "AatUrl" "http://someurl.com"
                     "TeacherNames" :
                     {
                         {
