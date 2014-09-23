@@ -1902,6 +1902,26 @@ The selectedContent construct in the response instructs the client what is retur
         - `Grade` (GradeLevel): List of Organizations each containing a Token(string) and Name(string).
         - `Organizations` (list of strings): List of Organizations each containing a Token(string) and UserName(string).
 
+GradeLevel is an Enum
+GradeLevel
+  {
+    PreK,
+    Kindergarten,
+    First,
+    Second,
+    Third,
+    Fourth,
+    Fifth,
+    Sixth,
+    Seventh,
+    Eighth,
+    Ninth,
+    Tenth,
+    Eleventh,
+    Twelfth,
+    Other,
+  }
+
 + Parameters
     + searchTerms = `` (optional,string, ``)...Search string to search Organizations by name. It can have partial or full name of the organization.
     + offset = `` (optional,int, ``)...The position of the entry to be listed.
