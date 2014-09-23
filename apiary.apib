@@ -1797,4 +1797,37 @@ The selectedContent construct in the response instructs the client what is retur
                 ]
                 
         }
+## Activity [/filter/details{?organizationIds,groupIds,studentIds,gradelevelIds}]
+
+Generate growth reports by student(s), gradelevel(s),group(s), organization(s).
+
+### Get Growth Reports for Students/gradelevels/groups/organization [GET]
+
+The selectedContent construct in the response instructs the client what is returned back:
+
+- `BeginningDate` (string): Beginning date from which the scores are counted for the report.
+- `EndDate` (string): End date of the results.
+- `SimilarTrends`: (List of IrtPoints): Each containing a date and a floting point number.
+- `StudentTrends`: (List of IrtPoints): Each containing a date and a floting point number.
+- `GroupsTrends`: (List of IrtPoints): Each containing a date and a floting point number.
+- `GradesTrends`: (List of IrtPoints): Each containing a date and a floting point number.
+- `GradeRanges`: (List of grade ranges) Each containing Grade, LowPoint(float) and and HighPoint(float).
+
++ Parameters
+    + student = `` (optional, list of strings, ``)...The list of student tokens identifying which students if any the report needs to be generated for. It is important that atleast one of the student, gradelevel, group has to be sent in to get successful results.
+    + gradelevel = `` (optional, list of strings, ``)...The list of grade level tokens identifying for which grades if any, the report needs to be generated.
+    + group = `` (optional, list of strings, ``)...The list of group tokens identifying for which student groups if any, the report needs to be generated.
+    + graphtype = `` (optional, enum GraphType, `GraphType.AllPoints`)...The Graph Type for the reports, RollingAverage(default), WeeklyAverage and AllPoints.
+    + schoolyearstartmmdd = `` (optional, string, `10/14`)...The beginning Day and Month from which the report needs to be generated. This is for testing purpose only.Actual start date will be taken from the Organization information.
+
+
++ Request (application/json)
+
+        {
+          "student" : "DZOtOM8mCMOjDJ0sOoqqD68rBJWvCM4jOJCvOp0mPZTcDcHY0",
+          "gradelevel": "C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0",
+          "group": "C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0",
+          "graphtype" : GraphType.AllPoints ,
+          "schoolyearstartmmdd": "05/06"
+        }
         
