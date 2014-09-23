@@ -1903,7 +1903,7 @@ The selectedContent construct in the response instructs the client what is retur
         - `Organizations` (list of strings): List of Organizations each containing a Token(string) and UserName(string).
 
 + Parameters
-    + searchTerms = `` (optional,string, ``)...Search string with Organization name in it. It can have partial name or actual full name of the organization.
+    + searchTerms = `` (optional,string, ``)...Search string to search Organizations by name. It can have partial or full name of the organization.
     + offset = `` (optional,int, ``)...The position of the entry to be listed.
     + limit = `` (optional,int, ``)...Number of entries per page.
     
@@ -1913,9 +1913,9 @@ The selectedContent construct in the response instructs the client what is retur
 + Request (application/json)
 
         {
-          "search" : "DZOtOM8mCMOjDJ0sOoqqD68rBJWvCM4jOJCvOp0mPZTcDcHY0",
-          "offset": "C30mC30mC30jC30mC2qmC30mBJ0mC30jC30mC30mC30mC30m0",
-          "limit": "D40mD40mD40jD40mC2qmD40mBJ0mD40jD40mD40mD40mD40m0",
+          "search" : "Organization1",
+          "offset": 0,
+          "limit": 10,
         }
         
 + Response 302 (application/json)
