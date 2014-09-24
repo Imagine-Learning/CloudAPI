@@ -2238,6 +2238,11 @@ GradeLevel
 
 The authenticated Teacher/User token is used to filter students directly under him or her and an array of Students is returned to the caller.
 
++ Parameters
+    + searchTerms = `` (optional,string, ``)...Search string to search groups by username.
+    + offset = `` (optional,int, ``)...The position of the entry to be listed.
+    + limit = `` (optional,int, ``)...Number of entries per page.
+
 + Request (application/json)
 
         {
