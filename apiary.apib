@@ -2493,8 +2493,10 @@ The selectedContent construct in the response instructs the client what is retur
     - `DetailsBySkill` (string): Details by skills.
     - `DetailsByStudent` (string): Details by the student.
 
-
-The authenticated Teacher/User token is used to get the curriculum areas.
++ Parameters
+    + group = `` (required,string, ``)...The group name.
+    + dateRange = `` (required,string, ``)...date range for generating the report.
+    
 + Request (application/json)
 
         {
