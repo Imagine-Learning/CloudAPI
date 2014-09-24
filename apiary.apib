@@ -2525,3 +2525,55 @@ The authenticated Teacher/User token is used to get the curriculum areas.
             ]
         }
        
+## Return a list of ActionAreasBySkill for the group for the provided date range [/actionAreas/{id}/skills/{group}/{dateRange}]
+
+Return a list of ActionAreasBySkills for the group and the given date ranges.
+
+###  Return a list of ActionAreasBySkill for the group and the given date ranges.[GET]
+
+The selectedContent construct in the response instructs the client what is returned back:
+
+- `List<CurriculumAreas>`: Curriculum area for the group containing
+    - `Name` (string): Name of the curriculum area.
+    - `Id` (string): The Id of the curriculum area.
+    - `Students` (int): Number of students.
+    - `DetailsBySkill` (string): Details by skills.
+    - `DetailsByStudent` (string): Details by the student.
+
++ Parameters
+    + id = `` (required,string, ``)...Curriculum area Id.
+    + group = `` (required,string, ``)...The group name.
+    + dateRange = `` (required,string, ``)...date range for generating the report.
+    
+
++ Request (application/json)
+
+        {
+            "id" :"Curriculum1"
+            "group" : "Group1"
+            "dateRange" : "dateRange"
+            
+        }
+
++ Response 302 (application/json)
+
+        
+        {   
+            [
+                {
+                    "Name" : "Curriculum1"
+                    "Id" : "Curriculum12345"
+                    "Students" : 30
+                    "DetailsBySkill" : "Details"
+                    "DetailsByStudent" : "DetailsByStudents"
+                }
+                {
+                    "Name" : "Curriculum2"
+                    "Id" : "Curriculum12346"
+                    "Students" : 45
+                    "DetailsBySkill" : "DetailsbySkills"
+                    "DetailsByStudent" : "DetailsByStudents"
+                }
+            ]
+        }
+       
