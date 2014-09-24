@@ -2486,14 +2486,13 @@ Return curriculumAreas for the group and the given date ranges.
 
 The selectedContent construct in the response instructs the client what is returned back:
 
-- `GroupCategories`: List of group categories containing
-    - `Name` (int): Name of the category.
-    - `Groups` (list of strings): Group records each containing a Name(string), Id(string) and Grade (GradeLevel).
-- `TimeRanges` (TimeRange): List of time ranges containing,
-    - `Name` (string): Name of the time range.
-    - `Id` (short): The Id of the time range.
-    - `IsDefault` (bool): Is Default time range or not.
-    
+- `CurriculumArea`: Curriculum area for the group containing
+    - `Name` (string): Name of the curriculum area.
+    - `Id` (string): The Id of the curriculum area.
+    - `Students` (int): Number of students.
+    - `DetailsBySkill` (string): Details by skills.
+    - `DetailsByStudent` (string): Details by the student.
+
 GradeLevel is an Enum
 GradeLevel
   {
