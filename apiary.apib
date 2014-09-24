@@ -2541,7 +2541,17 @@ Return ActionArea By Skill for the curriculum area and the group within the give
 
 The selectedContent construct in the response instructs the client what is returned back:
 
-- `List<CurriculumAreas>`: Curriculum area for the group containing
+- `ActionAreasBySkillReport`: Action areas by skill for curriculum area and the group containing,
+    - `Title` (string): Action area title.
+    - `DescriptionHtml` (string): DEscription Html for the action area.
+    - `Students` (int): Number of students.
+    - `DetailsBySkill` (string): Details by skills.
+    - `DetailsByStudent` (string): Details by the student.
+    - `Name` (string): Name of the curriculum area.
+    - `Id` (string): The Id of the curriculum area.
+    - `Students` (int): Number of students.
+    - `DetailsBySkill` (string): Details by skills.
+    - `DetailsByStudent` (string): Details by the student.
     - `Name` (string): Name of the curriculum area.
     - `Id` (string): The Id of the curriculum area.
     - `Students` (int): Number of students.
