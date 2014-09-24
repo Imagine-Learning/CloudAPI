@@ -2543,11 +2543,11 @@ The selectedContent construct in the response instructs the client what is retur
 
 - `ActionAreasBySkillReport`: Action areas by skill for curriculum area and the group containing,
     - `Title` (string): Action area title.
-    - `DescriptionHtml` (string): DEscription Html for the action area.
-    - `Students` (int): Number of students.
-    - `DetailsBySkill` (string): Details by skills.
-    - `DetailsByStudent` (string): Details by the student.
-    - `Name` (string): Name of the curriculum area.
+    - `DescriptionHtml` (string): Description Html for the action area.
+    - `Group` (Group): Group information containing,
+        - `Name` (string): Details by skills.
+        - `Id` (string): Details by the student.
+        - `Grade` (GradeLevel): Name of the curriculum area.
     - `Id` (string): The Id of the curriculum area.
     - `Students` (int): Number of students.
     - `DetailsBySkill` (string): Details by skills.
