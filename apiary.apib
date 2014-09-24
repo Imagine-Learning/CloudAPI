@@ -2363,4 +2363,53 @@ The authenticated Teacher/User token is used to filter students directly under h
                 ]
                
         }
+
+## Return Action areas report visible to the teacher/user [/options{userid}/actionAreas]
+
+Filter students by organization visible to the Teacher/User.
+
+###  Returns students Action Areas report for students visible to the teacher/user.[GET]
+
+The selectedContent construct in the response instructs the client what is returned back:
+
+- `GroupCategories`: List of Organizations by Grade Levels containing
+    - `Name` (int): Total number of results.
+    - `Groups` (list of strings): Group records each containing a Name(string), Id(string) and Grade (GradeLevel).
+    - `BatchCount` (int): Total entries in the batch.
+- `TimeRanges` (GroupsByUser): List of Students by organization containing,
+    - `Name` (string): Name of the student.
+    - `Id` (short): The Id of the student.
+    - `IsDefault` (bool): Is Default time range.
+    
+GradeLevel is an Enum
+GradeLevel
+  {
+    PreK,
+    Kindergarten,
+    First,
+    Second,
+    Third,
+    Fourth,
+    Fifth,
+    Sixth,
+    Seventh,
+    Eighth,
+    Ninth,
+    Tenth,
+    Eleventh,
+    Twelfth,
+    Other,
+  }
+        
+
+The authenticated Teacher/User token is used to filter students directly under him or her and an array of Students is returned to the caller.
+
++ Request (application/json)
+
+        {
+            "searchTerm" : "User1",
+            "offset": 0,
+            "limit": 10,
+          
+        }
         
