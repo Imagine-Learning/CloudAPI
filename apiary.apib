@@ -2478,115 +2478,50 @@ The authenticated Teacher/User token is used to filter students directly under h
                 
         }
         
-## Return curriculumAreas for the group for the provided date range [/actionAreas/{group}/{dateRange}]
+## Return a list of curriculumAreas for the group for the provided date range [/actionAreas/{group}/{dateRange}]
 
-Return curriculumAreas for the group and the given date ranges.
+Return a list of curriculumAreas for the group and the given date ranges.
 
-###  Return curriculumAreas for the group and the given date ranges.[GET]
+###  Return a list of curriculumAreas for the group and the given date ranges.[GET]
 
 The selectedContent construct in the response instructs the client what is returned back:
 
-- `CurriculumArea`: Curriculum area for the group containing
+- `List<CurriculumAreas>`: Curriculum area for the group containing
     - `Name` (string): Name of the curriculum area.
     - `Id` (string): The Id of the curriculum area.
     - `Students` (int): Number of students.
     - `DetailsBySkill` (string): Details by skills.
     - `DetailsByStudent` (string): Details by the student.
 
-GradeLevel is an Enum
-GradeLevel
-  {
-    PreK,
-    Kindergarten,
-    First,
-    Second,
-    Third,
-    Fourth,
-    Fifth,
-    Sixth,
-    Seventh,
-    Eighth,
-    Ninth,
-    Tenth,
-    Eleventh,
-    Twelfth,
-    Other,
-  }
-        
 
-The authenticated Teacher/User token is used to filter students directly under him or her and an array of Students is returned to the caller.
-
+The authenticated Teacher/User token is used to get the curriculum areas.
 + Request (application/json)
 
         {
+            "group" : "Group1"
+            "dateRange" : "dateRange"
             
         }
 
 + Response 302 (application/json)
 
-        {  
-            "GroupCategories" : [
-                    {
-                        "Name" : "Category1"
-                        "Groups" : [
-                            {
-                                {
-                                    "Name" : "Group1"
-                                    "Id" : "Group12345"
-                                    "GradeLevel" : "Third"
-                                }
-                                {
-                                    "Name" : "Group2"
-                                    "Id" : "Group45678"
-                                    "GradeLevel" : "Second"
-                                }
-                                {
-                                    "Name" : "Group3"
-                                    "Id" : "Group67891"
-                                    "GradeLevel" : "First"
-                                }
-                            }
-                        ]    
-                    
-                    }
-                
-                    {
-                        "Name" : "Category2"
-                        "Groups" : [
-                            {
-                                {
-                                    "Name" : "Group5"
-                                    "Id" : "Group90876"
-                                    "GradeLevel" : "Third"
-                                }
-                                {
-                                    "Name" : "Group6"
-                                    "Id" : "Group90877"
-                                    "GradeLevel" : "Second"
-                                }
-                                {
-                                    "Name" : "Group7"
-                                    "Id" : "Group90888"
-                                    "GradeLevel" : "First"
-                                }
-                            }
-                        ]    
-                    
-                    }
-                ]
-             "TimeRanges" : [
-                    {
-                        "Name" : "TimeRange1"
-                        "Id" : "TimeRange12345"
-                        "IsDefault" : "false"
-                        
-                    }
-                    {
-                        "Name" : "TimeRange2"
-                        "Id" : "TimeRange12346"
-                        "IsDefault" : "true"
-                        
-                    }
-                ]    
-                
+        
+        {   
+            [
+                {
+                    "Name" : "Curriculum1"
+                    "Id" : "Curriculum12345"
+                    "Students" : 30
+                    "DetailsBySkill" : "Details"
+                    "DetailsByStudent" : "DetailsByStudents"
+                }
+                {
+                    "Name" : "Curriculum2"
+                    "Id" : "Curriculum12346"
+                    "Students" : 45
+                    "DetailsBySkill" : "DetailsbySkills"
+                    "DetailsByStudent" : "DetailsByStudents"
+                }
+            ]
         }
+       
