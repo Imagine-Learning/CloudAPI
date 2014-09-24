@@ -2372,14 +2372,14 @@ Return AAT options for the groups visible to the Teacher/User.
 
 The selectedContent construct in the response instructs the client what is returned back:
 
-- `GroupCategories`: List of Organizations by Grade Levels containing
+- `GroupCategories`: List of group categories containing
     - `Name` (int): Total number of results.
     - `Groups` (list of strings): Group records each containing a Name(string), Id(string) and Grade (GradeLevel).
     - `BatchCount` (int): Total entries in the batch.
-- `TimeRanges` (GroupsByUser): List of Students by organization containing,
-    - `Name` (string): Name of the student.
-    - `Id` (short): The Id of the student.
-    - `IsDefault` (bool): Is Default time range.
+- `TimeRanges` (TimeRange): List of time ranges containing,
+    - `Name` (string): Name of the time range.
+    - `Id` (short): The Id of the time range.
+    - `IsDefault` (bool): Is Default time range or not.
     
 GradeLevel is an Enum
 GradeLevel
@@ -2407,10 +2407,7 @@ The authenticated Teacher/User token is used to filter students directly under h
 + Request (application/json)
 
         {
-            "searchTerm" : "User1",
-            "offset": 0,
-            "limit": 10,
-          
+            "userId" : "User1",
         }
 
 + Response 302 (application/json)
