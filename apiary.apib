@@ -1900,7 +1900,9 @@ GradeLevel
                         },
                         {
                             "Token": "A50mC30mA50jA50mC2qmA50mBJ0mA50jA50mA50mA50mA50m0",
-                            "Name": "Organization2"
+                            "Name": "Organization2""searchTerm" : "User1",
+          "offset": 0,
+          "limit": 10,
                         }
                     ]
                 
@@ -2050,9 +2052,10 @@ GradeLevel
 + Request (application/json)
 
         {
-          "searchTerm" : "User1",
-          "offset": 0,
-          "limit": 10,
+            "searchTerm" : "User1",
+            "offset": 0,
+            "limit": 10,
+          
         }
         
 + Response 302 (application/json)
@@ -2105,12 +2108,12 @@ Filter students by Teacher/User.
 The selectedContent construct in the response instructs the client what is returned back:
 
 - `List<Students>`: Array of Students. The student record contains,
-        - `Token` (string): Student Token.
-        - `Name` (string): Name of the student.
-        - `Grade` (GradeLevel): The Grade level the student is in.
-        - `StudentNumber` (string): Student Number.
-        - `AatUrl` (string): The Action area tools URL.
-        - `TeacherNames` (list of strings): List of Teachers the student has.
+    - `Token` (string): Student Token.
+    - `Name` (string): Name of the student.
+    - `Grade` (GradeLevel): The Grade level the student is in.
+    - `StudentNumber` (string): Student Number.
+    - `AatUrl` (string): The Action area tools URL.
+    - `TeacherNames` (list of strings): List of Teachers the student has.
         
 GradeLevel is an Enum
 GradeLevel
@@ -2137,6 +2140,7 @@ The authenticated Teacher/User token is used to filter students directly under h
 + Request (application/json)
 
         {
+            
           
         }
         
@@ -2157,7 +2161,6 @@ The authenticated Teacher/User token is used to filter students directly under h
                         {
                             Teacher2
                         }
-                            {
                             Teacher3
                         }
                     }
@@ -2178,7 +2181,105 @@ The authenticated Teacher/User token is used to filter students directly under h
                         {
                             Teacher2
                         }
-                            {
+                            Teacher3
+                        }
+                    }
+                
+                }
+             
+            ]  
+        }
+        
+## Filter and return all students grouped by organization visible to the teacher/user [/filter/allStudents]
+
+Filter students by organization visible to the Teacher/User.
+
+###  Returns students grouped by organization for all students visible to the teacher/user. [GET]
+
+The selectedContent construct in the response instructs the client what is returned back:
+
+- `StudentsByOrgResult`: List of Organizations by Grade Levels containing
+    - `TotalResults` (int): Total number of results.
+    - `BatchIndex` (int): Index number for the batch.
+    - `BatchCount` (int): Total entries in the batch.
+    - `StudentsByOrg` (GroupsByUser): List of Students by organization containing,
+        - `Organization` (strings): Organization record each containing a Token(string) and UserName(string).
+        - `List<Students>` (list of Student records): List of Students each containing,
+            - `Token` (string): Student Token.
+            - `Name` (string): Name of the student.
+            - `Grade` (GradeLevel): The Grade level the student is in.
+            - `StudentNumber` (string): Student Number.
+            - `AatUrl` (string): The Action area tools URL.
+            - `TeacherNames` (list of strings): List of Teachers the student has.
+GradeLevel is an Enum
+GradeLevel
+  {
+    PreK,
+    Kindergarten,
+    First,
+    Second,
+    Third,
+    Fourth,
+    Fifth,
+    Sixth,
+    Seventh,
+    Eighth,
+    Ninth,
+    Tenth,
+    Eleventh,
+    Twelfth,
+    Other,
+  }
+        
+
+The authenticated Teacher/User token is used to filter students directly under him or her and an array of Students is returned to the caller.
+
++ Request (application/json)
+
+        {
+            "searchTerm" : "User1",
+            "offset": 0,
+            "limit": 10,
+          
+        }
+        
++ Response 302 (application/json)
+
+        {   [
+                {
+                    "Token" : "DZOtOM8mCMOjDJ0sOoqqD68rBJWvCM4jOJCvOp0mPZTcDcHY0"    
+                    "Name" : "Student 1"
+                    "Grade" : "First"
+                    "StudentNumber" : "Student12345"
+                    "AatUrl" "http://someurl.com"
+                    "TeacherNames" :
+                    {
+                        {
+                            Teacher1
+                        }
+                        {
+                            Teacher2
+                        }
+                            Teacher3
+                        }
+                    }
+                
+                }
+                
+                {
+                    "Token" :  "A50mC30mA50jA50mC2qmA50mBJ0mA50jA50mA50mA50mA50m0"   
+                    "Name" : "Student2"
+                    "Grade" : "First"
+                    "StudentNumber" : "Student6789"
+                    "AatUrl" "http://someurl.com"
+                    "TeacherNames" :
+                    {
+                        {
+                            Teacher1
+                        }
+                        {
+                            Teacher2
+                        }
                             Teacher3
                         }
                     }
