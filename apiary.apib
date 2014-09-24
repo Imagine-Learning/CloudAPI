@@ -2375,7 +2375,6 @@ The selectedContent construct in the response instructs the client what is retur
 - `GroupCategories`: List of group categories containing
     - `Name` (int): Total number of results.
     - `Groups` (list of strings): Group records each containing a Name(string), Id(string) and Grade (GradeLevel).
-    - `BatchCount` (int): Total entries in the batch.
 - `TimeRanges` (TimeRange): List of time ranges containing,
     - `Name` (string): Name of the time range.
     - `Id` (short): The Id of the time range.
@@ -2407,7 +2406,7 @@ The authenticated Teacher/User token is used to filter students directly under h
 + Request (application/json)
 
         {
-            "userId" : "User1",
+            "userId" : "User1234",
         }
 
 + Response 302 (application/json)
