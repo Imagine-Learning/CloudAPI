@@ -2060,7 +2060,23 @@ GradeLevel
         
 + Response 302 (application/json)
 
-        {
+        
+        
+## Filter and send students under the teacher/user [/filter/directStudents]
+
+Filter students by Teacher/User.
+
+###  Returns flat array of all students directly under the teacher/user. [GET]
+
+The selectedContent construct in the response instructs the client what is returned back:
+
+- `List<Students>`: Array of Students. The student record contains,
+    - `Token` (string): Student Token.
+    - `Name` (string): Name of the student.
+    - `Grade` (GradeLevel): The Grade level the student is in.
+    - `StudentNumber` (string): Student Number.
+    - `AatUrl` (string): The Action area tools URL.
+    - `TeacherNames` (list of strings): List of Teachers the student has.{
                 "TotalResults" : 3245,
                 "BatchIndex" : 0,
                 "BatchCount" : 50,
@@ -2098,22 +2114,6 @@ GradeLevel
                 ]
                
         }
-        
-## Filter and send students under the teacher/user [/filter/directStudents]
-
-Filter students by Teacher/User.
-
-###  Returns flat array of all students directly under the teacher/user. [GET]
-
-The selectedContent construct in the response instructs the client what is returned back:
-
-- `List<Students>`: Array of Students. The student record contains,
-    - `Token` (string): Student Token.
-    - `Name` (string): Name of the student.
-    - `Grade` (GradeLevel): The Grade level the student is in.
-    - `StudentNumber` (string): Student Number.
-    - `AatUrl` (string): The Action area tools URL.
-    - `TeacherNames` (list of strings): List of Teachers the student has.
         
 GradeLevel is an Enum
 GradeLevel
@@ -2244,47 +2244,113 @@ The authenticated Teacher/User token is used to filter students directly under h
         }
         
 + Response 302 (application/json)
-
-        {   [
-                {
-                    "Token" : "DZOtOM8mCMOjDJ0sOoqqD68rBJWvCM4jOJCvOp0mPZTcDcHY0"    
-                    "Name" : "Student 1"
-                    "Grade" : "First"
-                    "StudentNumber" : "Student12345"
-                    "AatUrl" "http://someurl.com"
-                    "TeacherNames" :
+        {
+                "TotalResults" : 3245,
+                "BatchIndex" : 0,
+                "BatchCount" : 50,
+                "StudentsByOrg": [
                     {
+                        
+                        "Organization" 
                         {
-                            Teacher1
+                            "Token": "A50mC30mA50jA50mC2qmA50mBJ0mA50jA50mA50mA50mA50m0"
+                            "Name" : "Organization1"
                         }
-                        {
-                            Teacher2
-                        }
-                            Teacher3
-                        }
+                    
+                        "Students": [
+                            {
+                                "Token" : "DZOtOM8mCMOjDJ0sOoqqD68rBJWvCM4jOJCvOp0mPZTcDcHY0"    
+                                "Name" : "Student 1"
+                                "Grade" : "First"
+                                "StudentNumber" : "Student12345"
+                                "AatUrl" "http://someurl.com"
+                                "TeacherNames" :
+                                {
+                                    {
+                                        Teacher1
+                                    }
+                                    {
+                                        Teacher2
+                                    }
+                                        Teacher3
+                                    }
+                                }
+                            
+                            }
+                            
+                            {
+                                "Token" :  "A50mC30mA50jA50mC2qmA50mBJ0mA50jA50mA50mA50mA50m0"   
+                                "Name" : "Student2"
+                                "Grade" : "First"
+                                "StudentNumber" : "Student6789"
+                                "AatUrl" "http://someurl.com"
+                                "TeacherNames" :
+                                {
+                                    {
+                                        Teacher1
+                                    }
+                                    {
+                                        Teacher2
+                                    }
+                                        Teacher3
+                                    }
+                                }
+                            
+                            }
+                        
+                        ]
                     }
-                
-                }
-                
-                {
-                    "Token" :  "A50mC30mA50jA50mC2qmA50mBJ0mA50jA50mA50mA50mA50m0"   
-                    "Name" : "Student2"
-                    "Grade" : "First"
-                    "StudentNumber" : "Student6789"
-                    "AatUrl" "http://someurl.com"
-                    "TeacherNames" :
                     {
+                     "Organization" 
                         {
-                            Teacher1
+                            "Token": "DZOtOM8mCMOjDJ0sOoqqD68rBJWvCM4jOJCvOp0mPZTcDcHY0"
+                            "Name" : "Organization2"
                         }
-                        {
-                            Teacher2
-                        }
-                            Teacher3
-                        }
+                    
+                        "Students": [
+                            {
+                                "Token" : "DZOtOM8mCMOjDJ0sOoqqD68rBJWvCM4jOJCvOp0mPZTcDcHY0"    
+                                "Name" : "Student 1"
+                                "Grade" : "First"
+                                "StudentNumber" : "Student12345"
+                                "AatUrl" "http://someurl.com"
+                                "TeacherNames" :
+                                {
+                                    {
+                                        Teacher1
+                                    }
+                                    {
+                                        Teacher2
+                                    }
+                                        Teacher3
+                                    }
+                                }
+                            
+                            }
+                            
+                            {
+                                "Token" :  "A50mC30mA50jA50mC2qmA50mBJ0mA50jA50mA50mA50mA50m0"   
+                                "Name" : "Student2"
+                                "Grade" : "First"
+                                "StudentNumber" : "Student6789"
+                                "AatUrl" "http://someurl.com"
+                                "TeacherNames" :
+                                {
+                                    {
+                                        Teacher1
+                                    }
+                                    {
+                                        Teacher2
+                                    }
+                                        Teacher3
+                                    }
+                                }
+                            
+                            }
+                        
+                        ]
                     }
-                
-                }
-             
-            ]  
+                ]
+               
         }
+       
