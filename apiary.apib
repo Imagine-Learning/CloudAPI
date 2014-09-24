@@ -2364,11 +2364,11 @@ The authenticated Teacher/User token is used to filter students directly under h
                
         }
 
-## Return Action areas report visible to the teacher/user [/options{userid}/actionAreas]
+## Return AAT options for the groups visible to the teacher/user [/options{userid}/actionAreas]
 
-Filter students by organization visible to the Teacher/User.
+Return AAT options for the groups visible to the Teacher/User.
 
-###  Returns students Action Areas report for students visible to the teacher/user.[GET]
+###  Return AAT options for the groups visible to the teacher/user.[GET]
 
 The selectedContent construct in the response instructs the client what is returned back:
 
@@ -2412,4 +2412,53 @@ The authenticated Teacher/User token is used to filter students directly under h
             "limit": 10,
           
         }
-        
+
++ Response 302 (application/json)
+
+        {   [
+                {
+                    "Token" : "DZOtOM8mCMOjDJ0sOoqqD68rBJWvCM4jOJCvOp0mPZTcDcHY0"    
+                    "Name" : "Student 1"
+                    "Grade" : "First"
+                    "StudentNumber" : "Student12345"
+                    "AatUrl" "http://someurl.com"
+                    "TeacherNames" : [
+                        {
+                            {
+                                Teacher1
+                            }
+                            {
+                                Teacher2
+                            }
+                            {
+                                Teacher3
+                            }
+                        }
+                    ]    
+                
+                }
+                
+                {
+                    "Token" :  "A50mC30mA50jA50mC2qmA50mBJ0mA50jA50mA50mA50mA50m0"   
+                    "Name" : "Student2"
+                    "Grade" : "First"
+                    "StudentNumber" : "Student6789"
+                    "AatUrl" "http://someurl.com"
+                    "TeacherNames" : [
+                        {
+                            {
+                                Teacher1
+                            }
+                            {
+                                Teacher2
+                            }
+                            {
+                                Teacher3
+                            }
+                        }
+                    ]    
+                
+                }
+             
+            ]  
+        }
