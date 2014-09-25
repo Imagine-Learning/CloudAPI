@@ -2664,27 +2664,29 @@ Return Actionable skill details for the group within the given date ranges.
 The selectedContent construct in the response instructs the client what is returned back:
 
 - `ActionAreasBySkillReport`: Action areas by skill for curriculum area and the group containing,
-    - `Title` (string): Action area title.
-    - `DescriptionHtml` (string): Description Html for the action area.
-    - `Group` (Group): Group information containing,
-        - `Name` (string): Group Name.
-        - `Id` (string): Group Id.
-        - `Grade` (GradeLevel): Grade Level of the group.
-    - `DateRange` (TimeRange): Date range containing,
-        - `Name` (string): Time range name.
-        - `Id` (short): Time range Id.
-        - `IsDefault` (bool): Is this the default time range.
-    - `Skills` (List of ActionableSkills): List of actionable skills containing,
-        - `Id` (string): Skill Id.
-        - `Name` (string): Skill name.
-        - `Students` (List of StudentScores): List of Student scores containing,
-            - `Id` (string): Student Id.
-            - `Name` (string): Student Name.
-            - `Correct` (int): Number of correct answers.
-            - `Total` (int): Total number of questions.
-            - `AdditionalData` (string):Additional Data.Curriculum12345
-        - `Details` (Uri): Details by skills.
-        - `CurriculumArea` (string): Curriculum area.
+    - `Name` (string): Actionable skill name.
+    - `Description` (string): Description of the actionable skill.
+    - `FailedStudents` (Group): Group information containing,
+        - `Name` (string): Student Name.
+        - `Subskills` (list of strings): subskills associated with the primary skill.
+    - `FailedSubSkills` (FailedSkill): List of failed sub skills,
+        - `Name` (string): Sub skill name.
+        - `Description` (string): description of the subskill.
+        - `Students` (list of strings): List of students who failed this subskill.
+    - `Resources` (List of ActionableSkills): List of actionable skills containing,
+        - `Name` (string): Name of the resource.
+        - `Skills` (List of resources): List of resources for the failed subskill,
+            - `Name` (string): resource name.
+            - `Activities` (list of Activities): List of Activities.
+                - `Name` (string): Name of the activity.
+                - `Type` (string): Type of the activity.
+                - `Icon` (Uri): Icon for the activity.
+                - `Play` (string): Playing the activity.
+                - `TypicalTime` (TimeSpan): Typical time taken to play the activity.
+                - `Description` (string): Description of the activity.
+            - `SupplementalMaterials` (List of SupplementalMaterials): List of supplemental material to help learn the skill.
+                - `AdditionalData` (string):Additional Data.Curriculum12345
+    - `Standards` (Uri): Details by skills.
    
 + Parameters
     + id = `` (required,string, ``)...Curriculum area Id.
