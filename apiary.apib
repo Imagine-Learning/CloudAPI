@@ -2060,43 +2060,44 @@ GradeLevel
         
 + Response 302 (application/json)
 
-    {
-                "TotalResults" : 3245,
-                "BatchIndex" : 0,
-                "BatchCount" : 50,
-                "GroupsByUser": [
-                    {
-                        
-                        "User" : "User1"
+        {
+        
+            "TotalResults" : 3245,
+            "BatchIndex" : 0,
+            "BatchCount" : 50,
+            "GroupsByUser": [
+                {
                     
-                        "Groups": [
-                            {
-                                "Name": "Group1",
-                                "Id": "37803E93-F0CB-48A2-92B7-51F55999CA0F"
-                                "Grade": First
-                            }
-                            {
-                                "Name": "Group2",
-                                "Id": "9BC6CCFC-4E2B-4358-BADB-6F9178F3434E"
-                                "Grade": Second
-                            }
-                        
-                        ]
-                    }
-                    {
-                        
-                        "User" : "User2"
+                    "User" : "User1"
+                
+                    "Groups": [
+                        {
+                            "Name": "Group1",
+                            "Id": "37803E93-F0CB-48A2-92B7-51F55999CA0F"
+                            "Grade": First
+                        }
+                        {
+                            "Name": "Group2",
+                            "Id": "9BC6CCFC-4E2B-4358-BADB-6F9178F3434E"
+                            "Grade": Second
+                        }
                     
-                        "Groups": [
-                            {
-                               "Name": "Group3",
-                                "Id": "37803E93-F0CB-48A2-92B7-51F55999CA0F"
-                                "Grade": Fourth
-                            }
-                        ]
-                    }
-                ]
-               
+                    ]
+                }
+                {
+                    
+                    "User" : "User2"
+                
+                    "Groups": [
+                        {
+                           "Name": "Group3",
+                            "Id": "37803E93-F0CB-48A2-92B7-51F55999CA0F"
+                            "Grade": Fourth
+                        }
+                    ]
+                }
+            ]
+                   
         }
         
         
@@ -2195,7 +2196,7 @@ The authenticated Teacher/User token is used to filter students directly under h
             ]  
         }
         
-## Filter and return all students grouped by organization visible to the teacher/user [/filter/allStudents]
+## Filter and return all students grouped by organization visible to the teacher/user [/filter/allStudents{?searchTerms,offset,limit}]
 
 Filter students by organization visible to the Teacher/User.
 
@@ -2560,7 +2561,7 @@ The selectedContent construct in the response instructs the client what is retur
             - `Name` (string): Student Name.
             - `Correct` (int): Number of correct answers.
             - `Total` (int): Total number of questions.
-            - `AdditionalData` (string):Additional Data.
+            - `AdditionalData` (string):Additional Data.Curriculum12345
         - `Details` (Uri): Details by skills.
         - `CurriculumArea` (string): Curriculum area.
    
@@ -2583,21 +2584,74 @@ The selectedContent construct in the response instructs the client what is retur
 
         
         {   
-            [
+            "Title" : "Curriculum1"
+            "DescriptionHtml" : "Curriculum12345"
+            "Group" : 
                 {
-                    "Name" : "Curriculum1"
-                    "Id" : "Curriculum12345"
-                    "Students" : 30
-                    "DetailsBySkill" : "Details"
-                    "DetailsByStudent" : "DetailsByStudents"
+                    "Name" : "Group1"
+                    "Id" : "Group12345"
+                    "Grade" : Second
                 }
+            "DateRange" : 
                 {
-                    "Name" : "Curriculum2"
-                    "Id" : "Curriculum12346"
-                    "Students" : 45
-                    "DetailsBySkill" : "DetailsbySkills"
-                    "DetailsByStudent" : "DetailsByStudents"
+                    "Name" : "DateRange1"
+                    "Id" : "DateRange12345"
+                    "IsDefault" : True
                 }
-            ]
+                }
+            "Skills" : [
+                    {
+                        {
+                            "Id" : "1256"
+                            "Name" : "SkillName1"
+                            "StudentScore" : [
+                                    {
+                                        {
+                                            "Id" : "StudentId1234"
+                                            "Name" : "StudentName"
+                                            "Correct" : 25
+                                            "Total" : 30
+                                            "AdditionalData" : "AdditionalData1256"
+                                        }
+                                        {
+                                            "Id" : "StudentId4567"
+                                            "Name" : "StudentName2"
+                                            "Correct" : 45
+                                            "Total" : 50
+                                            "AdditionalData" : "AdditionalData5678"
+                                        }
+                                    }
+                                ]
+                            "Details" : "http://someurl.com"
+                            "CurriculumArea" : "Curriculum1"
+                        }
+                        {
+                            "Id" : "1257"
+                            "Name" : "SkillName2"
+                            "StudentScore" : [
+                                    {
+                                        {
+                                            "Id" : "StudentId12345"
+                                            "Name" : "StudentName3"
+                                            "Correct" : 25
+                                            "Total" : 30
+                                            "AdditionalData" : "AdditionalData1256"
+                                        }
+                                        {
+                                            "Id" : "StudentId45678"
+                                            "Name" : "StudentName4"
+                                            "Correct" : 45
+                                            "Total" : 50
+                                            "AdditionalData" : "AdditionalData5678"
+                                        }
+                                    }
+                                ]
+                            "Details" : "http://someurl.com"
+                            "CurriculumArea" : "Curriculum2"
+                        }
+                        
+                    }
+                ]
+            
         }
        
