@@ -2556,17 +2556,14 @@ The selectedContent construct in the response instructs the client what is retur
         - `Id` (string): Skill Id.
         - `Name` (string): Skill name.
         - `Students` (List of StudentScores): List of Student scores containing,
-            - `Id` (string): Details by the student.
-            - `Name` (string): The Id of the curriculum area.
-            - `Correct` (int): Number of students.
-            - `Total` (int): Details by skills.
-            - `AdditionalData` (string): Details by the student.
-    - `DetailsByStudent` (string): Details by the student.
-        - `Id` (string): The Id of the curriculum area.
-    - `Students` (int): Number of students.
-    - `DetailsBySkill` (string): Details by skills.
-    - `DetailsByStudent` (string): Details by the student.
-
+            - `Id` (string): Student Id.
+            - `Name` (string): Student Name.
+            - `Correct` (int): Number of correct answers.
+            - `Total` (int): Total number of questions.
+            - `AdditionalData` (string):Additional Data.
+        - `Details` (Uri): Details by skills.
+        - `CurriculumArea` (string): Curriculum area.
+   
 + Parameters
     + id = `` (required,string, ``)...Curriculum area Id.
     + group = `` (required,string, ``)...The group name.
