@@ -2864,4 +2864,37 @@ The selectedContent construct in the response instructs the client what is retur
                 ]
             
         }
+        
+## Return Additional data related to a student and actionable skill. [/additionalData/{userId}/{studentId}/{actionableSkillId}]
+
+Return Additional data related to a student and actionable skill.
+
+###  Return Additional data related to a student and actionable skill.[GET]
+
+The selectedContent construct in the response instructs the client what is returned back:
+
+- `AdditionalData`: additional data related to student and actionable skill containing,
+    - `ExhaustedCurriculum` (bool): Is the curriculum exhausted.
+   
++ Parameters
+    + userId = `` (required,string, ``)...User Id.
+    + studentId = `` (required,string, ``)...Student Id for whom additional data is required.
+    + actionableSkillId = `` (required,string, ``)...actionable Skill Id.
+    
+
++ Request (application/json)
+
+        {
+            "userId" :"User1"
+            "studentId" : "Student1"
+            "actionableSkillId" : "ActionableSkill1"
+            
+        }
+
++ Response 302 (application/json)
+
+        
+        {   
+            "ExhaustedCurriculum" : True
+        }
        
