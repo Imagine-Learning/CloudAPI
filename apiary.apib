@@ -2666,7 +2666,7 @@ The selectedContent construct in the response instructs the client what is retur
 - `ActionAreasBySkillReport`: Action areas by skill for curriculum area and the group containing,
     - `Name` (string): Actionable skill name.
     - `Description` (string): Description of the actionable skill.
-    - `FailedStudents` (Group): Group information containing,
+    - `FailedStudents` (List of Failed Students): Group information containing,
         - `Name` (string): Student Name.
         - `Subskills` (list of strings): subskills associated with the primary skill.
     - `FailedSubSkills` (FailedSkill): List of failed sub skills,
@@ -2710,72 +2710,156 @@ The selectedContent construct in the response instructs the client what is retur
 
         
         {   
-            "Title" : "Curriculum1"
-            "DescriptionHtml" : "Curriculum12345"
-            "Group" : 
-                {
-                    "Name" : "Group1"
-                    "Id" : "Group12345"
-                    "Grade" : Second
-                }
-            "DateRange" : 
-                {
-                    "Name" : "DateRange1"
-                    "Id" : "DateRange12345"
-                    "IsDefault" : True
-                }
-                }
-            "Skills" : [
+            "Name" : "ActionableSkill1"
+            "Description" : "Description of actionable skill"
+            "FailedStudents" :  [
+                    {
+                        "Name" : "Student1"
+                        "Subskills" : [
+                            {
+                                {
+                                    "Skill12345"
+                                }
+                                {
+                                    "Skill12346"
+                                }
+                            }
+                    }
+                    {
+                        "Name" : "Student2"
+                        "Subskills" : [
+                            {
+                                {
+                                    "Skill5321"
+                                }
+                                {
+                                    "Skill5322"
+                                }
+                            }
+                    }
+                ]
+            "FailedSubSkills" :  [
+                    {
+                        "Name" : "Subskill1"
+                        "Description" : "Subskill1 description"
+                        "Subskills" : [
+                            {
+                                {
+                                    "Student1"
+                                }
+                                {
+                                    "Student2"
+                                }
+                            }
+                    }
+                    {
+                        "Name" : "Subskill2"
+                        "Description" : "Subskill2 description"
+                        "Students" : [
+                            {
+                                {
+                                    "Student3"
+                                }
+                                {
+                                    "Student4"
+                                }
+                            }
+                    }
+                ]
+            "Resources" : [
+                    {
+                        "Name" : "Resource1"
+                        "Skills" : [
+                            {
+                                {
+                                    "Name" : "SkillName1"
+                                    "Activities" : [
+                                            {
+                                                {
+                                                    "Name" : "Activity1"
+                                                    "Type" : "ActivityType"
+                                                    "Icon" : "http://someurl.com"
+                                                    "Play" : ""
+                                                    "TypicalTime" : 30
+                                                    "Description" : "Description of activity 1"
+                                                }
+                                                {
+                                                    "Name" : "Activity2"
+                                                    "Type" : "ActivityType"
+                                                    "Icon" : "http://someurl.com"
+                                                    "Play" : ""
+                                                    "TypicalTime" : 30
+                                                    "Description" : "Description of activity 2"
+                                                }
+                                            }
+                                        ]
+                                    "SupplementalMaterial" : [
+                                            {
+                                                {
+                                                    "Name" : "Material1"
+                                                    "Link" : "http://someurl.com"
+                                                }
+                                                {
+                                                    "Name" : "Material2"
+                                                    "Link" : "http://someurl.com"
+                                                }
+                                            }
+                                    
+                                        ]
+                                }
+                                {
+                                    "Name" : "SkillName2"
+                                    "Activities" : [
+                                            {
+                                                {
+                                                    "Name" : "Activity3"
+                                                    "Type" : "ActivityType"
+                                                    "Icon" : "http://someurl.com"
+                                                    "Play" : ""
+                                                    "TypicalTime" : 30
+                                                    "Description" : "Description of activity 3"
+                                                }
+                                                {
+                                                    "Name" : "Activity4"
+                                                    "Type" : "ActivityType"
+                                                    "Icon" : "http://someurl.com"
+                                                    "Play" : ""
+                                                    "TypicalTime" : 30
+                                                    "Description" : "Description of activity 4"
+                                                }
+                                            }
+                                        ]
+                                    "SupplementalMaterial" : [
+                                            {
+                                                {
+                                                    "Name" : "Material1"
+                                                    "Link" : "http://someurl.com"
+                                                }
+                                                {
+                                                    "Name" : "Material2"
+                                                    "Link" : "http://someurl.com"
+                                                }
+                                            }
+                                    
+                                        ]
+                                }
+                                
+                            }
+                        ]
+                    }
+                ]
+                
+            "Standards" : [
                     {
                         {
-                            "Id" : "1256"
-                            "Name" : "SkillName1"
-                            "StudentScore" : [
-                                    {
-                                        {
-                                            "Id" : "StudentId1234"
-                                            "Name" : "StudentName"
-                                            "Correct" : 25
-                                            "Total" : 30
-                                            "AdditionalData" : "AdditionalData1256"
-                                        }
-                                        {
-                                            "Id" : "StudentId4567"
-                                            "Name" : "StudentName2"
-                                            "Correct" : 45
-                                            "Total" : 50
-                                            "AdditionalData" : "AdditionalData5678"
-                                        }
-                                    }
-                                ]
-                            "Details" : "http://someurl.com"
-                            "CurriculumArea" : "Curriculum1"
+                            "Name" : "Standard1"
+                            "Link" : "http://someurl.com"
                         }
                         {
-                            "Id" : "1257"
-                            "Name" : "SkillName2"
-                            "StudentScore" : [
-                                    {
-                                        {
-                                            "Id" : "StudentId12345"
-                                            "Name" : "StudentName3"
-                                            "Correct" : 25
-                                            "Total" : 30
-                                            "AdditionalData" : "AdditionalData1256"
-                                        }
-                                        {
-                                            "Id" : "StudentId45678"
-                                            "Name" : "StudentName4"
-                                            "Correct" : 45
-                                            "Total" : 50
-                                            "AdditionalData" : "AdditionalData5678"
-                                        }
-                                    }
-                                ]
-                            "Details" : "http://someurl.com"
-                            "CurriculumArea" : "Curriculum2"
+                            "Name" : "Standard2"
+                            "Link" : "http://someurl.com"
                         }
-                        
+                    
                     }
                 ]
             
