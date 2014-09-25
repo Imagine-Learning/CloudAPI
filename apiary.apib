@@ -2655,3 +2655,124 @@ The selectedContent construct in the response instructs the client what is retur
             
         }
        
+## Return Actionable skill details for the group within the provided date range [/actionableSkill/{id}/{group}/{dateRange}]
+
+Return Actionable skill details for the group within the given date ranges.
+
+###  Actionable skill details for the group within the given date ranges.[GET]
+
+The selectedContent construct in the response instructs the client what is returned back:
+
+- `ActionAreasBySkillReport`: Action areas by skill for curriculum area and the group containing,
+    - `Title` (string): Action area title.
+    - `DescriptionHtml` (string): Description Html for the action area.
+    - `Group` (Group): Group information containing,
+        - `Name` (string): Group Name.
+        - `Id` (string): Group Id.
+        - `Grade` (GradeLevel): Grade Level of the group.
+    - `DateRange` (TimeRange): Date range containing,
+        - `Name` (string): Time range name.
+        - `Id` (short): Time range Id.
+        - `IsDefault` (bool): Is this the default time range.
+    - `Skills` (List of ActionableSkills): List of actionable skills containing,
+        - `Id` (string): Skill Id.
+        - `Name` (string): Skill name.
+        - `Students` (List of StudentScores): List of Student scores containing,
+            - `Id` (string): Student Id.
+            - `Name` (string): Student Name.
+            - `Correct` (int): Number of correct answers.
+            - `Total` (int): Total number of questions.
+            - `AdditionalData` (string):Additional Data.Curriculum12345
+        - `Details` (Uri): Details by skills.
+        - `CurriculumArea` (string): Curriculum area.
+   
++ Parameters
+    + id = `` (required,string, ``)...Curriculum area Id.
+    + group = `` (required,string, ``)...The group name.
+    + dateRange = `` (required,string, ``)...date range for generating the report.
+    
+
++ Request (application/json)
+
+        {
+            "id" :"Curriculum1"
+            "group" : "Group1"
+            "dateRange" : "dateRange"
+            
+        }
+
++ Response 302 (application/json)
+
+        
+        {   
+            "Title" : "Curriculum1"
+            "DescriptionHtml" : "Curriculum12345"
+            "Group" : 
+                {
+                    "Name" : "Group1"
+                    "Id" : "Group12345"
+                    "Grade" : Second
+                }
+            "DateRange" : 
+                {
+                    "Name" : "DateRange1"
+                    "Id" : "DateRange12345"
+                    "IsDefault" : True
+                }
+                }
+            "Skills" : [
+                    {
+                        {
+                            "Id" : "1256"
+                            "Name" : "SkillName1"
+                            "StudentScore" : [
+                                    {
+                                        {
+                                            "Id" : "StudentId1234"
+                                            "Name" : "StudentName"
+                                            "Correct" : 25
+                                            "Total" : 30
+                                            "AdditionalData" : "AdditionalData1256"
+                                        }
+                                        {
+                                            "Id" : "StudentId4567"
+                                            "Name" : "StudentName2"
+                                            "Correct" : 45
+                                            "Total" : 50
+                                            "AdditionalData" : "AdditionalData5678"
+                                        }
+                                    }
+                                ]
+                            "Details" : "http://someurl.com"
+                            "CurriculumArea" : "Curriculum1"
+                        }
+                        {
+                            "Id" : "1257"
+                            "Name" : "SkillName2"
+                            "StudentScore" : [
+                                    {
+                                        {
+                                            "Id" : "StudentId12345"
+                                            "Name" : "StudentName3"
+                                            "Correct" : 25
+                                            "Total" : 30
+                                            "AdditionalData" : "AdditionalData1256"
+                                        }
+                                        {
+                                            "Id" : "StudentId45678"
+                                            "Name" : "StudentName4"
+                                            "Correct" : 45
+                                            "Total" : 50
+                                            "AdditionalData" : "AdditionalData5678"
+                                        }
+                                    }
+                                ]
+                            "Details" : "http://someurl.com"
+                            "CurriculumArea" : "Curriculum2"
+                        }
+                        
+                    }
+                ]
+            
+        }
+       
