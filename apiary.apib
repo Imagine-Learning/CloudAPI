@@ -2685,8 +2685,11 @@ The selectedContent construct in the response instructs the client what is retur
                 - `TypicalTime` (TimeSpan): Typical time taken to play the activity.
                 - `Description` (string): Description of the activity.
             - `SupplementalMaterials` (List of SupplementalMaterials): List of supplemental material to help learn the skill.
-                - `AdditionalData` (string):Additional Data.Curriculum12345
-    - `Standards` (Uri): Details by skills.
+                - `Name` (string): Name of the suplmenental material
+                - `Link` (Uri):Link to the suplemental material.
+    - `Standards` (List of Standards): List of standards for this skill.
+        - `Name` (string): Name of the standard.
+        - `Link` (Uri):Link to standard.
    
 + Parameters
     + id = `` (required,string, ``)...Curriculum area Id.
