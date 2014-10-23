@@ -1685,4 +1685,31 @@ This resource is the collection of all diagnostic logs that the authenticated us
         
 + Response 202
 
-       
+# Group Student Data
+
+## Get Value [/studentData/{key}]
+
+Provides a simples key/value store for string data
+
++ Parameters
+    + key (string) ... The key counterpart for your value
+
+### Get a value for a key [GET]
+
++ Response 200 (text/plain)
+
+        100000
+        
+### Set a value for a key [PUT]
+
++ Request (text/plain)
+    
+        testValue
+
++ Response 202 
+
+        <no content>
+        
+### Delete a value for a key [DELETE]
+
++ Response 204 
