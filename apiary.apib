@@ -736,7 +736,7 @@ To update an Organization send a Patch Request with updated value(s) for one or 
 
 This resource represents the list of child organizations for the specified organization
 
-### Retrieve groups in the Organization [GET]
+### Retrieve child Organizations [GET]
 
 + Parameters
     + id (string) ... Id of the parent Organization
@@ -746,36 +746,6 @@ This resource represents the list of child organizations for the specified organ
         {
           "metadata": {},
           "groups":
-          {
-            [{
-              "id": "6f587521-1dd4-431d-ad91-4c27c5f32776",
-              "groupType" : "School",
-              "name": "First Grade",
-              "sessionTime": 30,
-              "printOption": "Full",
-              "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
-              "sectionName": "",
-              "groupNumber": "",
-              "syncId", ""
-            }]
-          }
-          "notifications": {}
-        }
-
-## Organizations's Groups Collection [/organizations/{id}/groups]
-
-This resource represents the list of groups for the specified organization
-
-### Retrieve child Organizations [GET]
-
-+ Parameters
-    + id (string) ... Id of the Organization
-
-+ Response 200 (application/json)
-
-        {
-          "metadata": {},
-          "organizations":
           {
             [{
               "id": "6f587521-1dd4-431d-ad91-4c27c5f32776",
@@ -791,6 +761,46 @@ This resource represents the list of groups for the specified organization
               "organizationNumber": "",
               "syncId", ""
             }]
+          }
+          "notifications": {}
+        }
+
+## Organizations's Groups Collection [/organizations/{id}/groups]
+
+This resource represents the list of groups for the specified organization
+
+### Retrieve groups in the Organization [GET]
+
++ Parameters
+    + id (string) ... Id of the Organization
+
++ Response 200 (application/json)
+
+        {
+          "metadata": {},
+          "groups":
+          {
+            [{
+              "id": "5687fc7a-dccc-45b7-8be5-bf9533e37af3",
+              "name": "First Grade",
+              "groupType": "ILE",
+              "sessionTime": 30,
+              "printOption": "All",
+              "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+              "sectionName": "",
+              "groupNumber": "",
+              "syncId": ""
+            }, {
+              "id": "0a0b13c0-8315-43f3-bc5a-033d0dd340ac",
+              "name": "After School",
+              "groupType": "ILS",
+              "sessionTime": 60,
+              "printOption": "Partial",
+              "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+              "sectionName": "",
+              "groupNumber": "",
+              "syncId": ""
+            }
           }
           "notifications": {}
         }
