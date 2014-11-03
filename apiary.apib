@@ -808,9 +808,11 @@ This resource represents the list of groups for the specified organization
 
 ## Organizations's Student Collection [/organizations/{orgId}/students/{studentId}]
 
-This resource represents the list of students in the specified organization
+This resource represents the list of students in the specified organization.
 
 ### Retrieve students in an organization [GET]
+
+NOTE: The results of this call are paginated. Default maximum number of results is 100.
 
 + Parameters
     + orgId (string) ... Organization Id for which to retrieve students
