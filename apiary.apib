@@ -215,7 +215,7 @@ A Student resource has the following attributes:
 - `writtenLanguage` (string): Written language used at home
 - `studentNumber` (string): Unique district or school id for Student.  [OPTIONAL]
 - `syncId` (string): Id used in syncing with SIS [OPTIONAL]
-
+- `sessionTime` (int): Session time for the student [OPTIONAL]. If not provided, session time is not enforced.
 
 
 + Parameters
@@ -237,7 +237,8 @@ A Student resource has the following attributes:
             "firstLanguage": "English",
             "writtenLanguage": "English",
             "studentNumber": "",
-            "syncId": ""
+            "syncId": "",
+            "sessionTime": 25
           }
           "notifications": {}
         }
@@ -412,7 +413,7 @@ This resource is the collection of all students that the authenticated user has 
 | organizationId         | string  | Yes |       | Valid organizationId
 | studentNumber          | string  | No  | null  | Length 1-64 characters
 | syncId                 | string  | No  | null  | Length 1-64 characters
-
+| sessionTime            | number  | No  | null  | Must be >= 0 or null
 
 + Request (application/json)
 
