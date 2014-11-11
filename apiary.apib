@@ -887,7 +887,6 @@ This resource represents the list of groups for the specified organization
               "id": "5687fc7a-dccc-45b7-8be5-bf9533e37af3",
               "name": "First Grade",
               "groupType": "ILE",
-              "sessionTime": 30,
               "printOption": "All",
               "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
               "sectionName": "",
@@ -897,7 +896,6 @@ This resource represents the list of groups for the specified organization
               "id": "0a0b13c0-8315-43f3-bc5a-033d0dd340ac",
               "name": "After School",
               "groupType": "ILS",
-              "sessionTime": 60,
               "printOption": "Partial",
               "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
               "sectionName": "",
@@ -1154,7 +1152,6 @@ A Group represents any type of class or other grouping of students.   The resour
 - `id` (string) Unique Group identifier [Assigned by API when User is created]
 - `name` (string) Name of the Group
 - `groupType` (string) Type of group: "ILE", "ILS"
-- `sessionTime` (number) Number of minutes students run each session
 - `printOption` (string) "All" printouts, "Partial" printouts, or "None"
 - `organizationId` (string) Id of the Organization the group belongs to
 - `sectionName` (string) Name of Section [OPTIONAL]
@@ -1174,7 +1171,6 @@ A Group represents any type of class or other grouping of students.   The resour
             "id": "5687fc7a-dccc-45b7-8be5-bf9533e37af3",
             "name": "First Grade",
             "groupType": "ILE",
-            "sessionTime": 30,
             "printOption": "All",
             "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
             "sectionName": "",
@@ -1385,7 +1381,6 @@ This resource is the collection of groups owned by the current user.
               "id": "5687fc7a-dccc-45b7-8be5-bf9533e37af3",
               "name": "First Grade",
               "groupType": "ILE",
-              "sessionTime": 30,
               "printOption": "All",
               "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
               "sectionName": "",
@@ -1395,7 +1390,6 @@ This resource is the collection of groups owned by the current user.
               "id": "0a0b13c0-8315-43f3-bc5a-033d0dd340ac",
               "name": "After School",
               "groupType": "ILS",
-              "sessionTime": 60,
               "printOption": "Partial",
               "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
               "sectionName": "",
@@ -1413,7 +1407,6 @@ This resource is the collection of groups owned by the current user.
 |:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
 | name                   | string  | Yes |       | Length 1-256 characters
 | groupType              | string  | Yes |       | Valid values: "ILE", "ILS"
-| sessionTime            | number  | Yes |       | 
 | printOption            | string  | Yes |       | Valid values: "Full", "Partial", "None"
 | organizationId         | string  | Yes |       | Valid Organization Id the group belongs to
 | sectionName            | string  | No  | null  | Length 1-256 characters
@@ -1426,7 +1419,6 @@ This resource is the collection of groups owned by the current user.
         {
           "name" : "After School",
           "groupType" : "ILE",
-          "sessionTime" : 30,
           "printOption" : "Full",
           "organizationId" : "9fad4cfd-f669-4cc7-a38d-275d033eb7bc"
         }
