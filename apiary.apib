@@ -342,7 +342,7 @@ This resource represents the list of groups for the specified student
     + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
     + sortby = `Username` (optional, string, `Username`)...Sort field for results
     + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
-    + details = `false` (optional, bool,   `false`)...Return extra details of student (groups and organizations)
+    + details = `false` (optional, bool,   `false`)...Return extra details of group (contained students and owning users)
 
 + Response 200 (application/json)
 
@@ -471,7 +471,7 @@ This resource is the collection of all students that the authenticated user has 
         }
 
 
-## User [/users/{id}]
+## User [/users/{id}{?details}]
 
 A User resource has the following attributes: 
 
@@ -507,12 +507,16 @@ A User resource has the following attributes:
         }
 
 ### Retrieve a Single User [GET]
++ Parameters
+    + id (string) ... User Id.
+    + details = `false` (optional, bool,   `false`)...Return extra details of user (groups and organizations)
+
 + Response 200
     
     [User][]
 
 ### Edit a User [PATCH]
-To update a User send a Patch Request with updated value(s) for one or more of the Student resource attributes. All attributes values (properties) from the previous version are carried over by default if not specified.
+To update a User send a Patch Request with updated value(s) for one or more of the User resource attributes. All attributes values (properties) from the previous version are carried over by default if not specified.
 
 + Request (application/json)
 
@@ -524,6 +528,21 @@ To update a User send a Patch Request with updated value(s) for one or more of t
     
     [User][]
 
+### Edit a User [PUT]
+To update a User send a Put Request with updated value(s) for each of the User resource attributes. All attributes values (properties) are updated.
+
++ Request (application/json)
+
+        {
+          "attribute_name": "Updated attribute contents"
+        }
+
++ Response 200
+    
+        {
+          "notifications": {}
+        }
+
 ### Delete a User [DELETE]
 + Response 200 (application/json)
 
@@ -531,7 +550,7 @@ To update a User send a Patch Request with updated value(s) for one or more of t
           "notifications": {}
         }
         
-## Users's Organizations Collection [/users/{id}/organizations]
+## User's Organizations Collection [/users/{id}/organizations{?offset,limit,sortby,desc,details}]
 
 This resource represents the list of organizations for the specified user
 
@@ -539,6 +558,11 @@ This resource represents the list of organizations for the specified user
 
 + Parameters
     + id (string) ... Id of the User
+    + offset = `0` (optional, number, `10`)...The number of results to skip
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
+    + sortby = `Name` (optional, string, `Name`)...Sort field for results
+    + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
+    + details = `false` (optional, bool,   `false`)...Return extra details of organization (groups, organizations, students, users)
 
 + Response 200 (application/json)
 
@@ -577,7 +601,7 @@ This resource represents the list of organizations for the specified user
           "notifications": {}
         }      
 
-## Users's Groups Collection [/users/{id}/groups]
+## User's Groups Collection [/users/{id}/groups{?limit,offset,sortby,desc,details}]
 
 This resource represents the list of groups for the specified user
 
@@ -585,6 +609,11 @@ This resource represents the list of groups for the specified user
 
 + Parameters
     + id (string) ... Id of the User
+    + offset = `0` (optional, number, `10`)...The number of results to skip
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
+    + sortby = `Name` (optional, string, `Name`)...Sort field for results
+    + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
+    + details = `false` (optional, bool,   `false`)...Return extra details of group (contained students and owning users)
 
 + Response 200 (application/json)
 
@@ -617,15 +646,23 @@ This resource represents the list of groups for the specified user
           "notifications": {}
         }
 
-## Users Collection [/users{?limit,offset}]
+## Users Collection [/users{?offset,limit,sortby,desc,details,username,firstname,lastname,search}]
 
 This resource is the collection of all users
 
 ### List all Users [GET]
 
 + Parameters
-    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
     + offset = `0` (optional, number, `10`)...The number of results to skip
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
+    + sortby = `Username` (optional, string, `Username`)...Sort field for results
+    + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
+    + details = `false` (optional, bool,   `false`)...Return extra details of user (groups and organizations)
+    + username = `` (optional, string, ``)...Filter results by exact match on `Username` field
+    + firstname = `` (optional, string, ``)...Filter results by exact match on `FirstName` field
+    + lastname = `` (optional, string, ``)...Filter results by exact match on `LastName` field
+    + search = `` (optional, string, ``)...Filter results by case insensitive partial match on `FirstName`, `LastName`, or `Username` fields.
+      Multiple search terms may be separated by spaces.
 
 + Response 200 (application/json)
 
