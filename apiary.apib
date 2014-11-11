@@ -664,7 +664,7 @@ This resource is the collection of all users
         }
 
 
-## Organization [/organizations/{id}]
+## Organization [/organizations/{id}{?details}]
 
 An Organization reprents a school, district, sub-district, or similar grouping.   The resource has the following attributes: 
 
@@ -681,7 +681,7 @@ An Organization reprents a school, district, sub-district, or similar grouping. 
 - `licenseCap` (number) Number of licenses organization is limited to [OPTIONAL - ommission indicates no cap on licenses]
 - `organizationNumber` (string) Unique state/district id for Organization.
 - `syncId` (string) Id used in syncing with SIS
-- `authenticationDomainBoundary` (boolean) Indicates whether students authentication and searching stops at this organization or flows up to parent organization(s)
+- `authenticationSiteCode` (string) Students' authentication and searching stops at this organization.
 
 + Parameters
     + id (string) ... Organization Id.
@@ -709,6 +709,10 @@ An Organization reprents a school, district, sub-district, or similar grouping. 
         }
 
 ### Retrieve a Single Organization [GET]
++ Parameters
+    + id (string) ... Organization Id.
+    + details = `false` (optional, bool,   `false`)...Return extra details of organization (groups, organizations, students, users)
+
 + Response 200
     
     [Organization][]
@@ -726,6 +730,15 @@ To update an Organization send a Patch Request with updated value(s) for one or 
     
     [Organization][]
 
+### Edit an Organization [PUT]
+To update an Organization send a Put Request with updated value(s) for each of the Organization resource attributes. All attributes values (properties) are updated.
+
++ Response 200
+    
+        {
+          "notifications": {}
+        }
+
 ### Delete an Organization [DELETE]
 + Response 200 (application/json)
 
@@ -733,7 +746,7 @@ To update an Organization send a Patch Request with updated value(s) for one or 
           "notifications": {}
         }
 
-## Organizations's Child-Organization Collection [/organizations/{id}/organizations]
+## Organization's Child-Organization Collection [/organizations/{id}/organizations{?offset,limit,sortby,desc,details,name,sitecode,search}]
 
 This resource represents the list of child organizations for the specified organization
 
@@ -741,6 +754,15 @@ This resource represents the list of child organizations for the specified organ
 
 + Parameters
     + id (string) ... Id of the parent Organization
+    + offset = `0` (optional, number, `10`)...The number of results to skip
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
+    + sortby = `Name` (optional, string, `Name`)...Sort field for results
+    + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
+    + details = `false` (optional, bool,   `false`)...Return extra details of organization (groups, organizations, students, users)
+    + name = `` (optional, string, ``)...Filter results by exact match on `Name` field
+    + sitecode = `` (optional, string, ``)...Filter results by exact match on `AuthenticationSiteCode` field
+    + search = `` (optional, string, ``)...Filter results by case insensitive partial match on `Name` or `AuthenticationSiteCode` fields.
+      Multiple search terms may be separated by spaces.
 
 + Response 200 (application/json)
 
@@ -766,7 +788,7 @@ This resource represents the list of child organizations for the specified organ
           "notifications": {}
         }
 
-## Organizations's Groups Collection [/organizations/{id}/groups]
+## Organization's Groups Collection [/organizations/{id}/groups{?limit,offset,sortby,desc,details,name,sectionname,groupnumber,search}]
 
 This resource represents the list of groups for the specified organization
 
@@ -774,6 +796,16 @@ This resource represents the list of groups for the specified organization
 
 + Parameters
     + id (string) ... Id of the Organization
+    + offset = `0` (optional, number, `10`)...The number of results to skip
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
+    + sortby = `Name` (optional, string, `Name`)...Sort field for results
+    + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
+    + details = `false` (optional, bool,   `false`)...Return extra details of group (contained students and owning users)
+    + name = `` (optional, string, ``)...Filter results by exact match on `Name` field
+    + sectionname = `` (optional, string, ``)...Filter results by exact match on `SectionName` field
+    + groupnumber = `` (optional, string, ``)...Filter results by exact match on `GroupNumber` field
+    + search = `` (optional, string, ``)...Filter results by case insensitive partial match on `Name`, `SectionName`, or `GroupNumber` fields.
+      Multiple search terms may be separated by spaces.
 
 + Response 200 (application/json)
 
@@ -807,7 +839,7 @@ This resource represents the list of groups for the specified organization
         }
         
 
-## Organizations's Student Collection [/organizations/{orgId}/students/{?limit,offset}]
+## Organization's Students Collection [/organizations/{orgId}/students/{studentId}{?offset,limit,sortby,desc,details,username,gradelevel,firstname,lastname,search}]
 
 This resource represents the list of students in the specified organization.
 
@@ -818,8 +850,17 @@ The display starts at offset 0 and limits the display to 10 results per page.
 
 + Parameters
     + orgId (string) ... Organization Id for which to retrieve students
-    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
     + offset = `0` (optional, number, `10`)...The number of results to skip
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
+    + sortby = `Username` (optional, string, `Username`)...Sort field for results
+    + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
+    + details = `false` (optional, bool,   `false`)...Return extra details of student (groups and organizations)
+    + username = `` (optional, string, ``)...Filter results by exact match on `Username` field
+    + gradelevel = `` (optional, string, ``)...Filter results by exact match on `GradeLevel` field
+    + firstname = `` (optional, string, ``)...Filter results by exact match on `FirstName` field
+    + lastname = `` (optional, string, ``)...Filter results by exact match on `LastName` field
+    + search = `` (optional, string, ``)...Filter results by case insensitive partial match on `FirstName`, `LastName`, or `Username` fields.
+      Multiple search terms may be separated by spaces.
 
 + Response 200 (application/json)
 
@@ -873,7 +914,7 @@ The display starts at offset 0 and limits the display to 10 results per page.
 + Response 202 (application/json)
 
 
-## Organizations's Users Collection [/organizations/{orgId}/users/{userId}]
+## Organization's Users Collection [/organizations/{orgId}/users/{userId}{?offset,limit,sortby,desc,details,username,firstname,lastname,search}]
 
 This resource represents the list of users in the specified organization
 
@@ -881,6 +922,16 @@ This resource represents the list of users in the specified organization
 
 + Parameters
     + orgId (string) ... Organization Id for which to retrieve users
+    + offset = `0` (optional, number, `10`)...The number of results to skip
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
+    + sortby = `Username` (optional, string, `Username`)...Sort field for results
+    + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
+    + details = `false` (optional, bool,   `false`)...Return extra details of user (groups and organizations)
+    + username = `` (optional, string, ``)...Filter results by exact match on `Username` field
+    + firstname = `` (optional, string, ``)...Filter results by exact match on `FirstName` field
+    + lastname = `` (optional, string, ``)...Filter results by exact match on `LastName` field
+    + search = `` (optional, string, ``)...Filter results by case insensitive partial match on `FirstName`, `LastName`, or `Username` fields.
+      Multiple search terms may be separated by spaces.
 
 + Response 200 (application/json)
 
@@ -928,15 +979,22 @@ This resource represents the list of users in the specified organization
 + Response 202 (application/json)
 
 
-## Organizations Collection [/organizations{?limit,offset}]
+## Organizations Collection [/organizations{?offset,limit,sortby,desc,details,name,sitecode,search}]
 
 This resource is the collection of all Organizations
 
 ### List all Organizations [GET]
 
 + Parameters
-    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
     + offset = `0` (optional, number, `10`)...The number of results to skip
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
+    + sortby = `Name` (optional, string, `Name`)...Sort field for results
+    + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
+    + details = `false` (optional, bool,   `false`)...Return extra details of organization (groups, organizations, students, users)
+    + name = `` (optional, string, ``)...Filter results by exact match on `Name` field
+    + sitecode = `` (optional, string, ``)...Filter results by exact match on `AuthenticationSiteCode` field
+    + search = `` (optional, string, ``)...Filter results by case insensitive partial match on `Name` or `AuthenticationSiteCode` fields.
+      Multiple search terms may be separated by spaces.
 
 + Response 200 (application/json)
 
@@ -992,8 +1050,7 @@ This resource is the collection of all Organizations
 | licenseCap                  | number  | No  | null  | Empty=No Cap, otherwise Range (0-MAXINT)
 | organizationNumber          | string  | No  | null  | Length 1-64 characters
 | syncId                      | string  | No  | null  | Length 1-64 characters
-| authentiationDomainBoundary | boolean | No  | true  | 
-
+| authenticationSiteCode      | string  | No  | null  | Empty=not authentication domain boundary
 
 + Request (application/json)
 
@@ -1101,8 +1158,8 @@ This resource represents the list of students in the specified group
 
 + Parameters
     + groupId (string) ... Group Id for which to retrieve students
-    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
     + offset = `0` (optional, number, `10`)...The number of results to skip
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
     + sortby = `Username` (optional, string, `Username`)...Sort field for results
     + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
     + details = `false` (optional, bool,   `false`)...Return extra details of student (groups and organizations)
@@ -1173,8 +1230,8 @@ This resource represents the list of users in the specified group
 
 + Parameters
     + groupId (string) ... Group Id for which to retrieve users
-    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
     + offset = `0` (optional, number, `10`)...The number of results to skip
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
     + sortby = `Username` (optional, string, `Username`)...Sort field for results
     + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
     + details = `false` (optional, bool,   `false`)...Return extra details of user (groups and organizations)
@@ -1237,8 +1294,8 @@ This resource is the collection of groups owned by the current user.
 ### List all Groups for current User [GET]
 
 + Parameters
-    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
     + offset = `0` (optional, number, `10`)...The number of results to skip
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
     + sortby = `Name` (optional, string, `Name`)...Sort field for results
     + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
     + details = `false` (optional, bool,   `false`)...Return extra details of group (contained students and owning users)
