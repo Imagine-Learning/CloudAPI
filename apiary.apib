@@ -216,6 +216,7 @@ A Student resource has the following attributes:
 - `writtenLanguage` (string): Written language used at home
 - `studentNumber` (string): Unique district or school id for Student.  [OPTIONAL]
 - `syncId` (string): Id used in syncing with SIS [OPTIONAL]
+- `sessionTime` (number): Session Time for this student [OPTIONAL]
 
 
 
@@ -238,7 +239,8 @@ A Student resource has the following attributes:
             "firstLanguage": "English",
             "writtenLanguage": "English",
             "studentNumber": "",
-            "syncId": ""
+            "syncId": "",
+            "sessionTime" : 30
           }
           "notifications": {}
         }
@@ -311,7 +313,8 @@ This resource represents the list of organizations for the specified student
               "parentId": "00000000-0000-0000-0000-000000000000",
               "licenseCap": 100,
               "organizationNumber": "",
-              "syncId", ""
+              "syncId": "",
+              "sessionTime": 30
             }, {
               "id": "6f587521-1dd4-431d-ad91-4c27c5f32776",
               "organizationType" : "School",
@@ -324,7 +327,8 @@ This resource represents the list of organizations for the specified student
               "parentId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
               "licenseCap": 50,
               "organizationNumber": "",
-              "syncId", ""
+              "syncId": "",
+              "sessionTime": 25
             }
           }
           "notifications": {}
@@ -354,7 +358,6 @@ This resource represents the list of groups for the specified student
               "id": "5687fc7a-dccc-45b7-8be5-bf9533e37af3",
               "name": "First Grade",
               "groupType": "ILE",
-              "sessionTime": 30,
               "printOption": "All",
               "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
               "sectionName": "",
@@ -364,7 +367,6 @@ This resource represents the list of groups for the specified student
               "id": "0a0b13c0-8315-43f3-bc5a-033d0dd340ac",
               "name": "After School",
               "groupType": "ILS",
-              "sessionTime": 60,
               "printOption": "Partial",
               "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
               "sectionName": "",
@@ -410,7 +412,8 @@ This resource is the collection of all students that the authenticated user has 
               "firstLanguage": "English",
               "writtenLanguage": "English",
               "studentNumber": "",
-              "syncId": ""
+              "syncId": "",
+              "sessionTime": 30
             }, {
               "id": "3a617f40-4748-4c32-a8c3-5d6282c6842c",
               "username": "demostudent2@imaginelearning.com",
@@ -444,6 +447,7 @@ This resource is the collection of all students that the authenticated user has 
 | organizationId         | string  | Yes |       | Valid organizationId
 | studentNumber          | string  | No  | null  | Length 1-64 characters
 | syncId                 | string  | No  | null  | Length 1-64 characters
+| sessionTime            | number  | No  |       | Session Time (in minutes)
 
 
 + Request (application/json)
@@ -625,7 +629,6 @@ This resource represents the list of groups for the specified user
               "id": "5687fc7a-dccc-45b7-8be5-bf9533e37af3",
               "name": "First Grade",
               "groupType": "ILE",
-              "sessionTime": 30,
               "printOption": "All",
               "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
               "sectionName": "",
@@ -635,7 +638,6 @@ This resource represents the list of groups for the specified user
               "id": "0a0b13c0-8315-43f3-bc5a-033d0dd340ac",
               "name": "After School",
               "groupType": "ILS",
-              "sessionTime": 60,
               "printOption": "Partial",
               "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
               "sectionName": "",
