@@ -196,8 +196,85 @@ This resource has the following attributes
         {
           "message" : "The credentials entered are not valid"
         }  
-  
 
+# Group Password Reset
+The API enables sending a password reset email to a user with a link to click on to reset their 
+password (in case they have forgotten it). 
+
+## Initiate Password Reset [/passwordReset]
+This initiates the process of sending an email to the user with a link for them to click on. 
+
+### Request a password reset [POST]
+
+
++ Request (application/json)
+
+        {
+            "username": "forgetful@imaginelearning.com"
+        }
+
++ Response 202
+
++ Response 404
+
+        {
+            "message" : "The username does not exist"
+        }
+
+
++ Response 500 
+
+        {
+            "message": "Unable to reach SMTP server"
+        }
+
+## Complete Password Reset [/passwordReset/{id}]
+Once the user clicks the link in the email, they'll end up on a landing page where they can type in a new password.
+The UI can validate the link is valid, and set the new password.
+### Validate a password reset request [GET]
+
++ Parameters
+    + id (string) ... request id
+
++ Request (application/json)
+
+        {
+            "username": "forgetful@imaginelearning.com"
+        }
+
++ Response 200
+
+
++ Response 404
+
+        {
+            "message": "password reset request id is invalid"
+        }
+
+### Change the password [POST]
+
++ Parameters
+    + id (string) ... request id
+
++ Request (application/json)
+
+        {
+            "password": "Tr0ub4dor&3"
+        }
+
++ Response 200
+
++ Response 404
+
+        {
+            "message": "password reset request id is invalid"
+        }
+
++ Response 400
+
+        {
+            "message": "password must be at least 8 characters"
+        }
 
 # Group Provisioning
 
