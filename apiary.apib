@@ -271,6 +271,50 @@ The UI can validate the link is valid, and set the new password.
             "message": "password must be at least 8 characters"
         }
 
+# Group Product Metadata
+
+## Product [/products]
+
+A product resource represents a sequenced product that can be played.
+
+### Get products [GET]
+
++ Response 200 (application/json)
+
+        {
+            [
+                { "identifier": "ILE" },
+                { "identifier": "Spanish" },
+                { "identifier": "Test" },
+                { "identifier": "CommunicationTest" }
+            ]
+        }
+
+## SupportedActivity [/supportedactivities]
+
+A "supported activity" resource has the following attributes:
+
+- identifier: the string used to identify the activity ("ExploreEverydayWords" for example).  This is not to be confused with legacy integer/guid identifiers.
+
+### Retrieve supported activities [GET]
+
+Response looks like this:
+
+[
+  {
+    "identifier": "ActivityMenuLevel1"
+  },
+  {
+    "identifier": "ActivityMenuLevel2"
+  },
+  {
+    "identifier": "AdaptiveAssessment"
+  },
+  {
+    "identifier": "AffixAction"
+  }
+]
+
 # Group Provisioning
 
 ## Student [/students/{id}{?details}]
@@ -1507,23 +1551,6 @@ This resource is the collection of groups owned by the current user.
         }
 
 # Group Sequencing
-
-## Product [/products]
-
-A product resource represents a sequenced product that can be played.
-
-### Get products [GET]
-
-+ Response 200 (application/json)
-
-        {
-            [
-                { "identifier": "ILE" },
-                { "identifier": "Spanish" },
-                { "identifier": "Test" },
-                { "identifier": "CommunicationTest" }
-            ]
-        }
 
 ## Activity [/activities{?product,clientActivitySupport}]
 
