@@ -298,22 +298,16 @@ A "supported activity" resource has the following attributes:
 
 ### Retrieve supported activities [GET]
 
-Response looks like this:
++ Response 200 (application/json)
 
-[
-  {
-    "identifier": "ActivityMenuLevel1"
-  },
-  {
-    "identifier": "ActivityMenuLevel2"
-  },
-  {
-    "identifier": "AdaptiveAssessment"
-  },
-  {
-    "identifier": "AffixAction"
-  }
-]
+        {
+            [
+                { "identifier": "ActivityMenuLevel1" },
+                { "identifier": "ActivityMenuLevel2" },
+                { "identifier": "AdaptiveAssessment" },
+                { "identifier": "AffixAction" }
+            ]
+        }
 
 # Group Provisioning
 
