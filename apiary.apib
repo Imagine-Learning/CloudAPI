@@ -309,7 +309,7 @@ A "supported activity" resource has the following attributes:
             ]
         }
 
-## SupportedDataset [/supporteddatasets]
+## SupportedDataset [/supporteddatasets{?activityIdentifier}]
 
 A "supported dataset" resource has the following attributes:
 
@@ -317,7 +317,9 @@ A "supported dataset" resource has the following attributes:
 - supportedDatasets: list of the supported datasets where datasetNumber is the dataset number (1,10, 1000, etc. - this is not the same as the legacy numeric identifier, it's the user-friendly number) and datasetName is the friendly dataset set that originates in the ImagineMedia database.
 
 ### Retrieve supported datasets [GET]
-
++ Parameters
+    + activityIdentifier = `none` (optional, string)...Returns datasets for only the specified activity
+    
 + Response 200 (application/json)
 
         {
