@@ -309,6 +309,38 @@ A "supported activity" resource has the following attributes:
             ]
         }
 
+## SupportedDataset [/supporteddatasets]
+
+A "supported dataset" resource has the following attributes:
+
+- activityIdentifier: the string used to identify the activity ("ExploreEverydayWords" for example).  This is not to be confused with legacy integer/guid identifiers.
+- supportedDatasets: list of the supported datasets where datasetNumber is the dataset number (1,10, 1000, etc. - this is not the same as the legacy numeric identifier, it's the user-friendly number) and datasetName is the friendly dataset set that originates in the ImagineMedia database.
+
+### Retrieve supported datasets [GET]
+
++ Response 200 (application/json)
+
+        {
+            [
+                {
+                    "activityIdentifer":"ListenToAStory",
+                    "supportedDatasets":
+                    [
+                        {"datasetNumber":1, "datasetName": "Story 1: Moving"},
+                        {"datasetNumber":2, "datasetName": "Story 2: No, No, Baby Sue!"}
+                    ]
+                }
+                {
+                    "Activity":"LetterShapesAndSounds",
+                    "SupportedDatasets":
+                    [
+                        {"DatasetNumber":1, "datasetName": "Capital A"},
+                        {"DatasetNumber":2, "datasetName": "Capital M"}
+                    ]
+                }
+            ]
+        }
+
 # Group Provisioning
 
 ## Student [/students/{id}{?details}]
