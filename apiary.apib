@@ -1290,14 +1290,13 @@ This resource is the collection of all Organizations
 
 ## Organization's Authentication Site Code [/organizations/{orgId}/authenticationSiteCode]
 
-Retrieves the authentication site code for the authentication domain organization of the specified organization.
+Retrieves the authentication site code for the authentication domain organization of the specified organization (meaning, if the specified organization doesn't have an authentication site code, it will identify the first organization up the heirarchy with an authentication site code and return that value).
 
-- `orgId` (string) Organization ID
-
+### Retrieve an organization's authentication site code [GET]
 + Parameters
     + orgId (string) ... Organization ID
     
-+ Model (application/json)
++ Response 200
 
         "MyOrgSiteCode"
 
