@@ -1744,7 +1744,7 @@ Operations on underlying student data store
 
 # Seed the Student with sample Data [POST]
 
-NOTE: Only the root user is authorized to seed a student with sample data. Normally student data would be built over the course of natural use of the product. Typically, only tests would call for seeding a student with data.
+NOTE: Only ILAdmin users are authorized to seed a student with sample data. Normally student data would be built over the course of natural use of the product. Typically, only tests would call for seeding a student with data.
 
 The POST content is optional. Either supply valid student data (json document) or omit the content to use a server-side pre-built sample. Student data may only be seeded for a new student, i.e. one that does not yet have sequencing data.
 
@@ -1945,9 +1945,214 @@ The POST content is optional. Either supply valid student data (json document) o
         
 + Response 201
 
+# Get the Student's Current Data [GET]
+
+NOTE: Only ILAdmin users are authorized to get student data. Typically, only tests would call to archiving data with which to seed a student with data later.
+
++ Response 404 (application/json)
+
+        {
+            "message": "No student data exists for student with id = f566a01b-c3dd-47e1-a549-a3a0011b9fc3"
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "_id": "f566a01b-c3dd-47e1-a549-a3a0011b9fc3",
+            "Revision": 4,
+            "StudentProductStateCollection": [
+                {
+                    "Product": "ILE",
+                    "LastStrandChoiceAlgorithmUsed": "LongestSincePlayed",
+                    "NumReviewMenuChoicesMade": 0,
+                    "IsOnDemandTestAssigned": false
+                }
+            ],
+            "StudentLessonStateCollection": [
+                {
+                    "Lesson": "01d6691f-911f-45b5-b861-778c725b4d98",
+                    "LessonState": "Satisfied",
+                    "SatisfiedReason": "SkippedByGradeLevel",
+                    "RowVersion": 0,
+                    "AnyBranchEverFailed": false
+                },
+                {
+                    "Lesson": "d17e51fd-a445-47a1-8145-47d35f45af75",
+                    "LessonState": "Satisfied",
+                    "SatisfiedReason": "SkippedByGradeLevel",
+                    "RowVersion": 0,
+                    "AnyBranchEverFailed": false
+                }
+            ],
+            "ActivityCountedCollection": [
+                {
+                    "LessonBranch": "Main",
+                    "Activity": "EverydayWordsInScenes",
+                    "Lesson": "c3fe8440-1676-4147-8888-83ed059d9771",
+                    "SequenceNode": "b7974386-2593-44ed-80ae-938b46233ff7",
+                    "DataSet": 1,
+                    "DateTime": "2014-09-08T17:12:44.6435162-06:00",
+                    "ElapsedSeconds": 150.0
+                },
+                {
+                    "LessonBranch": "Main",
+                    "Activity": "RecognizeEverydayWords",
+                    "Lesson": "c3fe8440-1676-4147-8888-83ed059d9771",
+                    "SequenceNode": "f6ac8dd4-8ca5-4663-bcd4-f7eeade29b29",
+                    "DataSet": 1,
+                    "DateTime": "2014-09-08T17:12:46.442246-06:00",
+                    "ElapsedSeconds": 150.0,
+                    "Scores": [
+                        {
+                            "Activity": "RecognizeEverydayWords",
+                            "DataSet": 1,
+                            "Skill": "Summary_RecognizeEverydayWords",
+                            "Lesson": "c3fe8440-1676-4147-8888-83ed059d9771",
+                            "LessonBranch": "Main",
+                            "ActivityNode": "f6ac8dd4-8ca5-4663-bcd4-f7eeade29b29",
+                            "DateTime": "2014-09-08T17:12:46.442246-06:00",
+                            "NumPossible": 3,
+                            "NumCorrect": 1,
+                            "Mastered": false,
+                            "QuestionResponses": [
+                                {
+                                    "QuestionNumber": 1,
+                                    "ResponseNumber": 1,
+                                    "AttemptNumber": 1,
+                                    "ProductVersion": "1.0.0.0"
+                                },
+                                {
+                                    "QuestionNumber": 2,
+                                    "ResponseNumber": 2,
+                                    "AttemptNumber": 2,
+                                    "ProductVersion": "1.0.0.0"
+                                },
+                                {
+                                    "QuestionNumber": 3,
+                                    "ResponseNumber": 3,
+                                    "AttemptNumber": 3,
+                                    "ProductVersion": "1.0.0.0"
+                                }
+                            ]
+                        },
+                        {
+                            "Activity": "RecognizeEverydayWords",
+                            "DataSet": 1,
+                            "Skill": "bird",
+                            "Lesson": "c3fe8440-1676-4147-8888-83ed059d9771",
+                            "LessonBranch": "Main",
+                            "ActivityNode": "f6ac8dd4-8ca5-4663-bcd4-f7eeade29b29",
+                            "DateTime": "2014-09-08T17:12:46.442246-06:00",
+                            "NumPossible": 0,
+                            "NumCorrect": 0,
+                            "Mastered": false
+                        }
+                    ]
+                }
+            ],
+            "ActivitySavedDataCollection": [
+                {
+                    "Activity": "ThemeSong",
+                    "VariableName": "TestData",
+                    "Value": "TestData"
+                },
+                {
+                    "Activity": "TimeToRead",
+                    "VariableName": "InfoText_ScaffoldingLevel",
+                    "Value": "NOT_SET"
+                }
+            ],
+            "StudentLessonStateHistoryV2Collection": [
+                {
+                    "ActivatedRevision": 0,
+                    "AnyBranchEverFailed": false,
+                    "CurrentBranch": "",
+                    "LastBranch": "",
+                    "Lesson": "01d6691f-911f-45b5-b861-778c725b4d98",
+                    "LessonState": "Satisfied",
+                    "PendingBranchOutcome": "",
+                    "SatisfiedReason": "SkippedByGradeLevel",
+                    "LessonStateTransitionReason": "SkippingBasedOnGrade",
+                    "DateTime": "2014-09-08T17:12:39.7157042-06:00"
+                },
+                {
+                    "ActivatedRevision": 0,
+                    "AnyBranchEverFailed": false,
+                    "CurrentBranch": "",
+                    "LastBranch": "",
+                    "Lesson": "d17e51fd-a445-47a1-8145-47d35f45af75",
+                    "LessonState": "Satisfied",
+                    "PendingBranchOutcome": "",
+                    "SatisfiedReason": "SkippedByGradeLevel",
+                    "LessonStateTransitionReason": "SkippingBasedOnGrade",
+                    "DateTime": "2014-09-08T17:12:39.7157042-06:00"
+                }
+            ],
+            "TestInstances": [
+                {
+                    "Lesson": "c3fe8440-1676-4147-8888-83ed059d9771",
+                    "LessonBranch": "Main",
+                    "TestType": "Pretest",
+                    "TimeStarted": "2014-09-08T17:12:44.0948972-06:00",
+                    "TimeCompleted": "2014-09-08T17:12:44.3662592-06:00",
+                    "TestInstanceId": "1",
+                    "TestSectionInstances": [
+                        {
+                            "TestSection": "Basic Vocab 1-5",
+                            "TestQuestionInstances": [
+                                {
+                                    "TestQuestion": "q157",
+                                    "TimeStarted": "2014-09-08T17:12:44.2952474-06:00",
+                                    "TimeCompleted": "2014-09-08T17:12:44.2952474-06:00",
+                                    "TestOptionInstances": [
+                                        {
+                                            "ClickCount": 1,
+                                            "IsSelected": false,
+                                            "ResponseLatency": 5,
+                                            "TestOption": "opt729"
+                                        },
+                                        {
+                                            "ClickCount": 1,
+                                            "IsSelected": true,
+                                            "ResponseLatency": 5,
+                                            "TestOption": "opt730"
+                                        },
+                                        {
+                                            "ClickCount": 1,
+                                            "IsSelected": false,
+                                            "ResponseLatency": 5,
+                                            "TestOption": "opt731"
+                                        },
+                                        {
+                                            "ClickCount": 1,
+                                            "IsSelected": false,
+                                            "ResponseLatency": 5,
+                                            "TestOption": "opt732"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "MdtPredictionValidationCollection": [
+                {
+                    "PredictionValidationFrequency": 20.0,
+                    "MdtPredictionParameters": "GradeID Second, SectionID 39: QID51(0.689895470383,0.310104529617,0.6,0.4);QID52(0.852233676975,0.147766323025,0.6,0.4);QID53(0.90243902439,0.09756097561,0.444444444444,0.555555555556);QID54(0.923875432525,0.076124567475,0.65,0.35);QID58(0.973118279569,0.026881720431,0.153846153846,0.846153846154);QID61(0.844290657439,0.155709342561,0.6,0.4);QID62(0.585365853658,0.414634146342,0.5,0.5);",
+                    "DateTime": "2014-09-08T17:12:44.0908968-06:00",
+                    "Lesson": "c3fe8440-1676-4147-8888-83ed059d9771",
+                    "SequenceNode": "3a6b0d0e-9ab3-484b-b768-92e0a51d2f53",
+                    "TestSection": "Basic Vocab 1-5",
+                    "MdtPredictionResultType": "UncertainForcedValidation",
+                    "GradeLevel": "Second"
+                }
+            ]
+        }
+        
 # Delete Student Data [DELETE]
 
-NOTE: Only the root user is authorized to delete student data. We normally want to keep student data around forever. Typically, only a use case for cleaning up test data would call for deleting student data.
+NOTE: Only ILAdmin users are authorized to delete student data. We normally want to keep student data around forever. Typically, only a use case for cleaning up test data would call for deleting student data.
 
 Should be performed BEFORE deleting the Student itself via management/provisioning API's (DELETE /students/{id})
 
