@@ -107,7 +107,7 @@ To ensure student privacy and to fulfill legal obligations under [FERPA](http://
 Credentials must be exchanged for a bearer token by issuing a request to POST api/token:
 
 - The request must be a `HTTP POST` request.
-- The body of the request must be `grant_type=password&username=XXX&password=YYY`.
+- The body of the request must be `grant_type=password&username=XXX&password=YYY&client_id=ZZZZ[&client_secret=SSSS]`.
 
 ######Example request (Authorization header has been wrapped):
 
@@ -118,7 +118,7 @@ User-Agent: Imagine Learning Unity Player
 Content-Type: application/x-www-form-urlencoded;charset=UTF-8
 Content-Length: 67
 
-grant_type=password&username=demo@imaginelearning.com&password=demo
+grant_type=password&username=demo@imaginelearning.com&password=demo&client_id=SomeClient&client_secret=MySecret
 ```
 
 If the request was formatted correctly, the server will respond with a JSON-encoded payload:
