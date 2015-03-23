@@ -627,7 +627,7 @@ A User resource has the following attributes:
 - `username` (string) Unique name used to login (email address)
 - `firstName` (string) First Name
 - `lastName` (string) Last Name
-- `userType` (string) Type of user. Valid values: "Administrator", "Teacher"
+- `userType` (string) Type of user. Valid values: "Admin", "Teacher"
 - `language` (string) Language.  
 - `userNumber` (string) Unique district or school id for User.  [OPTIONAL]
 - `syncId` (string) Id used in syncing with SIS [OPTIONAL]
@@ -821,7 +821,7 @@ This resource is the collection of all users
               "username": "demouser@imaginelearning.com",
               "firstName": "Susan",
               "lastName": "Preator",
-              "userType": "Administrator",
+              "userType": "Admin",
               "language": "English",
               "userNumber": "",
               "syncId": ""
@@ -848,7 +848,7 @@ This resource is the collection of all users
 | password               | string  | Yes |       | Length 8-256 characters
 | firstName              | string  | Yes |       | Length 1-32 characters
 | lastName               | string  | Yes |       | Length 1-32 characters
-| userType               | string  | Yes |       | Valid values: "Administrator", "Teacher"
+| userType               | string  | Yes |       | Valid values: "Admin", "Teacher"
 | language               | string  | Yes |       | Call GET /WrittenLanguages for valid values
 | organizationId         | string  | Yes |       | Valid organizationId for initial membership
 | userNumber             | string  | No  |       | Length 1-64 characters
@@ -1156,7 +1156,7 @@ This resource represents the list of users in the specified organization
               "username": "demouser@imaginelearning.com",
               "firstName": "Susan",
               "lastName": "Preator",
-              "userType": "Administrator",
+              "userType": "Admin",
               "language": "English",
               "userNumber": "",
               "syncId": ""
@@ -1476,7 +1476,7 @@ This resource represents the list of users in the specified group
               "username": "demouser@imaginelearning.com",
               "firstName": "Susan",
               "lastName": "Preator",
-              "userType": "Administrator",
+              "userType": "Admin",
               "language": "English",
               "userNumber": "",
               "syncId": ""
