@@ -2527,3 +2527,116 @@ Get the list of settings for an organization for viewing/editing by an administr
         }
 
 + Response 202
+
+# Group License Management
+
+## License agreement collection [/organizations/{organization}/licenses]
+
+List or add license agreements for a specific organization
+
+### Get license agreements [GET]
+
++ Response 200 (application/json)
+
+        [
+            { 
+                "id": "0d0429b4-9f6e-4e57-97c4-103ff9d42f32",
+                "quantity": 100, 
+                "start": "2014-08-01T00:00:00Z", 
+                "end": "2015-7-31T00:00:00Z", 
+                "description": "Title 3 licenses with grant money",
+                "available": 0,
+                "reservations" : [
+                    { "id": "28b564bf-8195-440e-b214-d69000d51fb9", "quantity": 25},
+                    { "id": "f72d4a96-a915-4cdf-a68a-7169cfc74293", "quantity": 40}
+                ]
+            },
+            { 
+                "id": "db1e20af-66f5-498f-8f38-4b7c64c348ed",
+                "quantity": 50, 
+                "start": "2015-01-01T00:00:00Z", 
+                "end": "2015-12-31T00:00:00Z", 
+                "description": "Bonus licenses for being a Super School"},
+                "available" : 25,
+                "unusedData": "some data"
+        ]
+
+### Create a new license agreement [POST]
+
+Only the client_id=License can create new license agreements.
+
+| property               | type    | required | default | notes
+|:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
+| quantity               | int     | Yes |       | The number of student licenses
+| start                  | date    | Yes |       | The start date
+| end                    | date    | Yes |       | The end date
+| description            | string  | No  |       | A description of the license agreement for the user
+| reservations           | array   | No  |       | Allocations of licenses to specific child organizations
+| [additional fields]    |         | No  |       | Any additional fields will be stored, but not validated by the server
+
++ Request
+
+        { 
+                "quantity": 10, 
+                "start": "2015-01-01T00:00:00Z", 
+                "end": "2015-3-31T00:00:00Z", 
+                "description": "Demo licenses for 3 month pilot",
+                "extraInfo": "special data",
+                "reservations" : [
+                    { "id": "28b564bf-8195-440e-b214-d69000d51fb9", "quantity": 5},
+                    { "id": "f72d4a96-a915-4cdf-a68a-7169cfc74293", "quantity": 5}
+                ]
+        }
+
++ Response 204
+
+## Specific License Agreement [/organizations/{organization}/licenses/{license}]
+
+### Get specific license agreement [GET]
+
+| property               | type    | required | default | notes
+|:-----------------------|:-------:|:---:|:-----:|:-----------------------------------------------|
+| quantity               | int     | Yes |       | The number of student licenses (or "site" for site licenses)
+| start                  | date    | Yes |       | The start date
+| end                    | date    | Yes |       | The end date
+| description            | string  | No  |       | A description of the license agreement for the user
+| used                   | int     | Yes |       | The number of licenses in use
+| reservations           | array   | No  |       | Allocations of licenses to specific child organizations
+| [additional fields]    |         | No  |       | Any additional fields will be stored, but not validated by the server
+
++ Response 200 (application/json)
+
+        
+        { 
+            "id": "0d0429b4-9f6e-4e57-97c4-103ff9d42f32",
+            "quantity": 100, 
+            "start": "2014-08-01T00:00:00Z", 
+            "end": "2015-7-31T00:00:00Z", 
+            "description": "Title 3 licenses with grant money",
+            "used": 12,
+            "reservations" : [
+                { "id": "28b564bf-8195-440e-b214-d69000d51fb9", "quantity": 25},
+                { "id": "f72d4a96-a915-4cdf-a68a-7169cfc74293", "quantity": 40}
+            ],
+            "extraData": "extra stuff"
+        }
+    
+
+### Update a license agreement [PATCH]
+
+id, quantity, start, end and description can only be updated by the client_id License.  'used' can never be updated.
+
++ Request (application/json)
+
+        { 
+            "reservations" : [
+                { "id": "28b564bf-8195-440e-b214-d69000d51fb9", "quantity": 5}
+            ],
+            "extraData": "different stuff"
+        }
+
++ Response 204
+
+### Delete a license agreement [DELETE]
+
++ Response 204
