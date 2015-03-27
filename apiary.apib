@@ -1119,6 +1119,8 @@ The display starts at offset 0 and limits the display to 10 results per page.
 
 ### Remove student from organization [DELETE]
 
+The student cannot be removed from all organizations.  Call student archive to completely remove a student.
+
 + Parameters
     + orgId (string) ... Organization Id to remove Student from
     + studentId (string) ... Student Id being removed from Organization
@@ -1183,6 +1185,8 @@ This resource represents the list of users in the specified organization
 + Response 202 (application/json)
 
 ### Remove user from organization [DELETE]
+
+The user cannot be removed from all organizations.  Call user delete to completely remove a user.
 
 + Parameters
     + orgId (string) ... Organization Id to remove User from
