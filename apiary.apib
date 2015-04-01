@@ -354,18 +354,15 @@ A Student resource has the following attributes:
 - `password` (string): Password (minimum 4 characters)
 - `firstName` (string): First Name
 - `lastName` (string): Last Name
-- `gender` (string): Male or Female
 - `gradeLevel` (string): Grade Level: PreK, Kinderton, First-Twelfth, Other
 - `firstLanguage`(string): Oral first language
 - `writtenLanguage` (string): Written language used at home
 - `studentNumber` (string): Unique district or school id for Student.  [OPTIONAL]
 - `syncId` (string): Id used in syncing with SIS [OPTIONAL]
 - `sessionTime` (number): Session Time for this student [OPTIONAL]
-
-
-
-+ Parameters
-    + id (string) ... Student Id.
+- `realm` (string): Realm for Single Sign On [OPTIONAL]
+- `ssoid` (string): Single Sign On identifier [OPTIONAL]
+- `preventFromRunningSessions` (bool): Set if student is no longer licensed [OPTIONAL]
 
 + Model (application/hal+json)
 
@@ -421,7 +418,7 @@ To update a Student send a Put Request with updated value(s) for each of the Stu
         }
 
 ### Delete a Student [DELETE]
-NOTE: Only the root user is authorized to delete a Student. We normally want to keep student data around forever. Typically, only a use case for cleaning up test data would call for deleting a Student.
+NOTE: Students should normally be archived, not deleted. Only the root user is authorized to delete a Student. We normally want to keep student data around forever. Typically, only a use case for cleaning up test data would call for deleting a Student.
 
 + Response 204
 
@@ -521,7 +518,7 @@ This resource represents the list of groups for the specified student
           "notifications": {}
         }
 
-## Students Collection [/students{?offset,limit,sortby,desc,details,username,gradelevel,firstname,lastname,search}]
+## Students Collection [/students{?offset,limit,sortby,desc,details,username,gradelevel,firstname,lastname,search,includearchived}]
 
 This resource is the collection of all students that the authenticated user has rights to.
 
@@ -538,6 +535,7 @@ This resource is the collection of all students that the authenticated user has 
     + lastname = `` (optional, string, ``)...Filter results by exact match on `LastName` field
     + search = `` (optional, string, ``)...Filter results by case insensitive partial match on `FirstName`, `LastName`, or `Username` fields.
       Multiple search terms may be separated by spaces.
+    + includearchived = `false` (optional, bool, `false`)...Return archived students in the results (must be an ILAdmin)
 
 + Response 200 (application/json)
 
@@ -698,7 +696,7 @@ To update a User send a Put Request with updated value(s) for each of the User r
           "notifications": {}
         }
         
-## User's Organizations Collection [/users/{id}/organizations{?offset,limit,sortby,desc,details}]
+## User's Organizations Collection [/users/{id}/organizations{?offset,limit,sortby,desc,details,includearchived}]
 
 This resource represents the list of organizations for the specified user
 
@@ -711,6 +709,7 @@ This resource represents the list of organizations for the specified user
     + sortby = `Name` (optional, string, `Name`)...Sort field for results
     + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
     + details = `false` (optional, bool,   `false`)...Return extra details of organization (groups, organizations, students, users)
+    + includearchived = `false` (optional, bool, `false`)...Return archived organizations in the results (must be an ILAdmin)
 
 + Response 200 (application/json)
 
@@ -753,7 +752,7 @@ This resource represents the list of organizations for the specified user
 
 This resource represents the list of groups for the specified user
 
-### Retrieve Groups specified User [GET]
+### Retrieve Groups for a specified User [GET]
 
 + Parameters
     + id (string) ... Id of the User
@@ -791,6 +790,112 @@ This resource represents the list of groups for the specified user
           }
           "notifications": {}
         }
+
+## User's Students Collection [/users/{id}/students{?limit,offset,sortby,desc,details,includearchived}]
+
+### Retrieve all Students under the specified User's scope of influence [GET]
++ Parameters
+    + id (string) ... Id of the User
+    + offset = `0` (optional, number, `10`)...The number of results to skip
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
+    + sortby = `Name` (optional, string, `Name`)...Sort field for results
+    + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
+    + details = `false` (optional, bool,   `false`)...Return extra details of group (contained students and owning users)
+    + includearchived = `false` (optional, bool, `false`)...Return archived students in the results (must be an ILAdmin)
+
++ Response 200 (application/json)
+
+        {
+          "metadata": {},
+          "students":
+          {
+            [{
+              "id": "4176a86d-5ef3-4898-a350-8b80ddc09a49",
+              "username": "demostudent@imaginelearning.com",
+              "password": "1234",
+              "firstName": "Madyson",
+              "lastName": "Cram",
+              "gender": "Male",
+              "gradeLevel": "Second",
+              "firstLanguage": "English",
+              "writtenLanguage": "English",
+              "studentNumber": "",
+              "syncId": "",
+              "sessionTime": 30
+            }, {
+              "id": "3a617f40-4748-4c32-a8c3-5d6282c6842c",
+              "username": "demostudent2@imaginelearning.com",
+              "password": "5678",
+              "firstName": "Matt",
+              "lastName": "Lund",
+              "gender": "Male",
+              "gradeLevel": "PreK",
+              "firstLanguage": "Mandarin",
+              "writtenLanguage": "Chinese Simplified",                
+              "studentNumber": "",
+              "syncId": ""
+            }
+          }
+          "notifications": {}
+        }
+
+### Retrieve headers including X-Total-Count of Students under the specified User's scope of influence [HEAD]
++ Parameters
+    + id (string) ... Id of the User
++ Response 200 (application/json)
+
+## User's Assigned Students Collection [/users/{id}/assignedstudents{?limit,offset,sortby,desc,details,includearchived}]
+
+### Retrieve Students assigned directly to the specified User [GET]
++ Parameters
+    + id (string) ... Id of the User
+    + offset = `0` (optional, number, `10`)...The number of results to skip
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
+    + sortby = `Name` (optional, string, `Name`)...Sort field for results
+    + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
+    + details = `false` (optional, bool,   `false`)...Return extra details of group (contained students and owning users)
+    + includearchived = `false` (optional, bool, `false`)...Return archived students in the results (must be an ILAdmin)
+
++ Response 200 (application/json)
+
+        {
+          "metadata": {},
+          "students":
+          {
+            [{
+              "id": "4176a86d-5ef3-4898-a350-8b80ddc09a49",
+              "username": "demostudent@imaginelearning.com",
+              "password": "1234",
+              "firstName": "Madyson",
+              "lastName": "Cram",
+              "gender": "Male",
+              "gradeLevel": "Second",
+              "firstLanguage": "English",
+              "writtenLanguage": "English",
+              "studentNumber": "",
+              "syncId": "",
+              "sessionTime": 30
+            }, {
+              "id": "3a617f40-4748-4c32-a8c3-5d6282c6842c",
+              "username": "demostudent2@imaginelearning.com",
+              "password": "5678",
+              "firstName": "Matt",
+              "lastName": "Lund",
+              "gender": "Male",
+              "gradeLevel": "PreK",
+              "firstLanguage": "Mandarin",
+              "writtenLanguage": "Chinese Simplified",                
+              "studentNumber": "",
+              "syncId": ""
+            }
+          }
+          "notifications": {}
+        }
+
+### Retrieve headers including X-Total-Count of Students under the specified User's scope of influence [HEAD]
++ Parameters
+    + id (string) ... Id of the User
++ Response 200 (application/json)
 
 ## Users Collection [/users{?offset,limit,sortby,desc,details,username,firstname,lastname,search}]
 
@@ -896,9 +1001,7 @@ An Organization reprents a school, district, sub-district, or similar grouping. 
 - `organizationNumber` (string) Unique state/district id for Organization.
 - `syncId` (string) Id used in syncing with SIS
 - `authenticationSiteCode` (string) Students' authentication and searching stops at this organization.
-
-+ Parameters
-    + id (string) ... Organization Id.
+- `archived` (bool) Organization has been archived
 
 + Model (application/hal+json)
 
@@ -954,13 +1057,24 @@ To update an Organization send a Put Request with updated value(s) for each of t
         }
 
 ### Delete an Organization [DELETE]
+Only an ILAdmin is allowed to delete an organization.  Other users may call archive on an organization.
 + Response 200 (application/json)
 
         {
           "notifications": {}
         }
 
-## Organization's Child-Organization Collection [/organizations/{id}/organizations{?offset,limit,sortby,desc,details,name,sitecode,search}]
+## Archive an Organization [/organizations/{id}/archive]
+### Archive an Organization [PUT]
+To archive an Organization send a Put Request with the Organization Id.  Authenticated user must be an ILAdmin.
+
++ Response 200
+    
+        {
+          "notifications": {}
+        }
+
+## Organization's Child-Organization Collection [/organizations/{id}/organizations{?offset,limit,sortby,desc,details,name,sitecode,search,includearchived}]
 
 This resource represents the list of child organizations for the specified organization
 
@@ -977,6 +1091,7 @@ This resource represents the list of child organizations for the specified organ
     + sitecode = `` (optional, string, ``)...Filter results by exact match on `AuthenticationSiteCode` field
     + search = `` (optional, string, ``)...Filter results by case insensitive partial match on `Name` or `AuthenticationSiteCode` fields.
       Multiple search terms may be separated by spaces.
+    + includearchived = `false` (optional, bool, `false`)...Return archived organizations in the results (must be an ILAdmin)
 
 + Response 200 (application/json)
 
@@ -1051,7 +1166,7 @@ This resource represents the list of groups for the specified organization
         }
         
 
-## Organization's Students Collection [/organizations/{orgId}/students/{studentId}{?offset,limit,sortby,desc,details,username,gradelevel,firstname,lastname,search}]
+## Organization's Students Collection [/organizations/{orgId}/students/{studentId}{?offset,limit,sortby,desc,details,username,gradelevel,firstname,lastname,search,includearchived}]
 
 This resource represents the list of students in the specified organization.
 
@@ -1073,6 +1188,7 @@ The display starts at offset 0 and limits the display to 10 results per page.
     + lastname = `` (optional, string, ``)...Filter results by exact match on `LastName` field
     + search = `` (optional, string, ``)...Filter results by case insensitive partial match on `FirstName`, `LastName`, or `Username` fields.
       Multiple search terms may be separated by spaces.
+    + includearchived = `false` (optional, bool, `false`)...Return archived students in the results (must be an ILAdmin)
 
 + Response 200 (application/json)
 
@@ -1195,7 +1311,7 @@ The user cannot be removed from all organizations.  Call user delete to complete
 + Response 202 (application/json)
 
 
-## Organizations Collection [/organizations{?offset,limit,sortby,desc,details,name,sitecode,search}]
+## Organizations Collection [/organizations{?offset,limit,sortby,desc,details,name,sitecode,search,includearchived}]
 
 This resource is the collection of all Organizations
 
@@ -1211,6 +1327,7 @@ This resource is the collection of all Organizations
     + sitecode = `` (optional, string, ``)...Filter results by exact match on `AuthenticationSiteCode` field
     + search = `` (optional, string, ``)...Filter results by case insensitive partial match on `Name` or `AuthenticationSiteCode` fields.
       Multiple search terms may be separated by spaces.
+    + includearchived = `false` (optional, bool, `false`)...Return archived organizations in the results (must be an ILAdmin)
 
 + Response 200 (application/json)
 
@@ -1378,7 +1495,7 @@ To update a Group send a Put Request with updated value(s) for each of the Group
           "notifications": {}
         }
 
-## Group's Student Collection [/groups/{groupId}/students/{studentId}{?offset,limit,sortby,desc,details,username,gradelevel,firstname,lastname,search}]
+## Group's Student Collection [/groups/{groupId}/students/{studentId}{?offset,limit,sortby,desc,details,username,gradelevel,firstname,lastname,search,includearchived}]
 
 This resource represents the list of students in the specified group
 
@@ -1397,6 +1514,7 @@ This resource represents the list of students in the specified group
     + lastname = `` (optional, string, ``)...Filter results by exact match on `LastName` field
     + search = `` (optional, string, ``)...Filter results by case insensitive partial match on `FirstName`, `LastName`, or `Username` fields.
       Multiple search terms may be separated by spaces.
+    + includearchived = `false` (optional, bool, `false`)...Return archived students in the results (must be an ILAdmin)
 
 + Response 200 (application/json)
 
