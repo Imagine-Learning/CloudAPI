@@ -525,7 +525,7 @@ This resource is the collection of all students that the authenticated user has 
 ### List all Students [GET]
 + Parameters
     + offset = `0` (optional, number, `10`)...The number of results to skip
-    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve. If set to -1 returns all available results.
     + sortby = `Username` (optional, string, `Username`)...Sort field for results
     + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
     + details = `false` (optional, bool,   `false`)...Return extra details of student (groups and organizations)
@@ -536,6 +536,7 @@ This resource is the collection of all students that the authenticated user has 
     + search = `` (optional, string, ``)...Filter results by case insensitive partial match on `FirstName`, `LastName`, or `Username` fields.
       Multiple search terms may be separated by spaces.
     + includearchived = `false` (optional, bool, `false`)...Return archived students in the results (must be an ILAdmin)
+    + Ids = `does not exist` (optional, list[string], ``)...HEADER, if set returns only items specified by the id's in the list.
 
 + Response 200 (application/json)
 
@@ -905,7 +906,7 @@ This resource is the collection of all users
 
 + Parameters
     + offset = `0` (optional, number, `10`)...The number of results to skip
-    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve. If set to -1 returns all available results.
     + sortby = `Username` (optional, string, `Username`)...Sort field for results
     + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
     + details = `false` (optional, bool,   `false`)...Return extra details of user (groups and organizations)
@@ -914,6 +915,7 @@ This resource is the collection of all users
     + lastname = `` (optional, string, ``)...Filter results by exact match on `LastName` field
     + search = `` (optional, string, ``)...Filter results by case insensitive partial match on `FirstName`, `LastName`, or `Username` fields.
       Multiple search terms may be separated by spaces.
+    + Ids = `does not exist` (optional, list[string], ``)...HEADER, if set returns only items specified by the id's in the list.
 
 + Response 200 (application/json)
 
@@ -1319,7 +1321,7 @@ This resource is the collection of all Organizations
 
 + Parameters
     + offset = `0` (optional, number, `10`)...The number of results to skip
-    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve. If set to -1 returns all available results.
     + sortby = `Name` (optional, string, `Name`)...Sort field for results
     + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
     + details = `false` (optional, bool,   `false`)...Return extra details of organization (groups, organizations, students, users)
@@ -1328,6 +1330,7 @@ This resource is the collection of all Organizations
     + search = `` (optional, string, ``)...Filter results by case insensitive partial match on `Name` or `AuthenticationSiteCode` fields.
       Multiple search terms may be separated by spaces.
     + includearchived = `false` (optional, bool, `false`)...Return archived organizations in the results (must be an ILAdmin)
+    + Ids = `does not exist` (optional, list[string], ``)...HEADER, if set returns only items specified by the id's in the list.
 
 + Response 200 (application/json)
 
@@ -1641,7 +1644,7 @@ This resource is the collection of groups owned by the current user.
 
 + Parameters
     + offset = `0` (optional, number, `10`)...The number of results to skip
-    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve.
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve. If set to -1 returns all available results.
     + sortby = `Name` (optional, string, `Name`)...Sort field for results
     + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
     + details = `false` (optional, bool,   `false`)...Return extra details of group (contained students and owning users)
@@ -1649,7 +1652,8 @@ This resource is the collection of groups owned by the current user.
     + sectionname = `` (optional, string, ``)...Filter results by exact match on `SectionName` field
     + groupnumber = `` (optional, string, ``)...Filter results by exact match on `GroupNumber` field
     + search = `` (optional, string, ``)...Filter results by case insensitive partial match on `Name`, `SectionName`, or `GroupNumber` fields.
-      Multiple search terms may be separated by spaces.
+        Multiple search terms may be separated by spaces.
+    + Ids = `does not exist` (optional, list[string], ``)...HEADER, if set returns only items specified by the id's in the list.
 
 + Response 200 (application/json)
 
