@@ -2554,7 +2554,7 @@ Provides a simples key/value store for string data
 
 ## Get Settings with Sitecode [/settings?sitecode={sitecode}&version={version}&platform={platform}]
 
-Get client settings (mediaservers, precache option, etc) from the server, no authentication required.
+Get client settings (mediaservers, CachingMode, etc) from the server, no authentication required.
 
 + Parameters
     + sitecode (string) ... The site code the client devices has been configured to use
@@ -2572,8 +2572,8 @@ Get client settings (mediaservers, precache option, etc) from the server, no aut
                     "urls": ["http://10.10.50.28:8080/media", "http://10.10.50.10:8080/media"]
                 }
             ],
-            "precache": "PreCache",
-            "debugLogging" : false
+            "CachingMode": "PreCache",
+            "DebugLogging" : false
         }  
         
 + Response 204
@@ -2598,7 +2598,7 @@ Get client settings (mediaservers, precache option, etc) from the server.
                     "urls": ["http://10.10.50.28:8080/media", "http://10.10.50.10:8080/media"]
                 }
             ],
-            "precache": "PreCache",
+            "CachingMode": "PreCache",
             "debugLogging" : false
         }    
         
@@ -2623,7 +2623,7 @@ Get the list of settings for an organization for viewing/editing by an administr
                     "urls": ["http://10.10.50.28:8080/media", "http://10.10.50.10:8080/media"]
                 }
             ],
-            "precache": "PreCache"
+            "CachingMode": "PreCache"
         }
 
 + Response 204
@@ -2639,7 +2639,7 @@ Get the list of settings for an organization for viewing/editing by an administr
                     "urls": ["http://10.10.50.28:8080/media", "http://10.10.50.10:8080/media"]
                 }
             ],
-            "precache": "PreCache"
+            "CachingMode": "PreCache"
         }
 
 + Response 202
@@ -2649,7 +2649,7 @@ Get the list of settings for an organization for viewing/editing by an administr
 + Request 
 
         {
-            "precache": "PreCache"
+            "CachingMode": "PreCache"
         }
 
 + Response 202
