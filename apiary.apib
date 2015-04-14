@@ -2620,7 +2620,7 @@ Get the list of settings for an organization for viewing/editing by an administr
             "mediaservers": [
                 {
                     "priority": 1,
-                    "urls": ["http://10.10.50.28:8080/media", "http://10.10.50.10:8080/media"]
+                    "ids": ["ff72258d-8244-4d3f-975a-cca5e78e23bc","32ae40bc-6a65-41cd-a02b-3bc0b4f9d49b"]
                 }
             ],
             "CachingMode": "PreCache"
@@ -2636,7 +2636,7 @@ Get the list of settings for an organization for viewing/editing by an administr
             "mediaservers": [
                 {
                     "priority": 1,
-                    "urls": ["http://10.10.50.28:8080/media", "http://10.10.50.10:8080/media"]
+                    "ids": ["ff72258d-8244-4d3f-975a-cca5e78e23bc","32ae40bc-6a65-41cd-a02b-3bc0b4f9d49b"]
                 }
             ],
             "CachingMode": "PreCache"
@@ -2653,6 +2653,32 @@ Get the list of settings for an organization for viewing/editing by an administr
         }
 
 + Response 202
+
+## Get Media Servers for sitecode [/mediaservers?sitecode={sitecode}]
+
+Get broadcasting media servers that are registered to the given sitecode.
+
++ Parameters
+    + sitecode (string) ... The site code to search for
+
+### Get media servers with sitecode [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id":"ff72258d-8244-4d3f-975a-cca5e78e23bc",
+                "urls":["http://10.10.50.28/media"],
+                "name":"TESTCDN",
+                "lastContact":"2015-04-14T13:20:12Z"
+            },
+            {
+                "id":"32ae40bc-6a65-41cd-a02b-3bc0b4f9d49b",
+                "urls":["http://10.10.50.10:8080/media","http://169.254.75.39:8080/media"],
+                "name":"0315-107284-01",
+                "lastContact":"2015-04-14T12:56:35Z"
+            }
+        ]
 
 # Group License Management
 
