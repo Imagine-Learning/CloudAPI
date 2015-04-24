@@ -1,6 +1,6 @@
 FORMAT: 1A
 
-# Imagine Learning Cloud API v1 (beta)
+# Imagine Learning Cloud API v1
 
 # Group Overview
 
@@ -1064,6 +1064,18 @@ Only an ILAdmin is allowed to delete an organization.  Other users may call arch
 
         {
           "notifications": {}
+        }
+
+## Retrieve an Organization's Usage Goals [/organizations/{id}/usagegoals]
+### Retrieve an Organization's Usage Goals [GET]
+Returns the current goal set for an organization (may be 0 to indicate that the inherited goal should be used),
+and the inherited goal value (which is not used when the current goal value is set).
+Note that the usage goal for the root organization is considered the "recommended" usage goal for all organizations.
++ Response 200 (application/json)
+
+        {
+          "CurrentUsageGoal": { "Date": "2015-04-24T21:18:05.676Z", "Goal": 111 },
+          "InheritedUsageGoal": { "Date": "2014-09-01T00:00:00Z", "Goal": 100 }
         }
 
 ## Archive an Organization [/organizations/{id}/archive]
