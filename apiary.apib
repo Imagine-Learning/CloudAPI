@@ -475,6 +475,16 @@ This resource represents the list of organizations for the specified student
           "notifications": {}
         } 
 
+## Set Student's Organizations Collection [/students/{studentId}/setOrgs]
+
+This resource allows to edit student's organization collection
+
+### Set Student's Groups [PUT]
+The operation adds the student to the specified organizations and removes him from all other organizations he belonged to. An array of desired organization Ids should be sent with the Put request.
++ Parameters
+    + studentId (string) ... Id of the Student
++ Response 204
+
 ## Student's Groups Collection [/students/{id}/groups{?offset,limit,sortby,desc,details}]
 
 This resource represents the list of groups for the specified student
@@ -517,6 +527,17 @@ This resource represents the list of groups for the specified student
           }
           "notifications": {}
         }
+        
+## Set Student's Groups Collection [/students/{studentId}/setGroups]
+
+This resource allows to edit student's group collection
+
+### Set Student's Groups [PUT]
+The operation adds the student to the specified groups and removes him from all other groups he belonged to. If the new groups belong to different organizations than the ones the student belonged to, the student's organizations are changed accordingly. An array of desired group Ids should be sent with the Put request.
++ Parameters
+    + studentId (string) ... Id of the Student
++ Response 204
+
 
 ## Students Collection [/students{?offset,limit,sortby,desc,details,username,gradelevel,firstname,lastname,search,includearchived}]
 
