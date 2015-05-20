@@ -594,6 +594,61 @@ This resource is the collection of all students that the authenticated user has 
           }
           "notifications": {}
         }
+        
+## Direct Students Collection [/students/mine{?offset,limit,sortby,desc,details,username,gradelevel,firstname,lastname,search,includearchived}]
+
+This resource is the collection of all students that are in the groups that user belongs to.
+
+### List all direct Students [GET]
++ Parameters
+    + offset = `0` (optional, number, `10`)...The number of results to skip
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve. If set to -1 returns all available results.
+    + sortby = `Username` (optional, string, `Username`)...Sort field for results
+    + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
+    + details = `false` (optional, bool,   `false`)...Return extra details of student (groups and organizations)
+    + username = `` (optional, string, ``)...Filter results by exact match on `Username` field
+    + gradelevel = `` (optional, string, ``)...Filter results by exact match on `GradeLevel` field
+    + firstname = `` (optional, string, ``)...Filter results by exact match on `FirstName` field
+    + lastname = `` (optional, string, ``)...Filter results by exact match on `LastName` field
+    + search = `` (optional, string, ``)...Filter results by case insensitive partial match on `FirstName`, `LastName`, or `Username` fields.
+      Multiple search terms may be separated by spaces.
+    + includearchived = `false` (optional, bool, `false`)...Return archived students in the results (must be an ILAdmin)
+
++ Response 200 (application/json)
+
+        {
+          "metadata": {},
+          "students":
+          {
+            [{
+              "id": "4176a86d-5ef3-4898-a350-8b80ddc09a49",
+              "username": "demostudent@imaginelearning.com",
+              "password": "1234",
+              "firstName": "Madyson",
+              "lastName": "Cram",
+              "gender": "Male",
+              "gradeLevel": "Second",
+              "firstLanguage": "English",
+              "writtenLanguage": "English",
+              "studentNumber": "",
+              "syncId": "",
+              "sessionTime": 30
+            }, {
+              "id": "3a617f40-4748-4c32-a8c3-5d6282c6842c",
+              "username": "demostudent2@imaginelearning.com",
+              "password": "5678",
+              "firstName": "Matt",
+              "lastName": "Lund",
+              "gender": "Male",
+              "gradeLevel": "PreK",
+              "firstLanguage": "Mandarin",
+              "writtenLanguage": "Chinese Simplified",                
+              "studentNumber": "",
+              "syncId": ""
+            }
+          }
+          "notifications": {}
+        }
 
 
 ### Create student [POST]
@@ -1717,6 +1772,51 @@ This resource is the collection of groups owned by the current user.
           "notifications": {}
         }
 
+## Direct Groups Collection [/groups/mine{?limit,offset,sortby,desc,details,name,sectionname,groupnumber,search}]
+
+This resource is the collection of all groups that the authenticated user belongs to.
+
+### List all direct Groups [GET]
++ Parameters
+    + offset = `0` (optional, number, `10`)...The number of results to skip
+    + limit = `10` (optional, number, `100`)...The maximum number of results to retrieve. If set to -1 returns all available results.
+    + sortby = `Name` (optional, string, `Name`)...Sort field for results
+    + desc = `false` (optional, bool,   `false`)...Descending sort order of sortby field
+    + details = `false` (optional, bool,   `false`)...Return extra details of group (contained students and owning users)
+    + name = `` (optional, string, ``)...Filter results by exact match on `Name` field
+    + sectionname = `` (optional, string, ``)...Filter results by exact match on `SectionName` field
+    + groupnumber = `` (optional, string, ``)...Filter results by exact match on `GroupNumber` field
+    + search = `` (optional, string, ``)...Filter results by case insensitive partial match on `Name`, `SectionName`, or `GroupNumber` fields.
+        Multiple search terms may be separated by spaces.
+
++ Response 200 (application/json)
+
+        {
+          "metadata": {},
+          "groups":
+          {
+            [{
+              "id": "5687fc7a-dccc-45b7-8be5-bf9533e37af3",
+              "name": "First Grade",
+              "groupType": "ILE",
+              "printOption": "All",
+              "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+              "sectionName": "",
+              "groupNumber": "",
+              "syncId": ""
+            }, {
+              "id": "0a0b13c0-8315-43f3-bc5a-033d0dd340ac",
+              "name": "After School",
+              "groupType": "ILS",
+              "printOption": "Partial",
+              "organizationId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
+              "sectionName": "",
+              "groupNumber": "",
+              "syncId": ""
+            }
+          }
+          "notifications": {}
+        }
 
 ### Create Group [POST]
 
