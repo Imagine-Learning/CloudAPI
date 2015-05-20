@@ -1753,7 +1753,7 @@ This resource is the collection of groups owned by the current user.
 
 # Group Sequencing
 
-## Activity [/activities{?product,clientActivitySupport}]
+## Activity [/activities{?product,productRevision,clientActivitySupport}]
 
 An Activity resource represents the next activity selected for the Student to play
 
@@ -1768,6 +1768,7 @@ The selectedContent construct in the response instructs the client what should b
 
 + Parameters
     + product = `` (required, string, `ILE`)...The unique identifer (or Name) of the Product to run.
+    + productRevision = `` (optional, string, `7`)...The revision of the Product to run; for Testing; overrides revision that would typically be identified by the Student's promotion group (e.g. Production, or DevPartner)
     + clientActivitySupport = `` (optional, number, `123456789`)...The hash/Id of the set of supported Activities and DataSets. Omit the value (or use the value 0) to imply client support of all Activities and DataSets known to the server.
 
 + Response 200 (application/json)
@@ -1808,6 +1809,8 @@ The selectedContent construct in the response instructs the client what should b
 ## Activity [/activities]
 
 ### Process completed Activity [PUT]
+
+The content of the PUT is a construct specifying what "activity" and "dataSetNum" was just played, in what "product" (and optional "roductRevision") context, "elapsedTime" spent in the activity, and applicable results ("Scores", "TestSectionInstance", etc.)
 
 + Request (application/json)
 
@@ -2323,6 +2326,8 @@ Student recordings made in some activities
 
 # Store Recordings Metadata [POST]
 
+The content is a construct specifying what "activity" and "dataSetNum" made the recordings, in what "product" (and optional "productRevision") context, and a "name" for each of "recordingDatas". The response is a construct including server-assigned "recordingIds" in "recordingDatas" order.
+
 + Request (application/json)
 
         {
@@ -2330,9 +2335,9 @@ Student recordings made in some activities
             "activity": "DecodableBooks",
             "dataSetNum": 1,
             "recordingDatas": [
-            {
-                "name": "TestRecording"
-            }
+                {
+                    "name": "TestRecording"
+                }
             ]
         }
 
