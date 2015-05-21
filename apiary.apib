@@ -868,6 +868,16 @@ This resource represents the list of groups for the specified user
           "notifications": {}
         }
 
+## Set Users's Groups Collection [/users/{userId}/setGroups]
+
+This resource allows to edit users's group collection
+
+### Set Users's Groups [PUT]
+The operation adds the user to the specified groups and removes him from all other groups he belonged to. If the new groups belong to different organizations than the ones the user belonged to, the users's organizations are changed accordingly. An array of desired group Ids should be sent with the Put request.
++ Parameters
+    + userId (string) ... Id of the User
++ Response 204
+
 ## User's Students Collection [/users/{id}/students{?limit,offset,sortby,desc,details,includearchived}]
 
 ### Retrieve all Students under the specified User's scope of influence [GET]
