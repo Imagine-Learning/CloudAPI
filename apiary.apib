@@ -1094,6 +1094,7 @@ An Organization reprents a school, district, sub-district, or similar grouping. 
 - `mergedUsageGoals` (??)
 - `mergedYearlyGoalsInHours` (??)
 - `schoolYearSessions` (??)
+- `restrictStudentAccessTime` (json) Only allow students to login during this time range (24 hour clock, IANA timezone list: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 
 + Model (application/hal+json)
 
@@ -1108,6 +1109,11 @@ An Organization reprents a school, district, sub-district, or similar grouping. 
             "licenseCap": 50,
             "organizationNumber": "",
             "syncId", ""
+            "restrictStudentAccessTime": {
+                "start": "8:00",
+                "end":"15:00",
+                "timezone":"US/Mountain"
+            }
           }
           "notifications": {}
         }
