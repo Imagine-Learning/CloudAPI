@@ -475,7 +475,7 @@ This resource represents the list of organizations for the specified student
           "notifications": {}
         } 
 
-## Set Student's Organizations Collection [/students/{studentId}/setOrgs]
+## Set Student's Organizations Collection [/students/{studentId}/orgs]
 
 This resource allows to edit student's organization collection
 
@@ -528,14 +528,11 @@ This resource represents the list of groups for the specified student
           "notifications": {}
         }
         
-## Set Student's Groups Collection [/students/{studentId}/setGroups]
-
-This resource allows to edit student's group collection
 
 ### Set Student's Groups [PUT]
 The operation adds the student to the specified groups and removes him from all other groups he belonged to. If the new groups belong to different organizations than the ones the student belonged to, the student's organizations are changed accordingly. An array of desired group Ids should be sent with the Put request.
 + Parameters
-    + studentId (string) ... Id of the Student
+    + id (string) ... Id of the Student
 + Response 204
 
 
@@ -825,7 +822,7 @@ This resource represents the list of organizations for the specified user
           "notifications": {}
         }    
         
-## Set User's Organizations Collection [/users/{userId}/setOrgs]
+## Set User's Organizations Collection [/users/{userId}/orgs]
 
 This resource allows to edit users's organization collection
 
@@ -878,14 +875,10 @@ This resource represents the list of groups for the specified user
           "notifications": {}
         }
 
-## Set Users's Groups Collection [/users/{userId}/setGroups]
-
-This resource allows to edit users's group collection
-
 ### Set Users's Groups [PUT]
 The operation adds the user to the specified groups and removes him from all other groups he belonged to. If the new groups belong to different organizations than the ones the user belonged to, the users's organizations are changed accordingly. An array of desired group Ids should be sent with the Put request.
 + Parameters
-    + userId (string) ... Id of the User
+    + id (string) ... Id of the User
 + Response 204
 
 ## User's Students Collection [/users/{id}/students{?limit,offset,sortby,desc,details,includearchived}]
