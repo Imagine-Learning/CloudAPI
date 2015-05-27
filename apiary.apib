@@ -1081,18 +1081,19 @@ An Organization reprents a school, district, sub-district, or similar grouping. 
 - `id` (string) Unique Organization identifier [Assigned by API when User is created]
 - `name` (string) Name of the Organization
 - `organizationType` (string) Type of Organization
-- `address` (string) Street address
-- `address2` (string) Street address 2 [OPTIONAL]
-- `city` (string) City
-- `state` (string) State or Province, fully spelled out
-- `zip` (string) Zip Code 
-- `country` (string) [ISO 3166-1 alpha-3 Country Code](https://en.wikipedia.org/wiki/ISO_3166-1)
 - `parentId` (string) Id of the parent organization of this organization
 - `licenseCap` (number) Number of licenses organization is limited to [OPTIONAL - ommission indicates no cap on licenses]
 - `organizationNumber` (string) Unique state/district id for Organization.
 - `syncId` (string) Id used in syncing with SIS
 - `authenticationSiteCode` (string) Students' authentication and searching stops at this organization.
+- `netSuiteId` (string) Id used in syncing with NetSuite
 - `archived` (bool) Organization has been archived
+- `preventNewStudentSessions` (bool) Prevent any students who have not logged in before from running (due to license abuse)
+- `usageGoal` (??)
+- `yearlyGoalInHours` (??)
+- `mergedUsageGoals` (??)
+- `mergedYearlyGoalsInHours` (??)
+- `schoolYearSessions` (??)
 
 + Model (application/hal+json)
 
@@ -1103,11 +1104,6 @@ An Organization reprents a school, district, sub-district, or similar grouping. 
             "id": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
             "organizationType" : "School",
             "name": "Imagine Learning Academy",
-            "address": "191 River Park Dr.",
-            "city": "Provo",
-            "state": "Utah",
-            "zip": "84604",
-            "country": "USA",
             "parentId": "00000000-0000-0000-0000-000000000000",
             "licenseCap": 50,
             "organizationNumber": "",
@@ -1206,11 +1202,6 @@ This resource represents the list of child organizations for the specified organ
               "id": "6f587521-1dd4-431d-ad91-4c27c5f32776",
               "organizationType" : "School",
               "name": "Anderton Academy",
-              "address": "1100 Samson Trl",
-              "city": "McCall",
-              "state": "Idaho",
-              "zip": "83638",
-              "country": "USA",
               "parentId": "9fad4cfd-f669-4cc7-a38d-275d033eb7bc",
               "licenseCap": 50,
               "organizationNumber": "",
