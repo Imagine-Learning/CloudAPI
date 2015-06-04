@@ -526,7 +526,7 @@ This resource represents the list of groups for the specified student
         
 
 ### Set Student's Groups [PUT]
-The operation adds the student to the specified groups and removes him from all other groups he belonged to. If the new groups belong to different organizations than the ones the student belonged to, the student's organizations are changed accordingly. An array of desired group Ids should be sent with the Put request.
+The operation adds the student to the specified groups and removes him from all other groups he belonged to. If the new groups belong to different organizations than the ones the student belonged to, the student is added to new organizations. An array of desired group Ids should be sent with the Put request.
 + Parameters
     + id (string) ... Id of the Student
 + Response 204
