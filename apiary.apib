@@ -475,8 +475,8 @@ This resource represents the list of organizations for the specified student
           "notifications": {}
         } 
 
-### Set Student's Groups [PUT]
-The operation adds the student to the specified organizations and removes him from all other organizations he belonged to. An array of desired organization Ids should be sent with the Put request.
+### Set Student's Organizations [PUT]
+The operation adds the student to the specified organizations. An array of desired organization Ids should be sent with the Put request.
 + Parameters
     + id (string) ... Id of the Student
 + Response 204
@@ -820,7 +820,7 @@ This resource represents the list of organizations for the specified user
         
 
 ### Set User's Organizations [PUT]
-The operation adds the user to the specified organizations and removes him from all other organizations he belonged to. An array of desired organization Ids should be sent with the Put request.
+The operation adds the user to the specified organizations. An array of desired organization Ids should be sent with the Put request.
 + Parameters
     + id (string) ... Id of the User
 + Response 204
@@ -869,7 +869,7 @@ This resource represents the list of groups for the specified user
         }
 
 ### Set Users's Groups [PUT]
-The operation adds the user to the specified groups and removes him from all other groups he belonged to. If the new groups belong to different organizations than the ones the user belonged to, the users's organizations are changed accordingly. An array of desired group Ids should be sent with the Put request.
+The operation adds the user to the specified groups and removes him from all other groups he belonged to. If the new groups belong to different organizations than the ones the user belonged to, the user is added to new organizations. An array of desired group Ids should be sent with the Put request.
 + Parameters
     + id (string) ... Id of the User
 + Response 204
