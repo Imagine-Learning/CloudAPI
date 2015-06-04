@@ -475,14 +475,10 @@ This resource represents the list of organizations for the specified student
           "notifications": {}
         } 
 
-## Set Student's Organizations Collection [/students/{studentId}/orgs]
-
-This resource allows to edit student's organization collection
-
 ### Set Student's Groups [PUT]
 The operation adds the student to the specified organizations and removes him from all other organizations he belonged to. An array of desired organization Ids should be sent with the Put request.
 + Parameters
-    + studentId (string) ... Id of the Student
+    + id (string) ... Id of the Student
 + Response 204
 
 ## Student's Groups Collection [/students/{id}/groups{?offset,limit,sortby,desc,details}]
@@ -822,14 +818,11 @@ This resource represents the list of organizations for the specified user
           "notifications": {}
         }    
         
-## Set User's Organizations Collection [/users/{userId}/orgs]
 
-This resource allows to edit users's organization collection
-
-### Set Student's Groups [PUT]
+### Set User's Organizations [PUT]
 The operation adds the user to the specified organizations and removes him from all other organizations he belonged to. An array of desired organization Ids should be sent with the Put request.
 + Parameters
-    + userId (string) ... Id of the User
+    + id (string) ... Id of the User
 + Response 204
 
 ## User's Groups Collection [/users/{id}/groups{?limit,offset,sortby,desc,details}]
