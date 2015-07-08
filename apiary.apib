@@ -2007,6 +2007,16 @@ Operations on underlying student data store
 + Parameters
     + id (string) ... Student Id.
 
+# Query operations allowed on student data [OPTIONS]
+
+NOTE: Only ILAdmin users are authorized to query operations for student data. Typically, only internal tools or tests would need to query operations allowed for student data.
+
++ Response 200 (application/json)
+
+    + Headers
+            
+            Allow: OPTIONS,GET,DELETE
+
 # Seed the Student with sample Data [POST]
 
 NOTE: Only ILAdmin users are authorized to seed a student with sample data. Normally student data would be built over the course of natural use of the product. Typically, only tests would call for seeding a student with data.
