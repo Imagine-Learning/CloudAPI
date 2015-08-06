@@ -1945,15 +1945,18 @@ The content of the PUT is a construct specifying what "activity" and "dataSetNum
 
 ### Save Activity progress [POST]
 
+The content of the POST is a construct specifying data for "activity" in what "product" (and optional "productRevision") context, and "key","value" pairs of data to save (add or update)
+
 + Request (application/json)
 
         {
+            "product": "ILE",
             "activity": "PreAndPlacementTest",
             "activitySavedDataCollection": [
-            {
-                "key": "TestData",
-                "value": "TestData"
-            }
+                {
+                    "key": "TestData",
+                    "value": "TestData"
+                }
             ]
         }
 
@@ -1969,15 +1972,16 @@ A client may send its set of supported content (Activities and DataSets) such th
 
         {
             "clientActivitySupport": 123456789,
+            "product": "ILE",
             "supportedActivities": [
-            {
-                "activity": "AffixAction",
-                "supportedDataSetNums": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
-            },
-            {
-                "activity": "AlphabetQuiz",
-                "supportedDataSetNums": [1,2,3,4,5]
-            }
+                {
+                    "activity": "AffixAction",
+                    "supportedDataSetNums": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
+                },
+                {
+                    "activity": "AlphabetQuiz",
+                    "supportedDataSetNums": [1,2,3,4,5]
+                }
             ]
         }
 
@@ -2462,10 +2466,11 @@ The content is a construct specifying what "activity" and "dataSetNum" made the 
             ]
         }
         
-## Recordings List [/activities/recordings/list/{studentId}{?activities}]
+## Recordings List [/activities/recordings/list/{studentId}{?product,activities}]
 
 + Parameters
-    + studentId (string) ... List recordings for the studtent matching this Id
+    + studentId (string, required) ... List recordings for the studtent matching this Id
+    + product (string, required) ... Product context in which desired recordings were made
     + activities (string, optional) ... Comma separated list of activity names to limit the recordings returned
     
 # List Recordings [GET]
