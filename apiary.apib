@@ -1919,7 +1919,12 @@ The content of the PUT is a construct specifying what activity and dataSetNum wa
 - `activity` (string): Identifier of the activity that was played.  Same value as was provided in the get next activity response.
 - `dataSetNum`: (number): Dataset number that was provided in the get next activity response.
 - `elapsedTime`: (string): "hh:mm:ss" duration the activity was played by the student.  
-- `scores`: Collection of scores from student responses in the activity.  
+- `scores`: Collection of scores from student responses in the activity.  Each score is either Mastery (question was answered correctly or not) or percentage (x out of y correct) and each score is specific to a skill.
+- `skill` : Skill (anything from a particular letter to a course reading skill) that the score pertains to.  The server provides no information (please treat such data supplied under diagnostics at nothing more than hints/qa data) about the skills to be scored to.  The logic and data for which skills to be scored to resides in the activity code.
+- `numPossible` (number): Total number of questions asked or points about a particular skill.  Relevant only for percentage skills/scores.
+- `numCorrect` (number): Correct number of questions answered or points achieved for the skill.
+- `mastered`: (boolean): Binary indication of whether understanding/performance on the skill was demonstrated by the student.  Only relevant for mastery types of skills.
+- `activitySavedDataCollection` : Collection of key-value pairs that are meaningless to the server but are returned to the client each time the student plays this activity.  Anything that needs to be persisted between playing an activity from one occasion to another is saved here.  Examples include high scores, decals earned by the student, etc.
 
 + Request (application/json)
 
