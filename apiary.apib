@@ -1913,7 +1913,12 @@ The selectedContent construct in the response instructs the client what should b
 
 ### Process completed Activity [PUT]
 
-The content of the PUT is a construct specifying what "activity" and "dataSetNum" was just played, in what "product" (and optional "productRevision") context, "elapsedTime" spent in the activity, and applicable results ("Scores", "TestSectionInstance", etc.)
+The content of the PUT is a construct specifying what activity and dataSetNum was just played, in what product (and optional "productRevision") context, elapsed time spent in the activity, and applicable results ("Scores", "TestSectionInstance", etc.)
+
+- `product` (string): This is the identifier of the product such as "ILE".  Should be the same value that was sent in the GetNextActivity request
+- `activity` (string): Identifier of the activity that was played.  Same value as was provided in the get next activity response.
+- `dataSetNum`: (number): Dataset number that was provided in the get next activity response.
+- `elapsedTime`: (string): "hh:mm:ss" duration the activity was played by the student.  
 
 + Request (application/json)
 
