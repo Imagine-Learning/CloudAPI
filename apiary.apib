@@ -1935,20 +1935,69 @@ The content of the PUT is a construct specifying what activity and dataSetNum wa
                 "dataSetNum": 1,
                 "elapsedTime": "00:00:00",
                 "scores": [
-                {
-                    "skill": "Summary_RecognizeLetters",
-                    "numPossible": 10,
-                    "numCorrect": 0
-                },
-                {
-                    "skill": "A",
-                    "mastered": false
-                },
-                {
-                    "skill": "M",
-                    "mastered": false
-                }
+                    {
+                        "skill": "Summary_RecognizeLetters",
+                        "numPossible": 10,
+                        "numCorrect": 0
+                    },
+                    {
+                        "skill": "A",
+                        "mastered": false
+                    },
+                    {
+                        "skill": "M",
+                        "mastered": false
+                    }
                 ]
+                // Data structure that includes the student responses to test questions.  This is currently only expected for the PreAndPlacementTest activity. 
+                "testSectionInstance": {
+                
+                    // Identifier that's provided in the sequence assignment.  Meaningless to client but must be returned back to the sequencer application to provide context.
+                    "testSectionInstanceId": "1",
+    
+                    // Collection of test responses.  One testQuestionInstance is expected for each testQuestion that was provided in the sequenceAssignment
+                    "testQuestionInstances": [
+                        {
+                            // testQuestion identifier
+                            "testQuestionId": "q358",
+                            
+                            // timestamp when the question was started.  This is expected to be based on the server timestamp provided in the sequenceAssignment.  If the server said it's 1:00 and the test question is started 10 seconds later this should be 1:10 regardless of the client's operating system time
+                            "timeStarted": "2015-09-30T16:35:21.7923587-06:00",
+    
+                            // timestamp when the question was completed.  This is expected to be based on the server timestamp provided in the sequenceAssignment.  If the server said it's 1:00 and the test question is started 10 seconds later this should be 1:10 regardless of the client's operating system time
+                            "timeCompleted": "2015-09-30T16:35:21.7923587-06:00",
+                            
+                            // Collection of test options.  A testOptionInstance is expected for every testOption for this testQuestion that was provided in the sequence assignment.
+                            "testOptionInstances": [
+                                {
+                                    // testOption identifier provided in the sequence assignment
+                                    "testOptionId": "opt127",
+                                    
+                                    // number of times the student clicked before arriving at this option (clarify whether this description is accurate)
+                                    "clickCount": 1,
+    
+                                    // Reflects whether this option was selected.  Currently there should only be one selected option per test question though there has been discussion about test questions that allow for multiple options to be selected.
+                                    "isSelected": true,
+                                    
+                                    // Unknown.  Legacy that will probably be removed.
+                                    "responseLatency": 5
+                                },
+                                {
+                                    "testOptionId": "opt131",
+                                    "clickCount": 1,
+                                    "isSelected": false,
+                                    "responseLatency": 5
+                                },
+                                {
+                                    "testOptionId": "opt121",
+                                    "clickCount": 1,
+                                    "isSelected": false,
+                                    "responseLatency": 5
+                                }
+                            ]
+                        }
+                    ]
+                }
             }
         }
 
